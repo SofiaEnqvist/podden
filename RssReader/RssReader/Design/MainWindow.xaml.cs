@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RssReader.Logic;
 
 namespace RssReader
 {
@@ -20,9 +21,11 @@ namespace RssReader
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
+            Logic.Class1.Mani();
         }
     }
 }
