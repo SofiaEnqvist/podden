@@ -25,7 +25,17 @@ namespace RssReader
         public MainWindow()
         {
             InitializeComponent();
-            Logic.Class1.Mani();
+           TesatMetodKlass.getRss();
+        }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            //Skicka searchString till en metod som letar efter podden om den finns.. hur gör man det då?
+           var about = TesatMetodKlass.getRss(tbSearch.Text);
+           tblAbout.Text = about;
+           var count = TesatMetodKlass.countPodEps(tbSearch.Text);
+           tbCountAps.Text = count.ToString(); 
+
         }
     }
 }

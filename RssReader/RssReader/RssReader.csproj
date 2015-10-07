@@ -71,7 +71,9 @@
   <ItemGroup>
     <Compile Include="Entities\Feed.cs" />
     <Compile Include="Entities\PodcastEp.cs" />
-    <Compile Include="Logic\Class1.cs" />
+    <Compile Include="Logic\Manage.cs" />
+    <Compile Include="Logic\TesatMetodKlass.cs" />
+    <Compile Include="Logic\XML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

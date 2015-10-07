@@ -3,7 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="189,58,0,0" VerticalAlignment="Top" Width="75"/>
-
+        <Button Content="Search" Name="BtnSearch" HorizontalAlignment="Left" Margin="359,23,0,0" VerticalAlignment="Top" Width="75" Click="BtnSearch_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="37,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" Name="tbSearch"/>
+        <TextBlock HorizontalAlignment="Left" Margin="37,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="152" Width="289" x:Name="tblAbout"/>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="120,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Name="tbCountAps"/>
+        <Label Content="Antal avsnitt:" HorizontalAlignment="Left" Margin="37,53,0,0" VerticalAlignment="Top"/>
+        <Button Content="Prenumerera" HorizontalAlignment="Left" Margin="237,271,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
