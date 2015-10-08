@@ -67,12 +67,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Design\Subscriptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Design\Subscriptions.xaml.cs">
+      <DependentUpon>Subscriptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Feed.cs" />
     <Compile Include="Entities\PodcastEp.cs" />
     <Compile Include="Logic\Manage.cs" />
+    <Compile Include="Logic\Service\Service.cs" />
     <Compile Include="Logic\TesatMetodKlass.cs" />
+    <Compile Include="Logic\Validation.cs" />
     <Compile Include="Logic\XML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -100,7 +109,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Logic\Repository\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

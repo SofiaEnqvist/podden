@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RssReader.Entities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,29 +12,30 @@ namespace RssReader.Data
     public class XmlData
     {
         private XmlSerializer xmlSer;
-        private string searchPath;
+        private string filepath;
 
         public XmlData()
         {
-            xmlSer = new XmlSerializer(typeof(List<string>));
+            filepath = "c:\\temp\\Poddis.xml";
+            xmlSer = new XmlSerializer(typeof(List<PodcastEp>));
         }
 
-        public void Serialize(List<string> lista)
+        public void Serialize(List<PodcastEp> lista)
         {
-            using (var sw = new StreamWriter(searchPath, true))
+            using (var sw = new StreamWriter(filepath, true))
             {
                 xmlSer.Serialize(sw.BaseStream, lista);
                 sw.Dispose();
             }
         }
-        public List<string> Dezerialize()
+        public List<PodcastEp> Dezerialize()
         {
             try
             {
-                using (var sr = new StreamReader(searchPath))
+                using (var sr = new StreamReader(filepath))
                 {
                     var des = xmlSer.Deserialize(sr.BaseStream);
-                    var listOfFeeds = (List<string>)des;
+                    var listOfFeeds = (List<PodcastEp>)des;
                     sr.Dispose();
                     return listOfFeeds;
 
@@ -41,7 +43,7 @@ namespace RssReader.Data
             }
             catch (Exception)
             {
-                return new List<string>();
+                return new List<PodcastEp>();
             }
         }
     }

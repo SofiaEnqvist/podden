@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RssReader.Logic;
+using RssReader.Logic.Service;
 
 namespace RssReader
 {
@@ -25,17 +26,29 @@ namespace RssReader
         public MainWindow()
         {
             InitializeComponent();
-           TesatMetodKlass.getRss();
+           
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
             //Skicka searchString till en metod som letar efter podden om den finns.. hur gör man det då?
-           var about = TesatMetodKlass.getRss(tbSearch.Text);
+          var about = TesatMetodKlass.getRss(tbSearch.Text);
            tblAbout.Text = about;
-           var count = TesatMetodKlass.countPodEps(tbSearch.Text);
-           tbCountAps.Text = count.ToString(); 
+         var count = TesatMetodKlass.countPodEps(tbSearch.Text);
+          tbCountAps.Text = count.ToString(); 
 
+        }
+        //Prenumerera på en pocast, sparas ner som xml i poddis.xml
+        //To DO: validering om url finns
+        //To DO: Validering om podcasten redan prenumereras på
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TesatMetodKlass.Addnews(tbSearch.Text);
+            
+            //Vad ska hända när den ska prenumereras på?
+            // podfeeden ska sparas ner som xml
+            //- validering om att den inte redan är tillagd.
+            //podavsnitten ska läggas in under överlement, sparas under namnet på podden
         }
     }
 }
