@@ -32,10 +32,13 @@ namespace RssReader
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
             //Skicka searchString till en metod som letar efter podden om den finns.. hur gör man det då?
-          var about = TesatMetodKlass.getRss(tbSearch.Text);
+          var loadedRss = TesatMetodKlass.getRssByUri(tbSearch.Text);
+          var title = loadedRss.Title.Text;
+          tbTitle.Text = title;
+          var about = loadedRss.Description.Text;
            tblAbout.Text = about;
-         var count = TesatMetodKlass.countPodEps(tbSearch.Text);
-          tbCountAps.Text = count.ToString(); 
+           var count = loadedRss.Items.Count();
+           tbCountAps.Text = count.ToString(); 
 
         }
         //Prenumerera på en pocast, sparas ner som xml i poddis.xml
@@ -43,7 +46,7 @@ namespace RssReader
         //To DO: Validering om podcasten redan prenumereras på
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TesatMetodKlass.Addnews(tbSearch.Text);
+            TesatMetodKlass.AddNewSubscription(tbSearch.Text);
             
             //Vad ska hända när den ska prenumereras på?
             // podfeeden ska sparas ner som xml
