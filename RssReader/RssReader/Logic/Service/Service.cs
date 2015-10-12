@@ -8,6 +8,7 @@ using RssReader.Data;
 
 namespace RssReader.Logic.Service
 {
+    //Klassen används för metoder som lägger till, tar bort, eller ändrar i xml
     public static class Service
     {
 
