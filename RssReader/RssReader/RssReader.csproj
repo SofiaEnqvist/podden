@@ -76,8 +76,8 @@
     <Compile Include="Design\Subscriptions.xaml.cs">
       <DependentUpon>Subscriptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Feed.cs" />
-    <Compile Include="Entities\PodcastEp.cs" />
+    <Compile Include="Entity\Feed.cs" />
+    <Compile Include="Entity\PodcastEp.cs" />
     <Compile Include="Logic\Manage.cs" />
     <Compile Include="Logic\Service\Service.cs" />
     <Compile Include="Logic\TesatMetodKlass.cs" />

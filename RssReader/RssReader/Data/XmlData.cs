@@ -1,4 +1,4 @@
-﻿using RssReader.Entities;
+﻿using RssReader.Entity;
 using System;
 using System.Collections.Generic;
 using System.IO;
