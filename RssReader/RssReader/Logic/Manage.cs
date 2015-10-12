@@ -10,19 +10,35 @@ namespace RssReader.Logic
 {
     public static class Manage
     {
-        //Tar emot ett synfeedItem och "omvandlar" till objekt av PodcastEp
+        /// <summary>
+        /// TODO: Put into Repository map
+        /// Method that manage the subscription action
+        /// </summary>
+        /// <param name="searchString"></param>
+        public static void AddSubManage(string searchString)
+        {
+            var list = Service.Service.getRssByUri(searchString);
+            Service.Service.AddSubService(list);
+        }
+
+
+
+
+
+
+        ////Tar emot ett synfeedItem och "omvandlar" till objekt av PodcastEp
        
 
-        internal static PodcastEp CreatePodEp(SyndicationItem item)
-        {
-            var podd = new PodcastEp
-            {
-                Title = item.Title.Text,
-                Content = item.Summary.Text,
-                PubDate = item.PublishDate.DateTime
-            };
-            return podd;
-            throw new NotImplementedException();
-        }
+        //internal static PodcastEp CreatePodEp(SyndicationItem item)
+        //{
+        //    var podd = new PodcastEp
+        //    {
+        //        Title = item.Title.Text,
+        //        Content = item.Summary.Text,
+        //        PubDate = item.PublishDate.DateTime
+        //    };
+        //    return podd;
+        //    throw new NotImplementedException();
+        //}
     }
 }

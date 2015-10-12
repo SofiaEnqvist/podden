@@ -79,9 +79,9 @@
     <Compile Include="Entity\Feed.cs" />
     <Compile Include="Entity\PodcastEp.cs" />
     <Compile Include="Logic\Manage.cs" />
-    <Compile Include="Logic\Service\Service.cs" />
+    <Compile Include="Logic\Service.cs" />
     <Compile Include="Logic\TesatMetodKlass.cs" />
-    <Compile Include="Logic\Validation.cs" />
+    <Compile Include="Logic\MyValidation.cs" />
     <Compile Include="Logic\XML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -109,9 +109,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
