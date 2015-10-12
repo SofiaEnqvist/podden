@@ -15,13 +15,13 @@ namespace RssReader.Logic
 
         internal static PodcastEp CreatePodEp(SyndicationItem item)
         {
-            var pod = new PodcastEp
+            var podd = new PodcastEp
             {
                 Title = item.Title.Text,
                 Content = item.Summary.Text,
                 PubDate = item.PublishDate.DateTime
             };
-            return pod;
+            return podd;
             throw new NotImplementedException();
         }
     }
