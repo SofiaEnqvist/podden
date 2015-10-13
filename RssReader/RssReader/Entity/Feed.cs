@@ -5,17 +5,23 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace RssReader.Entity
 {
+    [Serializable()]
     public class Feed
     {
+        [XmlElement()]
         public string feedName { get; set; }
+        [XmlElement()]
         public string description { get; set; }
+        [XmlElement()]
         public string URL { get; set; }
-        public BindingList<PodcastEp> PodList { get; set; }
+        [XmlElement()]
+        public List<PodcastEp> PodList { get; set; }
 
-        internal static Feed mapFeed(SyndicationFeed feed, BindingList<PodcastEp> podcast)
+        internal static Feed mapFeed(SyndicationFeed feed, List<PodcastEp> podcast)
         {
             var feede = new Feed()
             {

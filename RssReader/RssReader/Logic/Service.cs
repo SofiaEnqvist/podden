@@ -41,7 +41,7 @@ namespace RssReader.Logic.Service
         {
             var seria = new XmlData();
             PodcastEp mappedPodcasts;
-            BindingList<PodcastEp> list = new BindingList<PodcastEp>();
+            List<PodcastEp> list = new List<PodcastEp>();
             foreach (var item in feed.Items)
             {
                 mappedPodcasts = PodcastEp.mapPodcastEp(item);
