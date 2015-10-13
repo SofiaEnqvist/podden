@@ -87,11 +87,13 @@ namespace RssReader.Data
 
         public Feed DezerializeFeed()
         {
-            if (!File.Exists(filepath))
+            //TODO: När nya filepath är skapat så ska den processen stängas! annars ligger den och körs när podden ska sparas
+            //ner och det kraschar
+              if (!File.Exists(filepath))
             {
                 File.Create(filepath);
-
             }
+          
             try
             {
                 Feed feed;
