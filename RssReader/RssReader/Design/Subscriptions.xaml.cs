@@ -33,7 +33,7 @@ namespace RssReader.Design
         //    //3.Antal avsnitt
         //    //4.Tryck på podcasten och kom till listan med alla avsnitt
         
-            var subscriptionList = TesatMetodKlass.getAllSubscriptions();
+            var subscriptionList = MethodTest.getAllSubscriptions();
               //foreach (var item in subscriptionList)
               //  {
               //      tblSubscriptions.Text += item.Title;

@@ -46,7 +46,7 @@ namespace RssReader
         //To DO: Validering om podcasten redan prenumereras på
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           var hej = TesatMetodKlass.getAllSubscriptions();
+           var hej = MethodTest.getAllSubscriptions();
             MyValidation.isSubscribedAlredy(tbSearch.Text);
             Manage.AddSubManage(tbSearch.Text);
             

@@ -21,7 +21,7 @@ namespace RssReader.Entity
             {
                 feedName = feed.Title.Text,
                 description = feed.Description.Text,
-                URL = " ",
+                URL = feed.BaseUri.ToString(),
                 PodList = podcast
                 //TO DO: Den skickar tillbaka list<podcastep> som tom, vilket ger ett nullexception       
                 //Vilket gör att den kraschar, hur ska vi kunna fylla listan?
