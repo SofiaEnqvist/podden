@@ -18,6 +18,7 @@ namespace RssReader.Data
         public XmlData()
         {
             filepath = "c:\\temp\\Poddis.xml";
+
             xmlSer = new XmlSerializer(typeof(List<PodcastEp>));
             xmlSerFeed = new XmlSerializer(typeof(Feed));
         }
