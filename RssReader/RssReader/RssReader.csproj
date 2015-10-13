@@ -79,8 +79,8 @@
     <Compile Include="Entity\Feed.cs" />
     <Compile Include="Entity\PodcastEp.cs" />
     <Compile Include="Logic\Manage.cs" />
+    <Compile Include="Logic\MethodTest.cs" />
     <Compile Include="Logic\Service.cs" />
-    <Compile Include="Logic\TesatMetodKlass.cs" />
     <Compile Include="Logic\MyValidation.cs" />
     <Compile Include="Logic\XML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
