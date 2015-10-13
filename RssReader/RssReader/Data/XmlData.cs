@@ -18,7 +18,6 @@ namespace RssReader.Data
         public XmlData()
         {
             filepath = "c:\\temp\\Poddis.xml";
-
             xmlSer = new XmlSerializer(typeof(List<PodcastEp>));
             xmlSerFeed = new XmlSerializer(typeof(Feed));
         }
@@ -78,18 +77,21 @@ namespace RssReader.Data
         /// and the URL and summary
         /// </summary>
         /// <returns></returns>
+ 
         public Feed DezerializeFeed()
         {
             try
             {
+                Feed feed;
                 using (var sr = new StreamReader(filepath))
                 {
-                    return xmlSerFeed.Deserialize(sr) as Feed;
-                    //var des = xmlSerFeed.Deserialize(sr.BaseStream);
-                    //var feed = (Feed)des;
+                    //return xmlSerFeed.Deserialize(sr) as Feed;
+                    var des = xmlSerFeed.Deserialize(sr.BaseStream);
+                    feed = (Feed)des;
                     //sr.Dispose();
-                    //return feed;
+                    
                 }
+                return feed;
             }
             catch (Exception)
             {
