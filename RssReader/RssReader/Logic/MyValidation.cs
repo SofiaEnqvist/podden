@@ -17,23 +17,42 @@ namespace RssReader.Logic
         }
 
         //Validera om podcasten redan prenumerereras på
-        public static bool isSubscribedAlredy(string podcast)
+        public static bool isSubscribedAlredy(string podcast, string podcastTitle)
         {
             //TODO: Lägg till så den loopar och kollar alla feedName, inte bara den första
             //get title of podcast hämta med streamreader och rulla igenom för att kolla Kanske en if (exists)
-                var seria = new XmlData();
+                var seria = new XmlData(podcastTitle);
                 var list = seria.DezerializeFeed();
-
-               
+                bool result = true;
 
                 if (podcast == list.URL)
                 {
-                    return true;
+                    result = true;
                 }
                 else
                 {
-                    return false;
+                    result = false;
                 }
+
+
+                //if (list.Count == 0)
+                //{
+                //    result = false;
+                //}
+                //foreach (Feed item in list)
+                //{
+                  
+                //    if (podcast == item.URL)
+                //    {
+                //        result = true;
+                //    }
+                //    else
+                //    {
+                //        result = false;
+                //    }
+                //}
+                return result;
+               
                 
         }
     }

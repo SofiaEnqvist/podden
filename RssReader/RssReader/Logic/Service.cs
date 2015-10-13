@@ -39,7 +39,7 @@ namespace RssReader.Logic.Service
         /// <param name="feed"></param>
         public static void AddSubService(SyndicationFeed feed)
         {
-            var seria = new XmlData();
+            var seria = new XmlData(feed.Title.Text);
             PodcastEp mappedPodcasts;
             List<PodcastEp> list = new List<PodcastEp>();
             foreach (var item in feed.Items)

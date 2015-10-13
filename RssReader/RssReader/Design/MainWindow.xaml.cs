@@ -47,7 +47,9 @@ namespace RssReader
         private void Button_Click(object sender, RoutedEventArgs e)
         {
            // var hej = MethodTest.getAllSubscriptions();
-            if (MyValidation.isSubscribedAlredy(tbSearch.Text) == false) {
+            bool res = MyValidation.isSubscribedAlredy(tbSearch.Text, tbTitle.Text);
+
+            if ( res == false) {
                 Manage.AddSubManage(tbSearch.Text);
                 MessageBox.Show("Podcasten är tillagd!");
 

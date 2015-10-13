@@ -17,12 +17,17 @@ namespace RssReader.Data
         private XmlSerializer xmlSer;
         private string filepath;
 
-        public XmlData()
+        /// <summary>
+        /// We want do pass the name of the podcast, example = "Värvet" to create a new xml-document
+        /// </summary>
+        /// <param name="path">This path is a string that vill create a new xml-document for each new podsubscription or something</param>
+        public XmlData(string path)
         {
-            filepath = "c:\\temp\\Poddis.xml";
+            filepath = "c:\\temp\\"+path+".xml";
             xmlSer = new XmlSerializer(typeof(List<PodcastEp>));
             xmlSerFeed = new XmlSerializer(typeof(Feed));
         }
+
 
         /// <summary>
         /// StreamWriter writes a feed, used only when a new subsciption i made
@@ -79,15 +84,18 @@ namespace RssReader.Data
         /// and the URL and summary
         /// </summary>
         /// <returns></returns>
- 
+
         public Feed DezerializeFeed()
         {
+            if (!File.Exists(filepath))
+            {
+                File.Create(filepath);
+
+            }
             try
             {
                 Feed feed;
-                //if (!File.Exists(filepath)){
-                //    File.Create(filepath);
-                //}
+              
                 using (var sr = new StreamReader(filepath))
                 {
                     //return xmlSerFeed.Deserialize(sr) as Feed;

@@ -17,8 +17,8 @@ namespace RssReader.Logic
 
         public static List<PodcastEp> getAllSubscriptions()
         {
-            // var searchString = "http://rss.acast.com/varvet";
-            var seria = new XmlData();
+             var searchString = "http://rss.acast.com/varvet";
+            var seria = new XmlData(searchString);
             var list = seria.Dezerialize();
             return list;
         }
@@ -35,7 +35,8 @@ namespace RssReader.Logic
         //Metod som först hämtar lista av podcasten som redan är subscribed, för att sedan lägga till nya avsnitt
         public static void AddEpService(string searchString)
         {
-            var seria = new XmlData();
+            var seria = new XmlData(searchString);
+        
             var list = seria.Dezerialize();
             var synFeed = SyndicationFeed.Load(XmlReader.Create(searchString));
 

@@ -10,8 +10,7 @@ using System.Xml.Serialization;
 namespace RssReader.Entity
 {
     [Serializable()]
-  
-    [XmlRootAttribute("Feed", Namespace = "", IsNullable = false)]
+    [XmlRootAttribute("Feed", Namespace = "", IsNullable = true)]
     public class Feed
     {
         [XmlElement()]
