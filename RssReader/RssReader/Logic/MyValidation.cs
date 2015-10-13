@@ -19,11 +19,22 @@ namespace RssReader.Logic
         //Validera om podcasten redan prenumerereras på
         public static bool isSubscribedAlredy(string podcast)
         {
+            //TODO: Lägg till så den loopar och kollar alla feedName, inte bara den första
             //get title of podcast hämta med streamreader och rulla igenom för att kolla Kanske en if (exists)
                 var seria = new XmlData();
                 var list = seria.DezerializeFeed();
 
-                return false;
+               
+
+                if (podcast == list.URL)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
         }
     }
    

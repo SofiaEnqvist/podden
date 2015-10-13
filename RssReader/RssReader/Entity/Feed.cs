@@ -10,6 +10,8 @@ using System.Xml.Serialization;
 namespace RssReader.Entity
 {
     [Serializable()]
+  
+    [XmlRootAttribute("Feed", Namespace = "", IsNullable = false)]
     public class Feed
     {
         [XmlElement()]
@@ -27,11 +29,13 @@ namespace RssReader.Entity
             {
                 feedName = feed.Title.Text,
                 description = feed.Description.Text,
-                URL = feed.BaseUri.ToString(),
+                URL = feed.Links.First().Uri.ToString(),
                 PodList = podcast
+
                 //TO DO: Den skickar tillbaka list<podcastep> som tom, vilket ger ett nullexception       
                 //Vilket gör att den kraschar, hur ska vi kunna fylla listan?
             };
+            
             return feede;
         }
     }

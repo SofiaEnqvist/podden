@@ -46,9 +46,24 @@ namespace RssReader
         //To DO: Validering om podcasten redan prenumereras på
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var hej = MethodTest.getAllSubscriptions();
-            MyValidation.isSubscribedAlredy(tbSearch.Text);
-            Manage.AddSubManage(tbSearch.Text);
+           // var hej = MethodTest.getAllSubscriptions();
+            if (MyValidation.isSubscribedAlredy(tbSearch.Text) == false) {
+                Manage.AddSubManage(tbSearch.Text);
+                MessageBox.Show("Podcasten är tillagd!");
+
+                tbSearch.Clear();
+                tbTitle.Text = "";
+                tbCountAps.Text = "";
+                tblAbout.Text = "";
+                
+            }
+                
+            else
+            {
+                MessageBox.Show("Du prenumererar redan på denna podcast!");
+            }
+            
+            
             
             //Vad ska hända när den ska prenumereras på?
             // podfeeden ska sparas ner som xml

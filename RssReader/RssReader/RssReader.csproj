@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="Entity\Feed.cs" />
     <Compile Include="Entity\PodcastEp.cs" />
+    <Compile Include="Entity\Subscription.cs" />
     <Compile Include="Logic\Manage.cs" />
     <Compile Include="Logic\MethodTest.cs" />
     <Compile Include="Logic\Service.cs" />

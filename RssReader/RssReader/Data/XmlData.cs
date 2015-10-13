@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 
 namespace RssReader.Data
 {
+
+    //NOTE TO SELF: vi har två typer av serializer, vilket vi bara behöver använda en
     public class XmlData
     {
         private XmlSerializer xmlSerFeed;
@@ -83,6 +85,9 @@ namespace RssReader.Data
             try
             {
                 Feed feed;
+                //if (!File.Exists(filepath)){
+                //    File.Create(filepath);
+                //}
                 using (var sr = new StreamReader(filepath))
                 {
                     //return xmlSerFeed.Deserialize(sr) as Feed;
