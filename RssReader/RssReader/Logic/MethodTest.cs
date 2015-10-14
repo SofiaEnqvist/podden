@@ -7,12 +7,32 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
+using System.IO;
 
 
 namespace RssReader.Logic
 {
     public static class MethodTest
     {
+        //TODO: trim() på namn s .xml inte följer med som substring
+        public static List<string> getAllSubs()
+        {
+
+            string folderPath = @"C:\temp\";
+            List<string> list = new List<string>();
+            DirectoryInfo di = new DirectoryInfo(folderPath);
+            FileInfo[] rgFiles = di.GetFiles("*.xml");
+            foreach (FileInfo fi in rgFiles)
+            {
+                XmlTextReader reader = new XmlTextReader(fi.FullName);
+                Console.WriteLine(fi.Name);
+                list.Add(fi.Name);
+                
+            }
+            return list;
+ 
+        }
 
 
         //public static List<PodcastEp> getAllSubscriptions()
@@ -21,6 +41,7 @@ namespace RssReader.Logic
         //    var seria = new XmlData(searchString);
         //    var list = seria.Dezerialize();
         //    return list;
+        
         //}
 
         internal static string getRssDescrition(string searchString)

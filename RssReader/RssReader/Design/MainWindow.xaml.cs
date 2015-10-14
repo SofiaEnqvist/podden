@@ -31,7 +31,6 @@ namespace RssReader
         //TODO: se till att prenumerreraknapen inte går att använda om man inte först har sökt efter podcasten, det blir ett kryphål där annars
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            //Skicka searchString till en metod som letar efter podden om den finns.. hur gör man det då?
           var loadedRss = Service.getRssByUri(tbSearch.Text);
           if (loadedRss.Title != null)
           {
@@ -41,22 +40,21 @@ namespace RssReader
               tblAbout.Text = about;
               var count = loadedRss.Items.Count();
               tbCountAps.Text = count.ToString(); 
-
           }
           else
           {
               MessageBox.Show("Kunde inte hitta sökvägen.");
           }
         }
-        //Prenumerera på en pocast, sparas ner som xml i poddis.xml
+
+        //Prenumerera på en pocast, sparas ner som xml i .xml
         //To DO: validering om url finns
-        //To DO: Validering om podcasten redan prenumereras på
         private void Button_Click(object sender, RoutedEventArgs e)
         {
            // var hej = MethodTest.getAllSubscriptions();
             bool res = MyValidation.isSubscribedAlredy(tbSearch.Text, tbTitle.Text);
 
-            if ( res == false) {
+            if (res == false) {
                 Manage.AddSubManage(tbSearch.Text);
                 MessageBox.Show("Podcasten är tillagd!");
 
@@ -64,7 +62,6 @@ namespace RssReader
                 tbTitle.Text = "";
                 tbCountAps.Text = "";
                 tblAbout.Text = "";
-                
             }
                 
             else

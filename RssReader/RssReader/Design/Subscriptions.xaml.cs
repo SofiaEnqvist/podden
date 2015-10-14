@@ -27,18 +27,24 @@ namespace RssReader.Design
         }
 
         private void Subscriptions_OnLoad(object sender, RoutedEventArgs e)
-        { //Lägg alla svasnitt snyggt :
-        //    // 1. Podcastnamnet
-        //    //2. Beskrivning av podcasten
-        //    //3.Antal avsnitt
-        //    //4.Tryck på podcasten och kom till listan med alla avsnitt
+        { 
+            //Lägg alla svasnitt snyggt :
+            // 1. Podcastnamnet
+            //2. Beskrivning av podcasten
+            //3.Antal avsnitt
+            //4.Tryck på podcasten och kom till listan med alla avsnitt
         
-          //  var subscriptionList = MethodTest.getAllSubscriptions();
-              //foreach (var item in subscriptionList)
-              //  {
-              //      tblSubscriptions.Text += item.Title;
-              //}
-           // TesatMetodKlass.test("http://rss.acast.com/varvet");
+            //var subscriptionList = MethodTest.getAllSubs();
+            //  foreach (var item in subscriptionList)
+            //    {
+            //        tblSubscriptions.Text += item.Title;
+            //  }
+           var list =  MethodTest.getAllSubs();
+           foreach (var name in list)
+           {
+               listBoxSubscription.Items.Add(name);
+           }
+            // TesatMetodKlass.test("http://rss.acast.com/varvet");
 
               //foreach (var item in subscriptionList)
               //{
