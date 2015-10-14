@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace RssReader.Entity
 {
     [Serializable()]
-    class Category
+    public class Category
     {
         [XmlElement()]
         public string CategoryName { get; set; }
