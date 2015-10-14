@@ -13,6 +13,7 @@ namespace RssReader.Logic
         //Validera om URL verkligen exiserar och om det är en rss..
         public static void doesURLExists(string URL)
         {
+            
 
         }
 

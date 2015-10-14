@@ -46,37 +46,37 @@ namespace RssReader.Data
         /// StreamWriter that writes list of podcasts, is used most when a new podcastepisode is availible 
         /// </summary>
         /// <param name="list"></param>
-        public void Serialize(List<PodcastEp> list)
-        {
-            using (var sw = new StreamWriter(filepath, true))
-            {
-                xmlSer.Serialize(sw.BaseStream, list);
-                sw.Dispose();
-            }
-        }
+        //public void Serialize(List<PodcastEp> list)
+        //{
+        //    using (var sw = new StreamWriter(filepath, true))
+        //    {
+        //        xmlSer.Serialize(sw.BaseStream, list);
+        //        sw.Dispose();
+        //    }
+        //}
 
         /// <summary>
         /// StreamReader reads up a list of pocasts, is used to get one podcastepisode at the time
         /// </summary>
         /// <returns></returns>
-        public List<PodcastEp> Dezerialize()
-        {
-            try
-            {
-                using (var sr = new StreamReader(filepath))
-                {
-                    var des = xmlSer.Deserialize(sr.BaseStream);
-                    var listOfFeeds = (List<PodcastEp>)des;
-                    sr.Dispose();
-                    return listOfFeeds;
+        //public List<PodcastEp> Dezerialize()
+        //{
+        //    try
+        //    {
+        //        using (var sr = new StreamReader(filepath))
+        //        {
+        //            var des = xmlSer.Deserialize(sr.BaseStream);
+        //            var listOfFeeds = (List<PodcastEp>)des;
+        //            sr.Dispose();
+        //            return listOfFeeds;
 
-                }
-            }
-            catch (Exception)
-            {
-                return new List<PodcastEp>();
-            }
-        }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return new List<PodcastEp>();
+        //    }
+        //}
 
         /// <summary>
         /// TODO: Dezerialiseringen fungerar ej, den gillar inte xml-dokumentet
@@ -91,7 +91,7 @@ namespace RssReader.Data
             //ner och det kraschar
               if (!File.Exists(filepath))
             {
-                File.Create(filepath);
+                File.Create(filepath).Close();
             }
           
             try

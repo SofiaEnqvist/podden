@@ -34,7 +34,6 @@ namespace RssReader.Entity
                 //TO DO: Den skickar tillbaka list<podcastep> som tom, vilket ger ett nullexception       
                 //Vilket gör att den kraschar, hur ska vi kunna fylla listan?
             };
-            
             return feede;
         }
     }

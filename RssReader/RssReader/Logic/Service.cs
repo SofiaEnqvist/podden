@@ -21,15 +21,24 @@ namespace RssReader.Logic.Service
         /// <returns>Syndicationfeed</returns>
         public static SyndicationFeed getRssByUri(string searchString)
         {
-            var synFeed = SyndicationFeed.Load(XmlReader.Create(searchString));
-            SyndicationFeed feed;
-            List<SyndicationItem> listOfItems = new List<SyndicationItem>();
-            foreach (SyndicationItem item in synFeed.Items)
+            try
             {
-                listOfItems.Add(item);
+                var synFeed = SyndicationFeed.Load(XmlReader.Create(searchString));
+                SyndicationFeed feed;
+                List<SyndicationItem> listOfItems = new List<SyndicationItem>();
+                foreach (SyndicationItem item in synFeed.Items)
+                {
+                    listOfItems.Add(item);
+                }
+                feed = new SyndicationFeed(synFeed.Title.Text, synFeed.Description.Text, new Uri(searchString), listOfItems);
+                return feed;
             }
-            feed = new SyndicationFeed(synFeed.Title.Text, synFeed.Description.Text, new Uri(searchString), listOfItems);
-            return feed;
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new SyndicationFeed();
+            }
+           
         }
 
 

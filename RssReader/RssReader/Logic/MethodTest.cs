@@ -15,15 +15,15 @@ namespace RssReader.Logic
     {
 
 
-        public static List<PodcastEp> getAllSubscriptions()
-        {
-             var searchString = "http://rss.acast.com/varvet";
-            var seria = new XmlData(searchString);
-            var list = seria.Dezerialize();
-            return list;
-        }
+        //public static List<PodcastEp> getAllSubscriptions()
+        //{
+        //     var searchString = "http://rss.acast.com/varvet";
+        //    var seria = new XmlData(searchString);
+        //    var list = seria.Dezerialize();
+        //    return list;
+        //}
 
-        internal static string getRss(string searchString)
+        internal static string getRssDescrition(string searchString)
         {
             var synFeed = SyndicationFeed.Load(XmlReader.Create(searchString));
             return synFeed.Description.Text;
@@ -33,21 +33,21 @@ namespace RssReader.Logic
 
 
         //Metod som först hämtar lista av podcasten som redan är subscribed, för att sedan lägga till nya avsnitt
-        public static void AddEpService(string searchString)
-        {
-            var seria = new XmlData(searchString);
+        //public static void AddEpService(string searchString)
+        //{
+        //    var seria = new XmlData(searchString);
         
-            var list = seria.Dezerialize();
-            var synFeed = SyndicationFeed.Load(XmlReader.Create(searchString));
+        //    var list = seria.Dezerialize();
+        //    var synFeed = SyndicationFeed.Load(XmlReader.Create(searchString));
 
-            foreach (var item in synFeed.Items)
-            {
-                var pod = PodcastEp.mapPodcastEp(item);
-                list.Add(pod);
-            }
+        //    foreach (var item in synFeed.Items)
+        //    {
+        //        var pod = PodcastEp.mapPodcastEp(item);
+        //        list.Add(pod);
+        //    }
 
-            seria.Serialize(list);
+        //    seria.Serialize(list);
 
-        }
+        //}
     }
 }

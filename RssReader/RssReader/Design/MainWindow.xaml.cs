@@ -28,18 +28,25 @@ namespace RssReader
             InitializeComponent();
            
         }
-
+        //TODO: se till att prenumerreraknapen inte går att använda om man inte först har sökt efter podcasten, det blir ett kryphål där annars
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
             //Skicka searchString till en metod som letar efter podden om den finns.. hur gör man det då?
           var loadedRss = Service.getRssByUri(tbSearch.Text);
-          var title = loadedRss.Title.Text;
-          tbTitle.Text = title;
-          var about = loadedRss.Description.Text;
-           tblAbout.Text = about;
-           var count = loadedRss.Items.Count();
-           tbCountAps.Text = count.ToString(); 
+          if (loadedRss.Title != null)
+          {
+              var title = loadedRss.Title.Text;
+              tbTitle.Text = title;
+              var about = loadedRss.Description.Text;
+              tblAbout.Text = about;
+              var count = loadedRss.Items.Count();
+              tbCountAps.Text = count.ToString(); 
 
+          }
+          else
+          {
+              MessageBox.Show("Kunde inte hitta sökvägen.");
+          }
         }
         //Prenumerera på en pocast, sparas ner som xml i poddis.xml
         //To DO: validering om url finns
