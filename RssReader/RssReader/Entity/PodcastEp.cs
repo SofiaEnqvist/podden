@@ -17,6 +17,8 @@ namespace RssReader.Entity
         public string Content { get; set; }
         [XmlElement()]
         public DateTime PubDate { get; set; }
+        [XmlElement()]
+        public string Mp3Link { get; set; }
 
         internal static PodcastEp mapPodcastEp(SyndicationItem item)
         {
@@ -24,7 +26,9 @@ namespace RssReader.Entity
             {
                 Title = item.Title.Text,
                 Content = item.Summary.Text,
-                PubDate = item.PublishDate.DateTime
+                PubDate = item.PublishDate.DateTime,
+                Mp3Link = item.Links.FirstOrDefault().Uri.ToString()
+
             };
             return podEp;
         }

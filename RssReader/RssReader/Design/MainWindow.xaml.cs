@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RssReader.Logic;
 using RssReader.Logic.Service;
+using RssReader.Design;
 
 namespace RssReader
 {
@@ -28,53 +29,67 @@ namespace RssReader
             InitializeComponent();
            
         }
-        //TODO: se till att prenumerreraknapen inte går att använda om man inte först har sökt efter podcasten, det blir ett kryphål där annars
+
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-          var loadedRss = Service.getRssByUri(tbSearch.Text);
-          if (loadedRss.Title != null)
-          {
-              var title = loadedRss.Title.Text;
-              tbTitle.Text = title;
-              var about = loadedRss.Description.Text;
-              tblAbout.Text = about;
-              var count = loadedRss.Items.Count();
-              tbCountAps.Text = count.ToString(); 
-          }
-          else
-          {
-              MessageBox.Show("Kunde inte hitta sökvägen.");
-          }
-        }
+            if(!String.IsNullOrEmpty(tbSearch.Text))
+            {
+                BtnSubscribe.IsEnabled = true;
+                var loadedRss = Service.getRssByUri(tbSearch.Text);
 
-        //Prenumerera på en pocast, sparas ner som xml i .xml
-        //To DO: validering om url finns
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           // var hej = MethodTest.getAllSubscriptions();
-            bool res = MyValidation.isSubscribedAlredy(tbSearch.Text, tbTitle.Text);
-
-            if (res == false) {
-                Manage.AddSubManage(tbSearch.Text);
-                MessageBox.Show("Podcasten är tillagd!");
-
-                tbSearch.Clear();
-                tbTitle.Text = "";
-                tbCountAps.Text = "";
-                tblAbout.Text = "";
+                if (loadedRss.Title != null)
+                {
+                    tbTitle.Text = loadedRss.Title.Text;
+                    tblAbout.Text = loadedRss.Description.Text;
+                    tbCountAps.Text = loadedRss.Items.Count().ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Kunde inte hitta sökvägen.");
+                    BtnSubscribe.IsEnabled = false;
+                }
             }
-                
             else
             {
-                MessageBox.Show("Du prenumererar redan på denna podcast!");
+                MessageBox.Show("Fyll i sökfältet.");
             }
-            
-            
-            
-            //Vad ska hända när den ska prenumereras på?
-            // podfeeden ska sparas ner som xml
-            //- validering om att den inte redan är tillagd.
-            //podavsnitten ska läggas in under överlement, sparas under namnet på podden
+           
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(tbSearch.Text))
+            {
+                bool res = MyValidation.isSubscribedAlredy(tbSearch.Text, tbTitle.Text);
+
+                if (res == false)
+                {
+                    Manage.AddSubManage(tbSearch.Text);
+                    MessageBox.Show("Podcasten är tillagd!");
+
+                    tbSearch.Clear();
+                    tbTitle.Text = "";
+                    tbCountAps.Text = "";
+                    tblAbout.Text = "";
+                }
+
+                else
+                {
+                    MessageBox.Show("Du prenumererar redan på denna podcast!");
+                }
+            }
+        }
+
+        private void btGoToSub_Click(object sender, RoutedEventArgs e)
+        {
+            new Subscriptions().Show();
+            this.Close();
+        }
+
+        private void btGoToSett_Click(object sender, RoutedEventArgs e)
+        {
+            //LÄgg till så att man kommer till settings.show()
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using RssReader.Entity;
+﻿using RssReader.Data;
+using RssReader.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,5 +41,12 @@ namespace RssReader.Logic
         //    return podd;
         //    throw new NotImplementedException();
         //}
+
+        internal static Feed getSelectedSub(string selectedItem)
+        {
+            XmlData xml = new XmlData(selectedItem);
+           var dezFed = xml.DezerializeFeed();
+           return dezFed;
+        }
     }
 }

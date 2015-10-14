@@ -20,15 +20,22 @@ namespace RssReader.Logic
         {
 
             string folderPath = @"C:\temp\";
+            string doneName;
             List<string> list = new List<string>();
             DirectoryInfo di = new DirectoryInfo(folderPath);
             FileInfo[] rgFiles = di.GetFiles("*.xml");
             foreach (FileInfo fi in rgFiles)
             {
-                XmlTextReader reader = new XmlTextReader(fi.FullName);
-                Console.WriteLine(fi.Name);
-                list.Add(fi.Name);
-                
+                XmlTextReader reader = new XmlTextReader(fi.Name);
+                string namnnamn = fi.Name;
+
+                if (namnnamn.Contains(".xml"))
+                {
+                    namnnamn = namnnamn.Substring(0, namnnamn.IndexOf(".xml"));
+                }
+                list.Add(namnnamn);
+
+
             }
             return list;
  
