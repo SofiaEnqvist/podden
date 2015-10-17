@@ -88,8 +88,9 @@ namespace RssReader
         }
 
         private void btGoToSett_Click(object sender, RoutedEventArgs e)
-        {
-            //LÄgg till så att man kommer till settings.show()
+        {  
+           new Settings().Show();
+           this.Close();
         }
     }
 }

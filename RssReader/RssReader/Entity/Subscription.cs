@@ -12,7 +12,8 @@ namespace RssReader.Entity
     public class Subscription
     {
 
-    [XmlElement]
+        [XmlElement]
         public List<Feed> subscribedFeed { get; set; }
+        
     }
 }

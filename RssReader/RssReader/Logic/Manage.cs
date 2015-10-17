@@ -44,7 +44,7 @@ namespace RssReader.Logic
 
         internal static Feed getSelectedSub(string selectedItem)
         {
-            XmlData xml = new XmlData(selectedItem);
+           XmlData xml = new XmlData(selectedItem);
            var dezFed = xml.DezerializeFeed();
            return dezFed;
         }
