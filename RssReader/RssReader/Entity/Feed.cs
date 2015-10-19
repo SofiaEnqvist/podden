@@ -20,7 +20,9 @@ namespace RssReader.Entity
         [XmlElement()]
         public string URL { get; set; }
         [XmlElement()]
-        public List<PodcastEp> PodList { get; set; }
+        public string Category { get; set; }
+        [XmlElement()]
+        public List<PodcastEp> PodEp { get; set; }
 
         internal static Feed mapFeed(SyndicationFeed feed, List<PodcastEp> podcast)
         {
@@ -29,7 +31,8 @@ namespace RssReader.Entity
                 feedName = feed.Title.Text,
                 description = feed.Description.Text,
                 URL = feed.Links.First().Uri.ToString(),
-                PodList = podcast
+                Category = "Default",
+                PodEp = podcast
 
                 //TO DO: Den skickar tillbaka list<podcastep> som tom, vilket ger ett nullexception       
                 //Vilket gör att den kraschar, hur ska vi kunna fylla listan?

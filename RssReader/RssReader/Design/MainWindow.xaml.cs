@@ -34,9 +34,11 @@ namespace RssReader
         {
             if(!String.IsNullOrEmpty(tbSearch.Text))
             {
+
                 BtnSubscribe.IsEnabled = true;
                 var loadedRss = Service.getRssByUri(tbSearch.Text);
 
+                //kanske kan göra en snygg validering på den här? i service istället för i designlagret
                 if (loadedRss.Title != null)
                 {
                     tbTitle.Text = loadedRss.Title.Text;

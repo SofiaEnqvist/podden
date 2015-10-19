@@ -42,17 +42,15 @@ namespace RssReader.Design
         private void listBoxSubscription_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            //MP3 grejen funkar !! nu ska vi bara få in den på varje knapp som kommer upp i listan.
-           // Process.Start("wmplayer.exe", "http://rss.acast.com/varvet/-197-darinzanyar/media.mp3");
-            //!!!
 
             lViewSub.Items.Clear();
             var selectedItem = listBoxSubscription.SelectedItem.ToString();
            Feed feed =  Manage.getSelectedSub(selectedItem);
-            foreach(var item in feed.PodList)
+            foreach(var item in feed.PodEp)
             {
-                lViewSub.Items.Add(item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString() + "\r\n");
+                lViewSub.Items.Add(item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
                 lViewSub.Items.Add(item.Mp3Link);
+               
 
                 //lViewSub.Items.Add(item.Content);
                 //lViewSub.Items.Add(item.PubDate.Date);
@@ -61,7 +59,7 @@ namespace RssReader.Design
                // var btn = new Button();
                // btn.Content = "Lyssna på avsnittet";
                // lboxSubEp.Items.Add(btn);
-               // lboxSubEp.Items.Add("----------------------------------------");
+               // lbo xSubEp.Items.Add("----------------------------------------");
                 
                 //tblSubs.Text += item.Title + "\r\n";
                 //tblSubs.Text += item.Content + "\r\n";
@@ -69,8 +67,6 @@ namespace RssReader.Design
                 //tblSubs.Text += "\r\n";
                 //tblSubs.Text += item.Mp3Link + "\r\n \r\n";
             }
-
-
 
 
         }
@@ -90,22 +86,15 @@ namespace RssReader.Design
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             var val = lViewSub.SelectedItem.ToString();
+
+            
+            char[] MyChar = { '"' };
+            string NewString = val.TrimStart(MyChar);
+            Console.WriteLine(NewString);
+            Process.Start(NewString);
+            Process.Start("wmplayer.exe", "http://rss.acast.com/varvet/-197-darinzanyar/media.mp3");
+            
         }
-
-
-        //private void Button_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    var subscriptionList = TesatMetodKlass.getAllSubscriptions();
-
-
-        //        foreach (var item in subscriptionList)
-        //        {
-        //            tblSubscriptions.Text +=  item.Title;
-
-        //        }
-
-
-        //}
         
     }
 }

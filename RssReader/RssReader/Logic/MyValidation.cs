@@ -17,43 +17,26 @@ namespace RssReader.Logic
 
         }
 
-        //Validera om podcasten redan prenumerereras på
+        /// <summary>
+        /// Check if the podcast is alredy subscribed, returns bool, if it is subscribed alredy it returns "true"
+        /// </summary>
+        /// <param name="podcast"></param>
+        /// <param name="podcastTitle"></param>
+        /// <returns>bool</returns>
         public static bool isSubscribedAlredy(string podcast, string podcastTitle)
         {
-            //TODO: Lägg till så den loopar och kollar alla feedName, inte bara den första
-            //get title of podcast hämta med streamreader och rulla igenom för att kolla Kanske en if (exists)
                 var seria = new XmlData(podcastTitle);
-                var list = seria.DezerializeFeed();
+                var finns = seria.DezerializeFeed();
                 bool result = true;
-
-                if (podcast == list.URL)
-                {
-                    result = true;
-                }
-                else
+                if (finns.URL == null)
                 {
                     result = false;
                 }
-
-
-                //if (list.Count == 0)
-                //{
-                //    result = false;
-                //}
-                //foreach (Feed item in list)
-                //{
-                  
-                //    if (podcast == item.URL)
-                //    {
-                //        result = true;
-                //    }
-                //    else
-                //    {
-                //        result = false;
-                //    }
-                //}
+                else if (podcast == finns.URL)
+                {
+                    result = true;
+                }
                 return result;
-               
                 
         }
     }
