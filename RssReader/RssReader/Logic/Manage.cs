@@ -23,10 +23,6 @@ namespace RssReader.Logic
         }
 
 
-
-
-
-
         ////Tar emot ett synfeedItem och "omvandlar" till objekt av PodcastEp
        
 

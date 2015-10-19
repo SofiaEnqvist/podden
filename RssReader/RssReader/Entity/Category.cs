@@ -12,10 +12,14 @@ namespace RssReader.Entity
 
 
     [Serializable()]
+    [XmlRootAttribute("Category", Namespace = "", IsNullable = true)]
+
     public class Category
     {
-        [XmlElement]
-        public string CategoryName { get; set; }
+        [XmlElement()]
+        public List<string> CategoryName { get; set; }
     }
+
+
     
 }

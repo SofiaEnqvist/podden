@@ -16,6 +16,8 @@ namespace RssReader.Data
         private XmlSerializer xmlSerCategory;
         private string filepath;
         
+        // Skapa mapppen. 
+
         public XmlCategory()
 
         {
@@ -36,38 +38,26 @@ namespace RssReader.Data
 
         }
 
-        //Får den inte att funka!
-        //public Category DezerializeCategory()
-        //{
+        public Category DezerializeCategory()
+        {
+            try
+            {
+               Category category;
 
-        //    TextReader reader = new StreamReader(@"c:\\temp\\Category.xml");
-        //    object obj = xmlSerCategory.Deserialize(reader);
-        //    Category XmlData = (Category)obj;
-        //    reader.Close();
+                using (var sr = new StreamReader(filepath))
+                {
+                    var des = xmlSerCategory.Deserialize(sr.BaseStream);
+                    category = (Category)des;
+                }
 
-        //    Category c = new Category();
-        //    return c;
-            
+                return category;
+            }
+            catch (Exception)
+            {
+                return new Category();
+            }
 
-        //}
-
-            //try
-            //{
-            //    Category category = new Category();
-
-            //    using (var sr = new StreamReader(filepath))
-            //    {
-            //        var des = xmlSerCategory.Deserialize(sr.BaseStream);
-            //        category = (Category)des;
-            //    }
-
-            //    return category;
-            //}
-            //catch (Exception)
-            //{
-            //    return new Category();
-            //}
-
+        }
 
 
         }

@@ -79,24 +79,36 @@ namespace RssReader.Logic
             return result;
         }
 
-        //public static bool isSubscribedAlredy(string CategoryName)
-        //{
-        //    var ser = new XmlCategory();
-        //    var list = ser.DezerializeCategory();
+        public static bool CategoryAlredy(string CategoryName)
+        {
+            var ser = new XmlCategory();
+            var list = ser.DezerializeCategory();
+           
+            bool result = true;
 
-        //    bool result = true;
+            if (list.CategoryName == null)
+            {
+                result = false;
+            }
 
-        //    if (CategoryName.Equals(list.CategoryName))
-        //    {
-        //        result = true;
-        //    }
-        //    else
-        //    {
-        //        result = false;
-        //    }
+            else
+            {
+                for (int i = 0; i < list.CategoryName.Count; i++)
+                {
+                    if (list.CategoryName[i].Equals(CategoryName))
+                    {
+                        result = true;
+                    }
 
-        //    return result;
-        //}
+                    else
+                    {
+                        result = false;
+                    }
+                }
+            }
+
+            return result;
+        }
         
     }
    
