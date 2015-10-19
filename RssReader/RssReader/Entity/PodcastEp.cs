@@ -27,8 +27,7 @@ namespace RssReader.Entity
                 Title = item.Title.Text,
                 Content = item.Summary.Text,
                 PubDate = item.PublishDate.DateTime,
-                Mp3Link = item.Links.FirstOrDefault().Uri.ToString()
-
+               Mp3Link = item.Links.First().Uri.ToString()
             };
             return podEp;
         }
