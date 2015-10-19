@@ -62,22 +62,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\XmlCategory.cs" />
     <Compile Include="Data\XmlData.cs" />
     <Compile Include="Design\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Design\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Design\Subscriptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Design\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Subscriptions.xaml.cs">
       <DependentUpon>Subscriptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entity\Feed.cs" />
     <Compile Include="Entity\PodcastEp.cs" />
+    <Compile Include="Entity\Category.cs" />
     <Compile Include="Entity\Subscription.cs" />
     <Compile Include="Logic\Manage.cs" />
     <Compile Include="Logic\MethodTest.cs" />

@@ -4,16 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace RssReader.Entity
 {
-    [Serializable()]
-    [XmlRoot]
-    public class Subscription
-    {
 
-        [XmlElement]
-        public List<Feed> subscribedFeed { get; set; }
-        
+
+
+    [Serializable()]
+    [XmlRootAttribute("Category", Namespace = "", IsNullable = true)]
+
+    public class Category
+    {
+        [XmlElement()]
+        public List<string> CategoryName { get; set; }
     }
+
+
+    
 }

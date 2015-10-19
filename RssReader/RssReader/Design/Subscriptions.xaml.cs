@@ -79,8 +79,8 @@ namespace RssReader.Design
 
         private void GoToSett_Click(object sender, RoutedEventArgs e)
         {
-            // new Settings().Show();
-            //this.Close();
+           new Settings().Show();
+           this.Close();
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)

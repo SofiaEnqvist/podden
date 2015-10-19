@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace RssReader.Logic
 {
@@ -17,28 +18,98 @@ namespace RssReader.Logic
 
         }
 
-        /// <summary>
-        /// Check if the podcast is alredy subscribed, returns bool, if it is subscribed alredy it returns "true"
-        /// </summary>
-        /// <param name="podcast"></param>
-        /// <param name="podcastTitle"></param>
-        /// <returns>bool</returns>
+        //Validera om podcasten redan prenumerereras på
         public static bool isSubscribedAlredy(string podcast, string podcastTitle)
         {
+            //TODO: Lägg till så den loopar och kollar alla feedName, inte bara den första
+            //get title of podcast hämta med streamreader och rulla igenom för att kolla Kanske en if (exists)
                 var seria = new XmlData(podcastTitle);
-                var finns = seria.DezerializeFeed();
+                var list = seria.DezerializeFeed();
                 bool result = true;
-                if (finns.URL == null)
-                {
-                    result = false;
-                }
-                else if (podcast == finns.URL)
+
+                if (podcast == list.URL)
                 {
                     result = true;
                 }
-                return result;
-                
+                else
+                {
+                    result = false;
+                }
+
+
+                //if (list.Count == 0)
+                //{
+                //    result = false;
+                //}
+                //foreach (Feed item in list)
+                //{
+                  
+                //    if (podcast == item.URL)
+                //    {
+                //        result = true;
+                //    }
+                //    else
+                //    {
+                //        result = false;
+                //    }
+                //}
+                return result;            
         }
+
+        public static bool CheckCategory(string CategoryName)
+        {
+            bool result = true;
+            XmlDocument doc = new XmlDocument();
+            doc.Load(@"c:\\temp\\Category.xml");
+
+            XmlNodeList elemList = doc.GetElementsByTagName("CategoryName");
+            for (int i = 0; i < elemList.Count; i++)
+            {
+                if (elemList[i].InnerXml.Equals(CategoryName))
+                {
+                    result = true;
+                }
+
+                else
+                {
+                    result = false;
+                }
+            }
+
+            return result;
+        }
+
+        public static bool CategoryAlredy(string CategoryName)
+        {
+            var ser = new XmlCategory();
+            var list = ser.DezerializeCategory();
+           
+            bool result = true;
+
+            if (list.CategoryName == null)
+            {
+                result = false;
+            }
+
+            else
+            {
+                for (int i = 0; i < list.CategoryName.Count; i++)
+                {
+                    if (list.CategoryName[i].Equals(CategoryName))
+                    {
+                        result = true;
+                    }
+
+                    else
+                    {
+                        result = false;
+                    }
+                }
+            }
+
+            return result;
+        }
+        
     }
    
 }
