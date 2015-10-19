@@ -8,9 +8,6 @@ using System.Xml;
 
 namespace RssReader.Entity
 {
-
-
-
     [Serializable()]
     [XmlRootAttribute("Category", Namespace = "", IsNullable = true)]
 

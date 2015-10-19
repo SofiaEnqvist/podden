@@ -86,13 +86,14 @@ namespace RssReader.Design
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             var val = lViewSub.SelectedItem.ToString();
-
             
             char[] MyChar = { '"' };
             string NewString = val.TrimStart(MyChar);
             Console.WriteLine(NewString);
             Process.Start(NewString);
-            Process.Start("wmplayer.exe", "http://rss.acast.com/varvet/-197-darinzanyar/media.mp3");
+
+           //Spelar upp mp3filer i win media player
+            //Process.Start("wmplayer.exe", "http://rss.acast.com/varvet/-197-darinzanyar/media.mp3");
             
         }
         

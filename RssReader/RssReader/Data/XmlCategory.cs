@@ -59,9 +59,9 @@ namespace RssReader.Data
 
         }
 
-
-        }
-
-        }
+        
+    }
+    
+}
     
 

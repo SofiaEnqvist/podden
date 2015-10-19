@@ -42,7 +42,7 @@ namespace RssReader.Logic.Service
         /// Add a new Podcast subscription
         /// </summary>
         /// <param name="feed"></param>
-        public static void AddSubService(SyndicationFeed feed)
+        public static void AddSubService(SyndicationFeed feed, string category)
         {
             var seria = new XmlData(feed.Title.Text);
             PodcastEp mappedPodcasts;
@@ -52,8 +52,56 @@ namespace RssReader.Logic.Service
                 mappedPodcasts = PodcastEp.mapPodcastEp(item);
                 list.Add(mappedPodcasts);
             }
-            Feed mappedFeed = Feed.mapFeed(feed, list);
+            Feed mappedFeed = Feed.mapFeed(feed, category, list);
             seria.SerializeFeed(mappedFeed);
         }
+
+        internal static Category GetCategory()
+        {
+            var seria = new XmlCategory();
+            var list = seria.DezerializeCategory();
+            return list;
+        }
+
+        public static void AddCategory(Category Category)
+        {
+            var ser = new XmlCategory();
+            ser.SerializeCategory(Category);
+        }
+
+        public static void DeleteCategory(string CategoryName)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(@"c:\\temp\\Category.xml");
+
+            XmlNodeList elemList = doc.GetElementsByTagName("CategoryName");
+
+            for (int i = 0; i < elemList.Count; i++)
+            {
+                if (elemList[i].InnerXml.Equals(CategoryName))
+                {
+                    doc.RemoveChild(elemList[i]);
+                    doc.Save(@"c:\\temp\\Category.xml");
+                }
+            }
+
+        }
+
+        public static List<string> GetAllCategory()
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(@"c:\\temp\\Category.xml");
+
+            XmlNodeList elemList = doc.GetElementsByTagName("CategoryName");
+            List<string> List = new List<string>();
+
+            for (int i = 0; i < elemList.Count; i++)
+            {
+                List.Add(elemList[i].InnerXml);
+            }
+
+            return List;
+        }
+
     }
 }

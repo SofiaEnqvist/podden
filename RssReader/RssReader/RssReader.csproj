@@ -54,6 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Design\AddSubscription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Design\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -64,6 +68,9 @@
     </Compile>
     <Compile Include="Data\XmlCategory.cs" />
     <Compile Include="Data\XmlData.cs" />
+    <Compile Include="Design\AddSubscription.xaml.cs">
+      <DependentUpon>AddSubscription.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

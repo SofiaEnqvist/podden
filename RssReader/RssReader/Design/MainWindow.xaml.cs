@@ -60,27 +60,14 @@ namespace RssReader
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            new AddSubscription(tbSearch.Text, tbTitle.Text).Show();
 
-            if (!string.IsNullOrEmpty(tbSearch.Text))
-            {
-                bool res = MyValidation.isSubscribedAlredy(tbSearch.Text, tbTitle.Text);
+            tbSearch.Clear();
+            tbTitle.Text = "";
+            tbCountAps.Text = "";
+            tblAbout.Text = "";
 
-                if (res == false)
-                {
-                    Manage.AddSubManage(tbSearch.Text);
-                    MessageBox.Show("Podcasten är tillagd!");
 
-                    tbSearch.Clear();
-                    tbTitle.Text = "";
-                    tbCountAps.Text = "";
-                    tblAbout.Text = "";
-                }
-
-                else
-                {
-                    MessageBox.Show("Du prenumererar redan på denna podcast!");
-                }
-            }
         }
 
         private void btGoToSub_Click(object sender, RoutedEventArgs e)
@@ -92,6 +79,8 @@ namespace RssReader
         private void btGoToSett_Click(object sender, RoutedEventArgs e)
         {
             //LÄgg till så att man kommer till settings.show()
+            new Settings().Show();
+            
         }
     }
 }

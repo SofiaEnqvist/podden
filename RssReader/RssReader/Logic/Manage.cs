@@ -16,32 +16,26 @@ namespace RssReader.Logic
         /// Method that manage the subscription action
         /// </summary>
         /// <param name="searchString"></param>
-        public static void AddSubManage(string searchString)
+        public static void AddSubManage(string searchString, string category)
         {
             var list = Service.Service.getRssByUri(searchString);
-            Service.Service.AddSubService(list);
+            Service.Service.AddSubService(list, category);
         }
 
-        ////Tar emot ett synfeedItem och "omvandlar" till objekt av PodcastEp
-       
-
-        //internal static PodcastEp CreatePodEp(SyndicationItem item)
-        //{
-        //    var podd = new PodcastEp
-        //    {
-        //        Title = item.Title.Text,
-        //        Content = item.Summary.Text,
-        //        PubDate = item.PublishDate.DateTime
-        //    };
-        //    return podd;
-        //    throw new NotImplementedException();
-        //}
+ 
 
         internal static Feed getSelectedSub(string selectedItem)
         {
             XmlData xml = new XmlData(selectedItem);
            var dezFed = xml.DezerializeFeed();
            return dezFed;
+        }
+
+        public static Category fillCb()
+        {
+            var list = new Category();
+            var item = Service.Service.GetCategory();
+            return item;
         }
     }
 }

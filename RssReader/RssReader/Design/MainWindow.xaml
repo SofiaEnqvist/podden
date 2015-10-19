@@ -3,14 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="600" Width="670">
     <Grid>
-        <Button Content="Search" Name="BtnSearch" HorizontalAlignment="Left" Margin="416,26,0,0" VerticalAlignment="Top" Width="75" Click="BtnSearch_Click"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="37,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" Name="tbSearch"/>
-        <TextBlock HorizontalAlignment="Left" Margin="37,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="243" Width="319" x:Name="tblAbout"/>
+        <Button Content="Search" Name="BtnSearch" HorizontalAlignment="Left" Margin="364,23,0,0" VerticalAlignment="Top" Width="75" Click="BtnSearch_Click"/>
+        <TextBox Text="http://rss.acast.com/varvet" HorizontalAlignment="Left" Height="23" Margin="37,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" Name="tbSearch"/>
+        <TextBlock HorizontalAlignment="Left" Margin="37,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="164" Width="303" x:Name="tblAbout"/>
         <TextBlock HorizontalAlignment="Left" Height="24" Margin="120,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Name="tbCountAps"/>
         <Label Content="Antal avsnitt:" HorizontalAlignment="Left" Margin="37,82,0,0" VerticalAlignment="Top"/>
-        <Button Content="Prenumerera" Name="BtnSubscribe" IsEnabled="False" HorizontalAlignment="Left" Margin="416,134,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Prenumerera" Name="BtnSubscribe" IsEnabled="False" HorizontalAlignment="Left" Margin="364,113,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <TextBlock Name="tbTitle" HorizontalAlignment="Left" Margin="37,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" Height="26"/>
         <Button Content="My Subscriptions" x:Name="btGoToSub" HorizontalAlignment="Left" Margin="65,508,0,0" VerticalAlignment="Top" Width="75" Click="btGoToSub_Click"/>
         <Button Content="Settings" x:Name="btGoToSett" HorizontalAlignment="Left" Margin="200,508,0,0" VerticalAlignment="Top" Width="75" Click="btGoToSett_Click"/>
+      
+       
     </Grid>
 </Window>

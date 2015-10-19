@@ -24,18 +24,15 @@ namespace RssReader.Entity
         [XmlElement()]
         public List<PodcastEp> PodEp { get; set; }
 
-        internal static Feed mapFeed(SyndicationFeed feed, List<PodcastEp> podcast)
+        internal static Feed mapFeed(SyndicationFeed feed, string category, List<PodcastEp> podcast)
         {
             var feede = new Feed()
             {
                 feedName = feed.Title.Text,
                 description = feed.Description.Text,
                 URL = feed.Links.First().Uri.ToString(),
-                Category = "Default",
+                Category = category,
                 PodEp = podcast
-
-                //TO DO: Den skickar tillbaka list<podcastep> som tom, vilket ger ett nullexception       
-                //Vilket gör att den kraschar, hur ska vi kunna fylla listan?
             };
             return feede;
         }

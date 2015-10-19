@@ -20,7 +20,6 @@ namespace RssReader.Logic
         {
 
             string folderPath = @"C:\temp\";
-            string doneName;
             List<string> list = new List<string>();
             DirectoryInfo di = new DirectoryInfo(folderPath);
             FileInfo[] rgFiles = di.GetFiles("*.xml");
