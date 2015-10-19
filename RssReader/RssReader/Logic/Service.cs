@@ -1,13 +1,9 @@
 ﻿using RssReader.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RssReader.Data;
 using System.ServiceModel.Syndication;
 using System.Xml;
-using System.ComponentModel;
 
 namespace RssReader.Logic.Service
 {
@@ -30,6 +26,7 @@ namespace RssReader.Logic.Service
                 {
                     listOfItems.Add(item);
                 }
+
                 feed = new SyndicationFeed(synFeed.Title.Text, synFeed.Description.Text, new Uri(searchString), listOfItems);
                 return feed;
             }
@@ -40,7 +37,6 @@ namespace RssReader.Logic.Service
             }
            
         }
-
 
         /// <summary>
         /// Add a new Podcast subscription

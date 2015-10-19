@@ -29,11 +29,6 @@ namespace RssReader.Design
             InitializeComponent();
         
         }
-        //Lägg alla svasnitt snyggt :
-        // 1. Podcastnamnet
-        //2. Beskrivning av podcasten
-        //3.Antal avsnitt
-        //4.Tryck på podcasten och kom till listan med alla avsnitt
         
         private void Subscriptions_OnLoad(object sender, RoutedEventArgs e)
         { 
@@ -43,7 +38,7 @@ namespace RssReader.Design
                listBoxSubscription.Items.Add(name);
            }     
         }
-
+        
         private void listBoxSubscription_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -51,21 +46,31 @@ namespace RssReader.Design
            // Process.Start("wmplayer.exe", "http://rss.acast.com/varvet/-197-darinzanyar/media.mp3");
             //!!!
 
-            lboxSubEp.Items.Clear();
+            lViewSub.Items.Clear();
             var selectedItem = listBoxSubscription.SelectedItem.ToString();
            Feed feed =  Manage.getSelectedSub(selectedItem);
             foreach(var item in feed.PodList)
             {
-                lboxSubEp.Items.Add(item.Title);
-                lboxSubEp.Items.Add(item.Content);
-                lboxSubEp.Items.Add(item.PubDate.Date);
-                lboxSubEp.Items.Add(item.Mp3Link);
-                //Här ska mp3grejen hamna, TODO  gör om så att rätt länk sparas i podcastEs, dvs .mp3-filen
-                var btn = new Button();
-                btn.Content = "Lyssna på avsnittet";
-                lboxSubEp.Items.Add(btn);
-                lboxSubEp.Items.Add("----------------------------------------");
+                lViewSub.Items.Add(item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString() + "\r\n");
+                lViewSub.Items.Add(item.Mp3Link);
+
+                //lViewSub.Items.Add(item.Content);
+                //lViewSub.Items.Add(item.PubDate.Date);
+                //lViewSub.Items.Add(item.Mp3Link);
+               // //Här ska mp3grejen hamna, TODO  gör om så att rätt länk sparas i podcastEs, dvs .mp3-filen
+               // var btn = new Button();
+               // btn.Content = "Lyssna på avsnittet";
+               // lboxSubEp.Items.Add(btn);
+               // lboxSubEp.Items.Add("----------------------------------------");
+                
+                //tblSubs.Text += item.Title + "\r\n";
+                //tblSubs.Text += item.Content + "\r\n";
+                //tblSubs.Text += item.PubDate.ToString() + "\r\n";
+                //tblSubs.Text += "\r\n";
+                //tblSubs.Text += item.Mp3Link + "\r\n \r\n";
             }
+
+
 
 
         }
@@ -80,6 +85,11 @@ namespace RssReader.Design
         {
             // new Settings().Show();
             //this.Close();
+        }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            var val = lViewSub.SelectedItem.ToString();
         }
 
 

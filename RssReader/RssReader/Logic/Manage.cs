@@ -22,11 +22,6 @@ namespace RssReader.Logic
             Service.Service.AddSubService(list);
         }
 
-
-
-
-
-
         ////Tar emot ett synfeedItem och "omvandlar" till objekt av PodcastEp
        
 
