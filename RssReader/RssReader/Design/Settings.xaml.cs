@@ -38,6 +38,7 @@ namespace RssReader.Design
                 foreach (var name in list)
                 {
                     CbAllCategory.Items.Add(name);
+                    cbChangeCategory.Items.Add(name);
                 }
             }
         }
@@ -52,6 +53,7 @@ namespace RssReader.Design
                 foreach (var name in list)
                 {
                     CbAllCategory.Items.Add(name);
+                    cbChangeCategory.Items.Add(name);
                 }
             }
         }
@@ -84,31 +86,33 @@ namespace RssReader.Design
             
             }
             
-        // Ej klar
+       
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
 
-            //if (!String.IsNullOrEmpty(CbAllCategory.Text))
-            //{
-            //    Service.DeleteCategory(CbAllCategory.Text);
-            //    //cballcategory ska uppdateras. 
-            //}
+            if (!String.IsNullOrEmpty(CbAllCategory.Text))
+            {
+                Service.DeleteCategory(CbAllCategory.Text);
+                MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
+                //cballcategory ska uppdateras. 
+            }
 
-            //else
-            //{
-            //    MessageBox.Show("välj vilken kategori du vill tabort");
-            //}
+            else
+            {
+                MessageBox.Show("välj vilken kategori du vill tabort");
+            }
         }
 
 
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
 
-            if (!String.IsNullOrEmpty(CbAllCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
+            if (!String.IsNullOrEmpty(cbChangeCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
             {
-                Service.ChangeCategory(CbAllCategory.Text, tbNewCategory.Text);
+                Service.ChangeCategory(cbChangeCategory.Text, tbNewCategory.Text);
                 tbNewCategory.Clear();
                 //cbAllCategory ska uppdateras. 
+                //cbchangecategory ska uppdateras. 
             }
 
             else
@@ -121,6 +125,12 @@ namespace RssReader.Design
         private void tbNewCategory_TextChanged(object sender, TextChangedEventArgs e)
        {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            this.Close();
         }
 
 

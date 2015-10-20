@@ -90,31 +90,21 @@ namespace RssReader.Logic.Service
         public static void DeleteCategory(string CategoryName)
         {
             var ser = new XmlCategory();
-            Category c = ser.DezerializeCategory();
+            var des = ser.DezerializeCategory();
+            List<string> list = new List<string>();
+            Category c = new Category();
 
-            for (int i = 0; i < c.CategoryName.Count; i++)
+            for (int i = 0; i < des.CategoryName.Count; i++)
             {
-                if (c.CategoryName[i].Equals(CategoryName))
+                if (des.CategoryName[i] != CategoryName)
+                   
                 {
-
+                    list.Add(des.CategoryName[i]);
                 }
             }
 
+            c.CategoryName = list;
             ser.SerializeCategory(c);
-
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(@"c:\\temp\\Category.xml");
-
-            //XmlNodeList elemList = doc.GetElementsByTagName("CategoryName");
-
-            //for (int i = 0; i < elemList.Count; i++)
-            //{
-            //    if (elemList[i].InnerXml.Equals(CategoryName))
-            //    {
-            //        doc.RemoveChild(elemList[i]);
-            //        doc.Save(@"c:\\temp\\Category.xml");
-            //    }
-            //}
         }
 
         public static void ChangeCategory(string name, string newName)
