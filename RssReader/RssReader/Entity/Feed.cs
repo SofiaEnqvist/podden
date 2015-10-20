@@ -14,9 +14,11 @@ namespace RssReader.Entity
     public class Feed
     {
         [XmlElement()]
-        public string feedName { get; set; }
+        public string Title { get; set; }
         [XmlElement()]
-        public string description { get; set; }
+        public string Name { get; set; }
+        [XmlElement()]
+        public string Description { get; set; }
         [XmlElement()]
         public string URL { get; set; }
         [XmlElement()]
@@ -24,12 +26,13 @@ namespace RssReader.Entity
         [XmlElement()]
         public List<PodcastEp> PodEp { get; set; }
 
-        internal static Feed mapFeed(SyndicationFeed feed, string category, List<PodcastEp> podcast)
+        internal static Feed mapFeed(SyndicationFeed feed, string feedName, string category, List<PodcastEp> podcast)
         {
             var feede = new Feed()
             {
-                feedName = feed.Title.Text,
-                description = feed.Description.Text,
+                Title = feed.Title.Text,
+                Name = feedName.ToString(),
+                Description = feed.Description.Text,
                 URL = feed.Links.First().Uri.ToString(),
                 Category = category,
                 PodEp = podcast

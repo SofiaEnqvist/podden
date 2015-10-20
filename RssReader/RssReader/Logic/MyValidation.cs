@@ -12,6 +12,8 @@ namespace RssReader.Logic
 {
     public static class MyValidation
     {
+        
+
         //Validera om URL verkligen exiserar och om det är en rss..
         public static void doesURLExists(string URL)
         {
@@ -114,7 +116,26 @@ namespace RssReader.Logic
 
             return result;
         }
-        
+
+
+        internal static bool feedNameExists(string podcastTitle, string feedName)
+        {
+            var seria = new XmlData(podcastTitle);
+            var list = seria.DezerializeFeed();
+            bool result = true;
+
+            if (feedName == list.Name)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
+
+        }
     }
    
 }
