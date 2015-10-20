@@ -56,12 +56,14 @@ namespace RssReader.Logic.Service
             seria.SerializeFeed(mappedFeed);
         }
 
+
         internal static Category GetCategory()
         {
             var seria = new XmlCategory();
             var list = seria.DezerializeCategory();
             return list;
         }
+
 
         public static void AddCategory(string CategoryName)
         {
@@ -87,6 +89,7 @@ namespace RssReader.Logic.Service
 
         }
 
+
         public static void DeleteCategory(string CategoryName)
         {
             var ser = new XmlCategory();
@@ -107,6 +110,7 @@ namespace RssReader.Logic.Service
             ser.SerializeCategory(c);
         }
 
+
         public static void ChangeCategory(string name, string newName)
         {
             var ser = new XmlCategory();
@@ -122,6 +126,7 @@ namespace RssReader.Logic.Service
 
             ser.SerializeCategory(c);
         }
+
         public static List<string> GetAllCategory()
         {
             var ser = new XmlCategory();

@@ -30,24 +30,18 @@ namespace RssReader.Design
         public Settings()
         {
             InitializeComponent();
-
-            var list = Service.GetAllCategory();
-
-            if (list != null)
-            {
-                foreach (var name in list)
-                {
-                    CbAllCategory.Items.Add(name);
-                    cbChangeCategory.Items.Add(name);
-                }
-            }
+            
+            //ska inte ligga här egentligen?
+            updateCb();
         }
 
-
-        private void Settings_OnLoad(object sender, RoutedEventArgs e)
+       
+        public void updateCb()
         {
-            var list = Service.GetAllCategory();
+            cbChangeCategory.Items.Clear();
+            CbAllCategory.Items.Clear();
 
+            var list = Service.GetAllCategory();
             if (list != null)
             {
                 foreach (var name in list)
@@ -58,6 +52,7 @@ namespace RssReader.Design
             }
         }
 
+        //TODO: + Validering på stora och små bokstäver?
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
            
@@ -70,12 +65,14 @@ namespace RssReader.Design
                     Service.AddCategory(tbCategory.Text);
                     MessageBox.Show("Kategorin" + " " + tbCategory.Text + " " + "är nu tillagd");
                     tbCategory.Clear();
+                    updateCb();
                 }
 
                 else
                 {
                     MessageBox.Show("Kategorin finns redan");
                     tbCategory.Clear();
+                    
                 }
 
             }
@@ -86,15 +83,14 @@ namespace RssReader.Design
             
             }
             
-       
+       //TODO: Den får inte tas bort om det finns feed under kategorin.
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-
             if (!String.IsNullOrEmpty(CbAllCategory.Text))
             {
                 Service.DeleteCategory(CbAllCategory.Text);
                 MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
-                //cballcategory ska uppdateras. 
+                updateCb();
             }
 
             else
@@ -103,16 +99,30 @@ namespace RssReader.Design
             }
         }
 
+        //TODO: Ändras även i feeden. 
 
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
 
             if (!String.IsNullOrEmpty(cbChangeCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
             {
-                Service.ChangeCategory(cbChangeCategory.Text, tbNewCategory.Text);
-                tbNewCategory.Clear();
-                //cbAllCategory ska uppdateras. 
-                //cbchangecategory ska uppdateras. 
+                bool check = MyValidation.CategoryAlredy(tbNewCategory.Text);
+
+                if (check == false)
+                {
+
+                    Service.ChangeCategory(cbChangeCategory.Text, tbNewCategory.Text);
+                    tbNewCategory.Clear();
+                    MessageBox.Show("Kategorin" + " " + cbChangeCategory.Text + " " + "är nu ändrad");
+                    updateCb();
+                }
+
+                else
+                {
+                    MessageBox.Show("Det finns redan en kategori med detta namn");
+                    tbNewCategory.Clear();
+                    updateCb();
+                }
             }
 
             else
@@ -122,6 +132,7 @@ namespace RssReader.Design
 
         }
 
+        //Blir knas när man försöker tabort denna? 
         private void tbNewCategory_TextChanged(object sender, TextChangedEventArgs e)
        {
 

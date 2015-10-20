@@ -61,7 +61,7 @@ namespace RssReader.Logic
             var ser = new XmlCategory();
             var list = ser.DezerializeCategory();
            
-            bool result = true;
+            bool result = false;
 
             if (list.CategoryName == null)
             {
@@ -77,10 +77,6 @@ namespace RssReader.Logic
                         result = true;
                     }
 
-                    else
-                    {
-                        result = false;
-                    }
                 }
             }
 
