@@ -15,6 +15,7 @@ using RssReader.Logic;
 using RssReader.Entity;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using RssReader.Logic.Service;
 
 
 namespace RssReader.Design
@@ -45,30 +46,12 @@ namespace RssReader.Design
 
             lViewSub.Items.Clear();
             var selectedItem = listBoxSubscription.SelectedItem.ToString();
-           Feed feed =  Manage.getSelectedSub(selectedItem);
+           Feed feed =  Manage.Man_getSelectedSub(selectedItem);
             foreach(var item in feed.PodEp)
             {
                 lViewSub.Items.Add(item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
                 lViewSub.Items.Add(item.Mp3Link);
-               
-
-                //lViewSub.Items.Add(item.Content);
-                //lViewSub.Items.Add(item.PubDate.Date);
-                //lViewSub.Items.Add(item.Mp3Link);
-               // //Här ska mp3grejen hamna, TODO  gör om så att rätt länk sparas i podcastEs, dvs .mp3-filen
-               // var btn = new Button();
-               // btn.Content = "Lyssna på avsnittet";
-               // lboxSubEp.Items.Add(btn);
-               // lbo xSubEp.Items.Add("----------------------------------------");
-                
-                //tblSubs.Text += item.Title + "\r\n";
-                //tblSubs.Text += item.Content + "\r\n";
-                //tblSubs.Text += item.PubDate.ToString() + "\r\n";
-                //tblSubs.Text += "\r\n";
-                //tblSubs.Text += item.Mp3Link + "\r\n \r\n";
             }
-
-
         }
 
         private void btGoToSub2_Click(object sender, RoutedEventArgs e)
@@ -90,7 +73,8 @@ namespace RssReader.Design
             char[] MyChar = { '"' };
             string NewString = val.TrimStart(MyChar);
             Console.WriteLine(NewString);
-            Process.Start(NewString);
+           Process.Start(NewString);
+           
 
            //Spelar upp mp3filer i win media player
             //Process.Start("wmplayer.exe", "http://rss.acast.com/varvet/-197-darinzanyar/media.mp3");

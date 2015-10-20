@@ -3,12 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AddSubscription" Height="300" Width="300" Loaded ="AddSubscription_OnLoad">
     <Grid>
-        <ComboBox  Name="cbCategory" HorizontalAlignment="Left" Margin="141,51,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbCategory_SelectionChanged"/>
-        <Label Content="Lägg till i kategori: " HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top"/>
-        <Label Content="Välj ett uppdateringsintervall" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="cbInterval" HorizontalAlignment="Left" Margin="200,102,0,0" VerticalAlignment="Top" Width="62"/>
-        <Button Name="btnExit" Content="Avbryt" HorizontalAlignment="Left" Margin="46,188,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="btnOkej" Content="Lägg till" HorizontalAlignment="Left" Margin="160,188,0,0" VerticalAlignment="Top" Width="75" Click="btnOkej_Click"/>
+        <ComboBox  Name="cbCategory" HorizontalAlignment="Left" Margin="42,98,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbCategory_SelectionChanged"/>
+        <Label Content="Lägg till i kategori: " HorizontalAlignment="Left" Margin="24,67,0,0" VerticalAlignment="Top"/>
+        <Label Content="Välj ett uppdateringsintervall" HorizontalAlignment="Left" Margin="24,131,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="cbInterval" HorizontalAlignment="Left" Margin="42,162,0,0" VerticalAlignment="Top" Width="62"/>
+        <Button Name="btnExit" Content="Avbryt" HorizontalAlignment="Left" Margin="42,216,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btnOkej" Content="Lägg till" HorizontalAlignment="Left" Margin="163,216,0,0" VerticalAlignment="Top" Width="75" Click="btnOkej_Click"/>
+        <Label Content="Namnge prenumerationen(?)" HorizontalAlignment="Left" Margin="24,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.206,0.414"/>
+        <TextBox Name="tbFeedName" HorizontalAlignment="Left" Height="21" Margin="42,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.003,-0.601"/>
 
     </Grid>
 </Window>

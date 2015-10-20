@@ -66,7 +66,6 @@ namespace RssReader.Design
                     {
                         c.CategoryName = list;
                     }
-                   
 
                     Service.AddCategory(c);
                     MessageBox.Show("Kategorin" + " " + tbCategory.Text + " " + "är nu tillagd");
@@ -77,9 +76,7 @@ namespace RssReader.Design
                 {
                     MessageBox.Show("Kategorin finns redan");
                     tbCategory.Clear();
-                }
-             
-        
+                }        
             }
         }
 

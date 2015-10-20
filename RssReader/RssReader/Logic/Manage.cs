@@ -6,9 +6,11 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using RssReader.Logic.Service;
 
 namespace RssReader.Logic
 {
+    //Typ en mellanklass mellan design och logiken som sköter xml-hanteringen. 
     public static class Manage
     {
         /// <summary>
@@ -16,19 +18,18 @@ namespace RssReader.Logic
         /// Method that manage the subscription action
         /// </summary>
         /// <param name="searchString"></param>
-        public static void AddSubManage(string searchString, string category)
+        public static void AddSubManage(string searchString, string feedName, string category)
         {
             var list = Service.Service.getRssByUri(searchString);
-            Service.Service.AddSubService(list, category);
+            Service.Service.AddSubService(list, feedName, category);
         }
 
- 
 
-        internal static Feed getSelectedSub(string selectedItem)
+
+        internal static Feed Man_getSelectedSub(string selectedItem)
         {
-            XmlData xml = new XmlData(selectedItem);
-           var dezFed = xml.DezerializeFeed();
-           return dezFed;
+         var dezFeed = Service.Service.Ser_getSelectedSub(selectedItem);
+         return dezFeed;
         }
 
         public static Category fillCb()
