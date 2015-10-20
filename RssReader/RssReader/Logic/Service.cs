@@ -35,7 +35,7 @@ namespace RssReader.Logic.Service
                 Console.WriteLine(e.Message);
                 return new SyndicationFeed();
             }
-           
+
         }
 
         /// <summary>
@@ -63,45 +63,85 @@ namespace RssReader.Logic.Service
             return list;
         }
 
-        public static void AddCategory(Category Category)
+        public static void AddCategory(string CategoryName)
         {
             var ser = new XmlCategory();
-            ser.SerializeCategory(Category);
+            var des = ser.DezerializeCategory();
+            List<string> lista = new List<string>();
+            Category c = new Category();
+
+            if (des.CategoryName == null)
+            {
+                lista.Add(CategoryName);
+                c.CategoryName = lista;
+                ser.SerializeCategory(c);
+            }
+
+            else
+            {
+                lista = des.CategoryName;
+                lista.Add(CategoryName);
+                c.CategoryName = lista;
+                ser.SerializeCategory(c);
+            }
+
         }
 
         public static void DeleteCategory(string CategoryName)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(@"c:\\temp\\Category.xml");
+            var ser = new XmlCategory();
+            Category c = ser.DezerializeCategory();
 
-            XmlNodeList elemList = doc.GetElementsByTagName("CategoryName");
-
-            for (int i = 0; i < elemList.Count; i++)
+            for (int i = 0; i < c.CategoryName.Count; i++)
             {
-                if (elemList[i].InnerXml.Equals(CategoryName))
+                if (c.CategoryName[i].Equals(CategoryName))
                 {
-                    doc.RemoveChild(elemList[i]);
-                    doc.Save(@"c:\\temp\\Category.xml");
+
                 }
             }
 
+            ser.SerializeCategory(c);
+
+            //XmlDocument doc = new XmlDocument();
+            //doc.Load(@"c:\\temp\\Category.xml");
+
+            //XmlNodeList elemList = doc.GetElementsByTagName("CategoryName");
+
+            //for (int i = 0; i < elemList.Count; i++)
+            //{
+            //    if (elemList[i].InnerXml.Equals(CategoryName))
+            //    {
+            //        doc.RemoveChild(elemList[i]);
+            //        doc.Save(@"c:\\temp\\Category.xml");
+            //    }
+            //}
         }
 
+        public static void ChangeCategory(string name, string newName)
+        {
+            var ser = new XmlCategory();
+            Category c = ser.DezerializeCategory();
+
+            for (int i = 0; i < c.CategoryName.Count; i++)
+            {
+                if (c.CategoryName[i].Equals(name))
+                {
+                    c.CategoryName[i] = newName;
+                }
+            }
+
+            ser.SerializeCategory(c);
+        }
         public static List<string> GetAllCategory()
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(@"c:\\temp\\Category.xml");
-
-            XmlNodeList elemList = doc.GetElementsByTagName("CategoryName");
+            var ser = new XmlCategory();
+            Category c = ser.DezerializeCategory();
             List<string> List = new List<string>();
-
-            for (int i = 0; i < elemList.Count; i++)
-            {
-                List.Add(elemList[i].InnerXml);
-            }
+            List = c.CategoryName;
 
             return List;
         }
+
 
     }
 }
