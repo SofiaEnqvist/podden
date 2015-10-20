@@ -15,20 +15,34 @@ namespace RssReader.Data
     {
         private XmlSerializer xmlSerCategory;
         private string filepath;
-        
-        // Skapa mapppen. 
+        private string path;
+      
 
         public XmlCategory()
 
         {
-            filepath = "c:\\temp\\Category.xml";
+            path = "c:\\Category";
+            filepath = "c:\\Category\\Category.xml";
             xmlSerCategory = new XmlSerializer(typeof(Category));
         }
 
-
-
         public void SerializeCategory(Category category)
         {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            if (!File.Exists(filepath))
+            {
+                File.Create(filepath).Close();
+            }
+
+            else
+            {
+                File.Delete(filepath);
+                File.Create(filepath).Close();
+            }
 
             using (var sw = new StreamWriter(filepath, true))
             {

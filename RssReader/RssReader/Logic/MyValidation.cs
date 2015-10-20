@@ -58,35 +58,12 @@ namespace RssReader.Logic
                 return result;            
         }
 
-        public static bool CheckCategory(string CategoryName)
-        {
-            bool result = true;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(@"c:\\temp\\Category.xml");
-
-            XmlNodeList elemList = doc.GetElementsByTagName("CategoryName");
-            for (int i = 0; i < elemList.Count; i++)
-            {
-                if (elemList[i].InnerXml.Equals(CategoryName))
-                {
-                    result = true;
-                }
-
-                else
-                {
-                    result = false;
-                }
-            }
-
-            return result;
-        }
-
         public static bool CategoryAlredy(string CategoryName)
         {
             var ser = new XmlCategory();
             var list = ser.DezerializeCategory();
            
-            bool result = true;
+            bool result = false;
 
             if (list.CategoryName == null)
             {
@@ -102,10 +79,6 @@ namespace RssReader.Logic
                         result = true;
                     }
 
-                    else
-                    {
-                        result = false;
-                    }
                 }
             }
 
