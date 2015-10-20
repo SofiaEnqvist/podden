@@ -2,6 +2,7 @@
 using RssReader.Entity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,37 @@ namespace RssReader.Logic
                 return result;            
         }
 
+        //validerar om kategorin som vill tas bort används.
+        public static List<string> CategoryUse(string CategoryName)
+        {
+        
+            //Får en lista av aktuella filenamn.
+            List<string> FileName = MethodTest.getAllSubs();
+
+            //Läser av varje filerna och letar efter kategorinamnet.
+            // Samlar alla feednamn i en lista(feedname)som har den valda kategorin. 
+            //skickar tillbaka listan, om listan är tom kanske de skiter sig?
+
+            
+            List<string> feedName = new List<string>();
+            
+
+            for (int i = 0; i < FileName.Count; i++)
+            {
+                var ser = new XmlData(FileName[i]);
+                var des = ser.DezerializeFeed();
+                
+                if(des.Category.Equals(CategoryName))
+                {
+                    feedName.Add(des.feedName);
+                }     
+            }
+
+            return feedName;
+
+        }
+
+        // validerar om kategorin finns 
         public static bool CategoryAlredy(string CategoryName)
         {
             var ser = new XmlCategory();

@@ -60,8 +60,6 @@ namespace RssReader.Data
 
         public Feed DezerializeFeed()
         {
-            
-          
             try
             {
                 Feed feed;

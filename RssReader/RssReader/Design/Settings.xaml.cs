@@ -83,14 +83,29 @@ namespace RssReader.Design
             
             }
             
-       //TODO: Den får inte tas bort om det finns feed under kategorin.
+       //TODO: Den får inte tas bort om det finns feed under kategorin. Ej testad.
+        //TODO: + Visa listan feedName, som har kategorin. 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+           
             if (!String.IsNullOrEmpty(CbAllCategory.Text))
             {
-                Service.DeleteCategory(CbAllCategory.Text);
-                MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
-                updateCb();
+                // kollar om kategorin finns i någon av feed.
+                List<string> FeedName = MyValidation.CategoryUse(CbAllCategory.Text);
+
+                // Om lista är null så kan kategorin tas bort.
+                if (FeedName == null)
+                {
+                    Service.DeleteCategory(CbAllCategory.Text);
+                    MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
+                    updateCb();
+                }
+
+                // Finns det feedName så kanske det vora snyggt att presdentera vilka feeds de måste ta bort. 
+                else
+                {
+                    MessageBox.Show("Du kan inte tabort en kategori som innehåller feeds");
+                }
             }
 
             else
@@ -140,6 +155,7 @@ namespace RssReader.Design
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             new MainWindow().Show();
             this.Close();
         }
