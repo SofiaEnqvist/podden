@@ -42,7 +42,7 @@ namespace RssReader.Logic.Service
         /// Add a new Podcast subscription
         /// </summary>
         /// <param name="feed"></param>
-        public static void AddSubService(SyndicationFeed feed, string category)
+        public static void AddSubService(SyndicationFeed feed, string feedName, string category)
         {
             var seria = new XmlData(feed.Title.Text);
             PodcastEp mappedPodcasts;
@@ -52,7 +52,7 @@ namespace RssReader.Logic.Service
                 mappedPodcasts = PodcastEp.mapPodcastEp(item);
                 list.Add(mappedPodcasts);
             }
-            Feed mappedFeed = Feed.mapFeed(feed, category, list);
+            Feed mappedFeed = Feed.mapFeed(feed, feedName, category, list);
             seria.SerializeFeed(mappedFeed);
         }
 
@@ -138,5 +138,13 @@ namespace RssReader.Logic.Service
         }
 
 
+
+        internal static Feed Ser_getSelectedSub(string selectedItem)
+        {
+            var seria = new XmlData(selectedItem);
+            Feed feed = seria.DezerializeFeed();
+            return feed;
+        
+        }
     }
 }
