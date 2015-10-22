@@ -28,24 +28,30 @@ namespace RssReader.Design
         public Subscriptions()
         {
             InitializeComponent();
-        
         }
-        
+
         private void Subscriptions_OnLoad(object sender, RoutedEventArgs e)
         {
-            var list =Manage.Man_getTitleListSubscription();
-           foreach (var name in list)
-           {
-               listBoxSubscription.Items.Add(name);
-           }     
+            var cbItems = Logic.Manage.fillCb();
+            foreach (var item in cbItems.CategoryName)
+            {
+                cbFilterCategory.Items.Add(item);
+            }
+
+            var list = Manage.Man_getTitleListSubscription();
+            foreach (var name in list)
+            {
+                listBoxSubscription.Items.Add(name);
+            }
+
         }
-        
+
         private void listBoxSubscription_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lViewSub.Items.Clear();
             var selectedItem = listBoxSubscription.SelectedItem.ToString();
-           Feed feed =  Manage.Man_getSelectedSub(selectedItem);
-            foreach(var item in feed.PodEp)
+            Feed feed = Manage.Man_getSelectedSub(selectedItem);
+            foreach (var item in feed.PodEp)
             {
                 lViewSub.Items.Add("------------------------\r\n" + item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
                 lViewSub.Items.Add(item.Mp3Link);
@@ -75,11 +81,11 @@ namespace RssReader.Design
 
         private void GoToSett_Click(object sender, RoutedEventArgs e)
         {
-           new Settings().Show();
-           this.Close();
+            new Settings().Show();
+            this.Close();
         }
 
-    
-        
+
+
     }
 }

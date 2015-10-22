@@ -15,5 +15,7 @@
             </ListView.View>
         </ListView>
         <Button Name="btnPlay" Content="Spela avsnitt" HorizontalAlignment="Left" Margin="556,524,0,0" VerticalAlignment="Top" Width="75" Click="btnPlay_Click"/>
+        <ComboBox Name="cbFilterCategory" HorizontalAlignment="Left" Margin="271,10,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.967,0.5"/>
+        <Label Content="Visa kategori" HorizontalAlignment="Left" Margin="176,6,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
