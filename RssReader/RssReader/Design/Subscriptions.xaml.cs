@@ -42,11 +42,9 @@ namespace RssReader.Design
         
         private void listBoxSubscription_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-
             lViewSub.Items.Clear();
             var selectedItem = listBoxSubscription.SelectedItem.ToString();
-           Feed feed =  Manage.Man_getSelectedSub(selectedItem);
+            Feed feed =  Manage.Man_getSelectedSub(selectedItem);
             foreach(var item in feed.PodEp)
             {
                 lViewSub.Items.Add(item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
@@ -73,7 +71,7 @@ namespace RssReader.Design
             char[] MyChar = { '"' };
             string NewString = val.TrimStart(MyChar);
             Console.WriteLine(NewString);
-           Process.Start(NewString);
+            Process.Start(NewString);
            
 
            //Spelar upp mp3filer i win media player

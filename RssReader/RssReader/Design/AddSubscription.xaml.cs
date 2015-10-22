@@ -22,13 +22,11 @@ namespace RssReader.Design
     public partial class AddSubscription : Window
     {
 
-
         public AddSubscription()
         {
             InitializeComponent();
-
-
         }
+
         public AddSubscription(string para1, string para2)
         {
             InitializeComponent();
@@ -105,11 +103,6 @@ namespace RssReader.Design
             }
         }
 
-        private void cbCategory_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();
@@ -118,5 +111,6 @@ namespace RssReader.Design
 
         public string searchString { get; set; }
         public string titleString { get; set; }
+
     }
 }

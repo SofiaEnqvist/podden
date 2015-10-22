@@ -57,14 +57,9 @@ namespace RssReader.Logic.Service
         }
 
 
-        internal static Category GetCategory()
-        {
-            var seria = new XmlCategory();
-            var list = seria.DezerializeCategory();
-            return list;
-        }
-
-
+        /// <summary>
+        /// Add a new category
+        /// </summary>
         public static void AddCategory(string CategoryName)
         {
             var ser = new XmlCategory();
@@ -90,13 +85,17 @@ namespace RssReader.Logic.Service
         }
 
 
+
+        /// <summary>
+        /// Delete a category
+        /// </summary>
         public static void DeleteCategory(string CategoryName)
         {
             var ser = new XmlCategory();
             var des = ser.DezerializeCategory();
-            List<string> list = new List<string>();
             Category c = new Category();
-
+            List<string> list = new List<string>();
+        
             for (int i = 0; i < des.CategoryName.Count; i++)
             {
                 if (des.CategoryName[i] != CategoryName)
@@ -110,7 +109,9 @@ namespace RssReader.Logic.Service
             ser.SerializeCategory(c);
         }
 
-
+        /// <summary>
+        /// Change a category 
+        /// </summary>
         public static void ChangeCategory(string name, string newName)
         {
             var ser = new XmlCategory();
@@ -127,24 +128,34 @@ namespace RssReader.Logic.Service
             ser.SerializeCategory(c);
         }
 
-        public static List<string> GetAllCategory()
+        /// <summary>
+        /// Change a feeds category 
+        /// </summary>
+        public static void ChangeFeed(List<string> FeedName, string NewCategory)
         {
-            var ser = new XmlCategory();
-            Category c = ser.DezerializeCategory();
-            List<string> List = new List<string>();
-            List = c.CategoryName;
+            for (int i = 0; i < FeedName.Count; i++)
+            {
+                var ser = new XmlData(FeedName[i]);
+                Feed des = ser.DezerializeFeed();
 
-            return List;
+                des.Category = NewCategory;
+                ser.SerializeFeed(des);
+            }        
         }
 
-
+       
+        internal static Category GetAllCategory()
+        {
+            var ser = new XmlCategory();
+            var des = ser.DezerializeCategory();
+            return des;
+        }
 
         internal static Feed Ser_getSelectedSub(string selectedItem)
         {
             var seria = new XmlData(selectedItem);
             Feed feed = seria.DezerializeFeed();
             return feed;
-        
         }
     }
 }

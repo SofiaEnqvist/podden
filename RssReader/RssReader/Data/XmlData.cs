@@ -40,10 +40,19 @@ namespace RssReader.Data
                 Directory.CreateDirectory(dirpath);
             }
 
-            if (!File.Exists(filepath))
+            //xml filen tas först bort sen skapas den på nytt. 
+
+            if (File.Exists(filepath))
+            { 
+                File.Delete(filepath);
+                File.Create(filepath).Close();
+            }
+
+            else
             {
                 File.Create(filepath).Close();
             }
+
             using (var sw = new StreamWriter(filepath, true))
             {
                 xmlSerFeed.Serialize(sw.BaseStream, feed);

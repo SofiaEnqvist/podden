@@ -26,6 +26,9 @@ namespace RssReader.Data
             xmlSerCategory = new XmlSerializer(typeof(Category));
         }
 
+        // Om xml filen finns tas den först bort sedan skapas en ny med det nya innehållet.
+        // Går förmodligen att gör på något snyggare sätt men detta funkar. 
+
         public void SerializeCategory(Category category)
         {
             if (!Directory.Exists(path))
