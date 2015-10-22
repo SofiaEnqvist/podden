@@ -24,7 +24,7 @@ namespace RssReader.Logic
         internal static void AddSubManage(string searchString, string feedName, string category)
         {
             var list = Service.Service.getRssByUri(searchString);
-            Service.Service.Ser_AddSubscription(list, feedName, category);
+            Service.Service.Ser_Add(list, feedName, category);
         }
 
 
@@ -43,6 +43,44 @@ namespace RssReader.Logic
         internal static List<string> Man_getTitleListSubscription()
         {
             return Service.Service.Ser_getTitleAllSubs();
+        }
+
+
+        //Hämta alla xmldokument
+        internal static List<string> Man_GetSelFeed(object selected)
+        {
+            var path = "c:\\temp";
+            var feedlist = Man_getDirectory(path);
+            var categoryList = new List<string>();
+            foreach (var feed in feedlist)
+            {
+                if (feed.Category == selected.ToString())
+                {
+                    categoryList.Add(feed.Title);
+                }
+            }
+            return categoryList;
+        }
+
+
+        public static List<Feed> Man_getDirectory(string path)
+        {
+            string[] fileEntries = Directory.GetFiles(path);
+            var feedllist = new List<Feed>();
+            foreach (var fileName in fileEntries)
+            {
+                var feed = Man_ProcessFile(fileName);
+                feedllist.Add(feed);
+            }
+            return feedllist;
+        }
+
+        public static Feed Man_ProcessFile(string filePath)
+        {
+            string path = filePath.Substring(8);
+            string donePath = path.Substring(0, path.IndexOf(".xml"));
+            var feed = Service.Service.Ser_getSelectedSub(donePath);
+            return feed;
         }
     }
 }

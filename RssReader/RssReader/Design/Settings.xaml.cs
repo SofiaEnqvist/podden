@@ -70,7 +70,7 @@ namespace RssReader.Design
 
                 if (check == false)
                 {
-                    Service.AddCategory(tbCategory.Text.ToUpper());
+                    Service.Ser_Add(tbCategory.Text.ToUpper());
                     MessageBox.Show("Kategorin" + " " + tbCategory.Text + " " + "är nu tillagd");
                 }
 
@@ -136,13 +136,13 @@ namespace RssReader.Design
 
             if (!String.IsNullOrEmpty(cbChangeCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
             {
-                bool check = MyValidation.CategoryAlredyExist(tbNewCategory.Text.ToUpper());
+                bool check = MyValidation.CategoryAlredyExist(tbNewCategory.Text);
 
                 if (check == false)
                 {
                     List<string> FeedName = MyValidation.CategoryUse(cbChangeCategory.Text);
-                    Service.ChangeCategory(cbChangeCategory.Text, tbNewCategory.Text.ToUpper());
-                    Service.ChangeFeed(FeedName, tbNewCategory.Text.ToUpper());
+                    Service.ChangeCategory(cbChangeCategory.Text, tbNewCategory.Text);
+                    Service.ChangeFeed(FeedName, tbNewCategory.Text);
 
                     MessageBox.Show("Kategorin" + " " + cbChangeCategory.Text + " " + "är nu ändrad");
                 }

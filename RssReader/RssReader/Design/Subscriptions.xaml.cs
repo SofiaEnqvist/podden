@@ -33,6 +33,8 @@ namespace RssReader.Design
         private void Subscriptions_OnLoad(object sender, RoutedEventArgs e)
         {
             var cbItems = Logic.Manage.fillCb();
+            var defaultCat = "Alla kategorier";
+            cbFilterCategory.Items.Add(defaultCat);
             foreach (var item in cbItems.CategoryName)
             {
                 cbFilterCategory.Items.Add(item);
@@ -43,7 +45,6 @@ namespace RssReader.Design
             {
                 listBoxSubscription.Items.Add(name);
             }
-
         }
 
         private void listBoxSubscription_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,6 +59,8 @@ namespace RssReader.Design
             }
         }
 
+
+        //TODO: Validering eller att det ej går tt klicka på annat än länken när man vill spela upp. 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             var val = lViewSub.SelectedItem.ToString();
@@ -85,7 +88,30 @@ namespace RssReader.Design
             this.Close();
         }
 
+        private void cbFilterCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbFilterCategory.SelectedIndex != 0)
+            {
+                var selected = cbFilterCategory.SelectedItem;
+                var list = Manage.Man_GetSelFeed(selected);
+                foreach (var item in list)
+                {
+                    listBoxSubscription.Items.Clear();
+                    listBoxSubscription.Items.Add(item);
+                }
 
-
+            }
+            else
+            {
+                listBoxSubscription.Items.Clear();
+                var list = Manage.Man_getTitleListSubscription();
+                foreach (var name in list)
+                {
+                    listBoxSubscription.Items.Add(name);
+                }
+                
+                
+            }
+        }
     }
 }
