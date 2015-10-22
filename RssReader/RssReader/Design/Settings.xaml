@@ -1,19 +1,36 @@
 ﻿<Window x:Class="RssReader.Design.Settings"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Settings" Height="300" Width="300">
+        Title="Settings" Height="505.97" Width="591.045">
     <Grid>
-        <TextBox Name="tbCategory" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Name="btnAdd"  Content="Add" HorizontalAlignment="Left" Margin="166,44,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
-        <ComboBox Name="CbAllCategory" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="tbNewCategory" HorizontalAlignment="Left" Height="23" Margin="10,181,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tbNewCategory_TextChanged"/>
-        <Button Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="166,97,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
-        <Button Name="btnChange" Content="Change" HorizontalAlignment="Left" Margin="166,184,0,0" VerticalAlignment="Top" Width="75" Click="btnChange_Click"/>
-        <Label Content="Delete category:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Change category:" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="120" Height="27"/>
-        <Label Content="Create category:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox Name="cbChangeCategory" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Home" HorizontalAlignment="Left" Margin="97,239,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBox Name="tbCategory" HorizontalAlignment="Left" Height="23" Margin="10,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Name="btnAdd"  Content="Add" HorizontalAlignment="Left" Margin="157,69,0,0" VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
+        <ComboBox Name="CbAllCategory" HorizontalAlignment="Left" Margin="17,176,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbAllCategory_SelectionChanged"/>
+        <TextBox Name="tbNewCategory" HorizontalAlignment="Left" Height="23" Margin="17,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tbNewCategory_TextChanged"/>
+        <Button Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="142,360,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
+        <Button Name="btnChange" Content="Save" HorizontalAlignment="Left" Margin="62,360,0,0" VerticalAlignment="Top" Width="75" Click="btnChange_Click"/>
+        <Label Content="Choose category:" HorizontalAlignment="Left" Margin="17,149,0,0" VerticalAlignment="Top" Width="120" Height="27"/>
+        <Label Content="Category name:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Home" HorizontalAlignment="Left" Margin="55,445,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <GridSplitter HorizontalAlignment="Left" Height="411" Margin="281,0,0,0" VerticalAlignment="Top" Width="5"/>
+        <ComboBox Name="cbAllFeed" HorizontalAlignment="Left" Margin="313,67,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbFeedName" HorizontalAlignment="Left" Height="23" Margin="313,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="cbIntervall" HorizontalAlignment="Left" Margin="313,288,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Choose feed" HorizontalAlignment="Left" Margin="313,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.859,-0.013" Width="120"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="313,149,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,-0.259" Width="120"/>
+        <Label Content="Interval:" HorizontalAlignment="Left" Margin="313,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.162,-0.421" Width="120"/>
+        <Label Content="Label" HorizontalAlignment="Left" Height="16" Margin="383,267,0,0" VerticalAlignment="Top" Width="0"/>
+        <Label Content="URL:" HorizontalAlignment="Left" Margin="313,94,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbURL" HorizontalAlignment="Left" Height="23" Margin="313,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="CbCategory" HorizontalAlignment="Left" Margin="313,230,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="313,204,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.03,-0.18" Width="120"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="343,360,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content=" EDIT CATEGORY" HorizontalAlignment="Left" Margin="83,117,0,0" VerticalAlignment="Top" Width="134"/>
+        <Label Content="EDIT FEED
+               " HorizontalAlignment="Left" Margin="383,0,0,0" VerticalAlignment="Top" Width="134"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="17,204,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="CREATE CATEGORY" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Width="134"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="423,360,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

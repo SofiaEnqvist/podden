@@ -38,8 +38,8 @@ namespace RssReader.Design
        
         public void updateCb()
         {
-            cbChangeCategory.Items.Clear();
             CbAllCategory.Items.Clear();
+            CbCategory.Items.Clear();
 
             var cbItems = Service.GetAllCategory();
             if (cbItems.CategoryName != null)
@@ -47,7 +47,8 @@ namespace RssReader.Design
                 foreach (var name in cbItems.CategoryName)
                 {
                     CbAllCategory.Items.Add(name);
-                    cbChangeCategory.Items.Add(name);
+                    CbCategory.Items.Add(name);
+                    
                 }
             }
 
@@ -134,17 +135,17 @@ namespace RssReader.Design
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
 
-            if (!String.IsNullOrEmpty(cbChangeCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
+            if (!String.IsNullOrEmpty(CbAllCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
             {
                 bool check = MyValidation.CategoryAlredyExist(tbNewCategory.Text.ToUpper());
 
                 if (check == false)
                 {
-                    List<string> FeedName = MyValidation.CategoryUse(cbChangeCategory.Text);
-                    Service.ChangeCategory(cbChangeCategory.Text, tbNewCategory.Text.ToUpper());
+                    List<string> FeedName = MyValidation.CategoryUse(CbAllCategory.Text);
+                    Service.ChangeCategory(CbAllCategory.Text, tbNewCategory.Text.ToUpper());
                     Service.ChangeFeed(FeedName, tbNewCategory.Text.ToUpper());
 
-                    MessageBox.Show("Kategorin" + " " + cbChangeCategory.Text + " " + "är nu ändrad");
+                    MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu ändrad");
                 }
 
                 else
@@ -174,6 +175,12 @@ namespace RssReader.Design
             new MainWindow().Show();
             this.Close();
         }
+
+        private void CbAllCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
 
 
                
