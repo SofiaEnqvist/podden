@@ -158,7 +158,16 @@ namespace RssReader.Logic.Service
             }        
         }
 
+        /// <summary>
+        /// Delete a feed
+        /// </summary>
+        public static void DeleteFeed(string FeedName)
+        {
+            string file = "c:\\temp\\" + FeedName + ".xml";
+            File.Delete(file);
+        }
        
+
         internal static Category GetAllCategory()
         {
             var ser = new XmlCategory();
