@@ -139,6 +139,13 @@ namespace RssReader.Logic.Service
             }        
         }
 
+        public static void ChangeFeed(string URL,string Name, string Category)
+        {
+            SyndicationFeed NewFeed = getRssByUri(URL);
+            Ser_AddSubscription(NewFeed,Name,Category);
+
+        }
+
         /// <summary>
         /// Delete a feed
         /// </summary>
