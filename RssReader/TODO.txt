@@ -1,0 +1,13 @@
+Hej anna
+Tänkte vi kunde lägga en lista av vad som är kvar att göra.
+Försöker skriva lite kommentarer i metoderna om det är saker kvar att göra men dem missar man kanske.
+Iaf så är det bara fylla på listan:
+- Async (kunde vi hoppa över)
+- internal metoder ( har vi på några ställen)
+- abstract
+- virtual
+- enhetstester, kunde vi göra om vi hinner ( kan väl vara bra att försöka förstå hur man gör dem ^^)
+- override-metoder (Ser_AddSubscription och AddCategory blev Add, med olika parameterlistor) 
+- uppdateringsintervall på feeden
+- Man ska kunna se om anändaren har lyssnat på podcasten (har en ide om hur man skulle kunna fixa det)
+- Ta bort en feed (samma funktionalitet som DeleteCategory? eller så tar man bort hela xmldokumentet iof.)
