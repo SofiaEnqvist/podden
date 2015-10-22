@@ -7,6 +7,8 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using RssReader.Logic.Service;
+using System.IO;
+using System.Xml;
 
 namespace RssReader.Logic
 {
@@ -21,7 +23,7 @@ namespace RssReader.Logic
         public static void AddSubManage(string searchString, string feedName, string category)
         {
             var list = Service.Service.getRssByUri(searchString);
-            Service.Service.AddSubService(list, feedName, category);
+            Service.Service.Ser_AddSubscription(list, feedName, category);
         }
 
 
@@ -37,6 +39,11 @@ namespace RssReader.Logic
             var list = new Category();
             var item = Service.Service.GetCategory();
             return item;
+        }
+
+              internal static List<string> Man_getTitleListSubscription()
+        {
+            return Service.Service.Ser_getTitleAllSubs();
         }
     }
 }

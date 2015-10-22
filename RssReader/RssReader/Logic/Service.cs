@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using RssReader.Data;
 using System.ServiceModel.Syndication;
 using System.Xml;
+using System.IO;
 
 namespace RssReader.Logic.Service
 {
@@ -42,14 +43,13 @@ namespace RssReader.Logic.Service
         /// Add a new Podcast subscription
         /// </summary>
         /// <param name="feed"></param>
-        public static void AddSubService(SyndicationFeed feed, string feedName, string category)
+        public static void Ser_AddSubscription(SyndicationFeed feed, string feedName, string category)
         {
             var seria = new XmlData(feed.Title.Text);
-            PodcastEp mappedPodcasts;
             List<PodcastEp> list = new List<PodcastEp>();
             foreach (var item in feed.Items)
             {
-                mappedPodcasts = PodcastEp.mapPodcastEp(item);
+                PodcastEp mappedPodcasts = PodcastEp.mapPodcastEp(item);
                 list.Add(mappedPodcasts);
             }
             Feed mappedFeed = Feed.mapFeed(feed, feedName, category, list);
@@ -138,13 +138,35 @@ namespace RssReader.Logic.Service
         }
 
 
-
         internal static Feed Ser_getSelectedSub(string selectedItem)
         {
             var seria = new XmlData(selectedItem);
             Feed feed = seria.DezerializeFeed();
             return feed;
-        
         }
+
+        internal static List<string> Ser_getTitleAllSubs()
+        {
+            string folderPath = @"C:\temp\";
+            List<string> list = new List<string>();
+            DirectoryInfo di = new DirectoryInfo(folderPath);
+            FileInfo[] rgFiles = di.GetFiles("*.xml");
+            foreach (FileInfo fi in rgFiles)
+            {
+                XmlTextReader reader = new XmlTextReader(fi.Name);
+                string namnnamn = fi.Name;
+
+                if (namnnamn.Contains(".xml"))
+                {
+                    namnnamn = namnnamn.Substring(0, namnnamn.IndexOf(".xml"));
+                }
+                list.Add(namnnamn);
+
+
+            }
+            return list;
+        }
+
+  
     }
 }

@@ -60,12 +60,12 @@ namespace RssReader
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //new AddSubscription(tbSearch.Text, tbTitle.Text).Show();
+            new AddSubscription(tbSearch.Text, tbTitle.Text).Show();
 
-            //tbSearch.Clear();
-            //tbTitle.Text = "";
-            //tbCountAps.Text = "";
-            //tblAbout.Text = "";
+            tbSearch.Clear();
+            tbTitle.Text = "";
+            tbCountAps.Text = "";
+            tblAbout.Text = "";
 
 
         }

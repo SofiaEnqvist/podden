@@ -32,8 +32,8 @@ namespace RssReader.Design
         }
         
         private void Subscriptions_OnLoad(object sender, RoutedEventArgs e)
-        { 
-           var list =  MethodTest.getAllSubs();
+        {
+            var list =Manage.Man_getTitleListSubscription();
            foreach (var name in list)
            {
                listBoxSubscription.Items.Add(name);
@@ -42,16 +42,29 @@ namespace RssReader.Design
         
         private void listBoxSubscription_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-
             lViewSub.Items.Clear();
             var selectedItem = listBoxSubscription.SelectedItem.ToString();
            Feed feed =  Manage.Man_getSelectedSub(selectedItem);
             foreach(var item in feed.PodEp)
             {
-                lViewSub.Items.Add(item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
+                lViewSub.Items.Add("------------------------\r\n" + item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
                 lViewSub.Items.Add(item.Mp3Link);
             }
+        }
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            var val = lViewSub.SelectedItem.ToString();
+
+            char[] MyChar = { '"' };
+            string NewString = val.TrimStart(MyChar);
+            Console.WriteLine(NewString);
+            Process.Start(NewString);
+
+
+            //Spelar upp mp3filer i win media player
+            //Process.Start("wmplayer.exe", "http://rss.acast.com/varvet/-197-darinzanyar/media.mp3");
+
         }
 
         private void btGoToSub2_Click(object sender, RoutedEventArgs e)
@@ -66,20 +79,7 @@ namespace RssReader.Design
            this.Close();
         }
 
-        private void btnPlay_Click(object sender, RoutedEventArgs e)
-        {
-            var val = lViewSub.SelectedItem.ToString();
-            
-            char[] MyChar = { '"' };
-            string NewString = val.TrimStart(MyChar);
-            Console.WriteLine(NewString);
-           Process.Start(NewString);
-           
-
-           //Spelar upp mp3filer i win media player
-            //Process.Start("wmplayer.exe", "http://rss.acast.com/varvet/-197-darinzanyar/media.mp3");
-            
-        }
+    
         
     }
 }

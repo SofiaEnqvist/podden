@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AddSubscription" Height="300" Width="300" Loaded ="AddSubscription_OnLoad">
     <Grid>
-        <ComboBox  Name="cbCategory" HorizontalAlignment="Left" Margin="42,98,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbCategory_SelectionChanged"/>
+        <ComboBox  Name="cbCategory" HorizontalAlignment="Left" Margin="42,98,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Lägg till i kategori: " HorizontalAlignment="Left" Margin="24,67,0,0" VerticalAlignment="Top"/>
         <Label Content="Välj ett uppdateringsintervall" HorizontalAlignment="Left" Margin="24,131,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="cbInterval" HorizontalAlignment="Left" Margin="42,162,0,0" VerticalAlignment="Top" Width="62"/>

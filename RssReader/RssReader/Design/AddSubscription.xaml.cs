@@ -105,10 +105,6 @@ namespace RssReader.Design
             }
         }
 
-        private void cbCategory_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
