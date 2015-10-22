@@ -67,7 +67,6 @@ namespace RssReader
             tbCountAps.Text = "";
             tblAbout.Text = "";
 
-
         }
 
         private void btGoToSub_Click(object sender, RoutedEventArgs e)

@@ -2,6 +2,7 @@
 using RssReader.Entity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +59,28 @@ namespace RssReader.Logic
                 return result;            
         }
 
-        public static bool CategoryAlredy(string CategoryName)
+        //Validerar om kategorin används och listar dem feed som använder det.
+        public static List<string> CategoryUse(string CategoryName)
+        {            
+            List<string> FileName = MethodTest.getAllSubs();
+            List<string> feedName = new List<string>();
+
+            for (int i = 0; i < FileName.Count; i++)
+            {
+                var ser = new XmlData(FileName[i]);
+                var des = ser.DezerializeFeed();
+
+                if (des.Category.Equals(CategoryName))
+                {
+                    feedName.Add(des.Title);
+                }
+            }
+
+            return feedName;
+        }
+
+        // Validerar om kategorin finns 
+        internal static bool CategoryAlredyExist(string CategoryName)
         {
             var ser = new XmlCategory();
             var list = ser.DezerializeCategory();

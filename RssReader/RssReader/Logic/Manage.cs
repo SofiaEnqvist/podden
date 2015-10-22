@@ -34,10 +34,11 @@ namespace RssReader.Logic
          return dezFeed;
         }
 
+         
         public static Category fillCb()
         {
             var list = new Category();
-            var item = Service.Service.GetCategory();
+            var item = Service.Service.GetAllCategory();
             return item;
         }
 

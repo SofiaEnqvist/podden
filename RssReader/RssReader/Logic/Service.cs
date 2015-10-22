@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using RssReader.Data;
 using System.ServiceModel.Syndication;
 using System.Xml;
-using System.IO;
 
 namespace RssReader.Logic.Service
 {
@@ -43,13 +42,14 @@ namespace RssReader.Logic.Service
         /// Add a new Podcast subscription
         /// </summary>
         /// <param name="feed"></param>
-        public static void Ser_AddSubscription(SyndicationFeed feed, string feedName, string category)
+        public static void AddSubService(SyndicationFeed feed, string feedName, string category)
         {
             var seria = new XmlData(feed.Title.Text);
+            PodcastEp mappedPodcasts;
             List<PodcastEp> list = new List<PodcastEp>();
             foreach (var item in feed.Items)
             {
-                PodcastEp mappedPodcasts = PodcastEp.mapPodcastEp(item);
+                mappedPodcasts = PodcastEp.mapPodcastEp(item);
                 list.Add(mappedPodcasts);
             }
             Feed mappedFeed = Feed.mapFeed(feed, feedName, category, list);
@@ -57,14 +57,9 @@ namespace RssReader.Logic.Service
         }
 
 
-        internal static Category GetCategory()
-        {
-            var seria = new XmlCategory();
-            var list = seria.DezerializeCategory();
-            return list;
-        }
-
-
+        /// <summary>
+        /// Add a new category
+        /// </summary>
         public static void AddCategory(string CategoryName)
         {
             var ser = new XmlCategory();
@@ -90,13 +85,17 @@ namespace RssReader.Logic.Service
         }
 
 
+
+        /// <summary>
+        /// Delete a category
+        /// </summary>
         public static void DeleteCategory(string CategoryName)
         {
             var ser = new XmlCategory();
             var des = ser.DezerializeCategory();
-            List<string> list = new List<string>();
             Category c = new Category();
-
+            List<string> list = new List<string>();
+        
             for (int i = 0; i < des.CategoryName.Count; i++)
             {
                 if (des.CategoryName[i] != CategoryName)
@@ -110,7 +109,9 @@ namespace RssReader.Logic.Service
             ser.SerializeCategory(c);
         }
 
-
+        /// <summary>
+        /// Change a category 
+        /// </summary>
         public static void ChangeCategory(string name, string newName)
         {
             var ser = new XmlCategory();
@@ -127,16 +128,28 @@ namespace RssReader.Logic.Service
             ser.SerializeCategory(c);
         }
 
-        public static List<string> GetAllCategory()
+        /// <summary>
+        /// Change a feeds category 
+        /// </summary>
+        public static void ChangeFeed(List<string> FeedName, string NewCategory)
         {
-            var ser = new XmlCategory();
-            Category c = ser.DezerializeCategory();
-            List<string> List = new List<string>();
-            List = c.CategoryName;
+            for (int i = 0; i < FeedName.Count; i++)
+            {
+                var ser = new XmlData(FeedName[i]);
+                Feed des = ser.DezerializeFeed();
 
-            return List;
+                des.Category = NewCategory;
+                ser.SerializeFeed(des);
+            }        
         }
 
+       
+        internal static Category GetAllCategory()
+        {
+            var ser = new XmlCategory();
+            var des = ser.DezerializeCategory();
+            return des;
+        }
 
         internal static Feed Ser_getSelectedSub(string selectedItem)
         {
@@ -144,29 +157,5 @@ namespace RssReader.Logic.Service
             Feed feed = seria.DezerializeFeed();
             return feed;
         }
-
-        internal static List<string> Ser_getTitleAllSubs()
-        {
-            string folderPath = @"C:\temp\";
-            List<string> list = new List<string>();
-            DirectoryInfo di = new DirectoryInfo(folderPath);
-            FileInfo[] rgFiles = di.GetFiles("*.xml");
-            foreach (FileInfo fi in rgFiles)
-            {
-                XmlTextReader reader = new XmlTextReader(fi.Name);
-                string namnnamn = fi.Name;
-
-                if (namnnamn.Contains(".xml"))
-                {
-                    namnnamn = namnnamn.Substring(0, namnnamn.IndexOf(".xml"));
-                }
-                list.Add(namnnamn);
-
-
-            }
-            return list;
-        }
-
-  
     }
 }

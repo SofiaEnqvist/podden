@@ -31,7 +31,7 @@ namespace RssReader.Design
         {
             InitializeComponent();
             
-            //ska inte ligga här egentligen?
+            //ska inte ligga här egentligen, en onload metod. 
             updateCb();
         }
 
@@ -41,94 +41,125 @@ namespace RssReader.Design
             cbChangeCategory.Items.Clear();
             CbAllCategory.Items.Clear();
 
-            var list = Service.GetAllCategory();
-            if (list != null)
+            var cbItems = Service.GetAllCategory();
+            if (cbItems.CategoryName != null)
             {
-                foreach (var name in list)
+                foreach (var name in cbItems.CategoryName)
                 {
                     CbAllCategory.Items.Add(name);
                     cbChangeCategory.Items.Add(name);
                 }
             }
+
+            //var list = Service.GetAllCategory();
+            //if (list != null)
+            //{
+            //    foreach (var name in list)
+            //    {
+            //        CbAllCategory.Items.Add(name);
+            //        cbChangeCategory.Items.Add(name);
+            //    }
+            //}
         }
 
-        //TODO: + Validering på stora och små bokstäver?
         private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-           
+        { 
             if (!String.IsNullOrEmpty(tbCategory.Text))
             {
-                bool check = MyValidation.CategoryAlredy(tbCategory.Text);
+                bool check = MyValidation.CategoryAlredyExist(tbCategory.Text.ToUpper());
 
                 if (check == false)
                 {
-                    Service.AddCategory(tbCategory.Text);
+                    Service.AddCategory(tbCategory.Text.ToUpper());
                     MessageBox.Show("Kategorin" + " " + tbCategory.Text + " " + "är nu tillagd");
-                    tbCategory.Clear();
-                    updateCb();
                 }
 
                 else
                 {
                     MessageBox.Show("Kategorin finns redan");
-                    tbCategory.Clear();
-                    
                 }
 
             }
+
                 else
                 {
                     MessageBox.Show("Fyll i en Kategori");
                 }
+
+            tbCategory.Clear();
+            updateCb();
             
-            }
+        }
             
-       //TODO: Den får inte tas bort om det finns feed under kategorin.
+       
+        //TODO: + Visa listan feedName, som har kategorin. 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+           
             if (!String.IsNullOrEmpty(CbAllCategory.Text))
             {
-                Service.DeleteCategory(CbAllCategory.Text);
-                MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
-                updateCb();
+                // Listar namnet på dem feeds som använder kategorin som försöker tas bort. 
+                List<string> FeedName = MyValidation.CategoryUse(CbAllCategory.Text);
+                
+                if (FeedName.Count() == 0)
+                {
+                    Service.DeleteCategory(CbAllCategory.Text);
+                    MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
+                }
+ 
+                else
+                {
+                    string test;
+
+                    for (int i = 0; i < FeedName.Count; i++)
+                    {
+                        test = FeedName[i] + ",";
+                    }
+
+                    MessageBox.Show("Kategorin kan inte tas bort den innehåller feeds");
+                }
             }
 
             else
             {
-                MessageBox.Show("välj vilken kategori du vill tabort");
+                MessageBox.Show("Välj vilken kategori du vill tabort");
             }
+
+            updateCb();
         }
 
-        //TODO: Ändras även i feeden. 
 
+       
+        // Change category name. 
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
 
             if (!String.IsNullOrEmpty(cbChangeCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
             {
-                bool check = MyValidation.CategoryAlredy(tbNewCategory.Text);
+                bool check = MyValidation.CategoryAlredyExist(tbNewCategory.Text.ToUpper());
 
                 if (check == false)
                 {
+                    List<string> FeedName = MyValidation.CategoryUse(cbChangeCategory.Text);
+                    Service.ChangeCategory(cbChangeCategory.Text, tbNewCategory.Text.ToUpper());
+                    Service.ChangeFeed(FeedName, tbNewCategory.Text.ToUpper());
 
-                    Service.ChangeCategory(cbChangeCategory.Text, tbNewCategory.Text);
-                    tbNewCategory.Clear();
                     MessageBox.Show("Kategorin" + " " + cbChangeCategory.Text + " " + "är nu ändrad");
-                    updateCb();
                 }
 
                 else
                 {
                     MessageBox.Show("Det finns redan en kategori med detta namn");
-                    tbNewCategory.Clear();
-                    updateCb();
                 }
             }
 
             else
             {
-                MessageBox.Show("Då måste välja kategori och ett nytt namn");
+                MessageBox.Show("Då måste välja kategori och ett nytt kategori namn");
             }
+
+            tbNewCategory.Clear();
+            updateCb();
 
         }
 
