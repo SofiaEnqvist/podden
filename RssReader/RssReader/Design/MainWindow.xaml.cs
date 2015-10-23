@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RssReader.Logic;
+
 using RssReader.Logic.Service;
 using RssReader.Design;
 
@@ -27,7 +28,7 @@ namespace RssReader
         public MainWindow()
         {
             InitializeComponent();
-           
+            
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)

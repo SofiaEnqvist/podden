@@ -206,7 +206,7 @@ namespace RssReader.Design
         // TODO validering innan, samma som när man la till en feed från början. 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
+            //Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
         }
 
 

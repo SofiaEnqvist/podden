@@ -107,6 +107,7 @@
     <Compile Include="Logic\MethodTest.cs" />
     <Compile Include="Logic\Service.cs" />
     <Compile Include="Logic\MyValidation.cs" />
+    <Compile Include="Logic\UpdateInterval.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

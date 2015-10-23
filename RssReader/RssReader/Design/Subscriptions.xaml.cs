@@ -32,6 +32,8 @@ namespace RssReader.Design
 
         private void Subscriptions_OnLoad(object sender, RoutedEventArgs e)
         {
+            
+            UpdateInterval.Timer();
             var cbItems = Logic.Manage.fillCb();
             var defaultCat = "Alla kategorier";
             cbFilterCategory.Items.Add(defaultCat);
@@ -49,6 +51,7 @@ namespace RssReader.Design
 
         private void listBoxSubscription_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             lViewSub.Items.Clear();
             var selectedItem = listBoxSubscription.SelectedItem.ToString();
             Feed feed = Manage.Man_getSelectedSub(selectedItem);
@@ -63,6 +66,7 @@ namespace RssReader.Design
         //TODO: Validering eller att det ej går tt klicka på annat än länken när man vill spela upp. 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
+            
             var val = lViewSub.SelectedItem.ToString();
 
             char[] MyChar = { '"' };
