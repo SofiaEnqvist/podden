@@ -98,32 +98,33 @@ namespace RssReader.Design
         }
 
 
-        //TODO: + Visa listan feedName, som har kategorin, alt ta bort även feeds.
-        // Listar namnet på dem feed(feedname) som använder kategorin som försöker tas bort. 
+        //TODO: + Visa listan feedName, som har kategorin, alt ta bort även feeds. 
         private void btnDeleteCategory_Click(object sender, RoutedEventArgs e)
         {
 
             if (!String.IsNullOrEmpty(CbAllCategory.Text))
             {
+                List<string> FileName = MethodTest.getAllSubs();
+                bool check = MyValidation.CategoryUse(CbAllCategory.Text, FileName);
 
-                List<string> FeedName = MyValidation.CategoryUse(CbAllCategory.Text);
-
-                if (FeedName.Count() == 0)
+                if (check == true)
                 {
-                    Service.DeleteCategory(CbAllCategory.Text);
-                    MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
+                    List<string> FeedName = Service.GetAllCategorysFeed(FileName, CbAllCategory.Text);
+
+                    //string test;
+
+                    //for (int i = 0; i < FeedName.Count; i++)
+                    //{
+                    //    test = FeedName[i] + ",";
+                    //}
+
+                    MessageBox.Show("Kategorin kan inte tas bort den innehåller feeds");
                 }
 
                 else
                 {
-                    string test;
-
-                    for (int i = 0; i < FeedName.Count; i++)
-                    {
-                        test = FeedName[i] + ",";
-                    }
-
-                    MessageBox.Show("Kategorin kan inte tas bort den innehåller feeds");
+                    Service.DeleteCategory(CbAllCategory.Text);
+                    MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
                 }
             }
 
@@ -135,6 +136,7 @@ namespace RssReader.Design
             updateCb();
         }
 
+
         private void btnSaveCategory_Click(object sender, RoutedEventArgs e)
         {
 
@@ -144,9 +146,20 @@ namespace RssReader.Design
 
                 if (check == false)
                 {
-                    List<string> FeedName = MyValidation.CategoryUse(CbAllCategory.Text);
-                    Service.ChangeCategory(CbAllCategory.Text, tbNewCategory.Text.ToUpper());
-                    Service.ChangeFeed(FeedName, tbNewCategory.Text.ToUpper());
+                    List<string> FileName = MethodTest.getAllSubs();
+                    bool FeedName = MyValidation.CategoryUse(CbAllCategory.Text, FileName);
+                    
+                    if(FeedName == true)
+                    {
+                        List<string> Feeds = Service.GetAllCategorysFeed(FileName, CbAllCategory.Text);
+                        Service.ChangeCategory(CbAllCategory.Text, tbNewCategory.Text.ToUpper());
+                        Service.ChangeFeed(Feeds, tbNewCategory.Text.ToUpper());   
+                    }
+
+                    else
+                    {
+                        Service.ChangeCategory(CbAllCategory.Text, tbNewCategory.Text.ToUpper());
+                    }
 
                     MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu ändrad");
                 }
@@ -167,10 +180,43 @@ namespace RssReader.Design
 
         }
 
-        //Blir knas när man försöker tabort denna? 
-        private void tbNewCategory_TextChanged(object sender, TextChangedEventArgs e)
+        private void btnSaveFeed_Click(object sender, RoutedEventArgs e)
         {
+            //MyValidation.doesURLExists(URL);
+            List<string> AllSub = MethodTest.getAllSubs();
+            bool SubscribeAlredy = MyValidation.isSubscribedAlredy(AllSub, tbURL.Text);
 
+            if (SubscribeAlredy == false)
+            {
+                bool FeedNameExists = MyValidation.FeedNameExists(tbFeedName.Text, AllSub);
+                if (FeedNameExists == true)
+                {
+                    MessageBox.Show("Du har redan en feed med detta namn");
+                    tbFeedName.Clear();
+                    
+                }
+
+                else
+                {
+                    Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
+                    MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
+                    updateCb();
+                }
+            }
+
+            else
+            {
+                MessageBox.Show("Du prenummerar redan på" + " " + tbURL.Text);
+                updateCb();
+            }
+            
+        }
+
+        private void btnDeleteFeed_Click(object sender, RoutedEventArgs e)
+        {
+            Service.DeleteFeed(cbAllFeed.Text);
+            MessageBox.Show(cbAllFeed.Text + " " + "är nu borttagen");
+            updateCb();
         }
 
         // TODO: testa mer. 
@@ -195,22 +241,6 @@ namespace RssReader.Design
             }
         }
 
-
-        private void btnSaveFeed_Click(object sender, RoutedEventArgs e)
-        {
-            Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
-            MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
-            updateCb();
-        }
-
-        private void btnDeleteFeed_Click(object sender, RoutedEventArgs e)
-        {
-            Service.DeleteFeed(cbAllFeed.Text);
-            MessageBox.Show(cbAllFeed.Text + " " + "är nu borttagen");
-            updateCb();
-        }
-
-
         private void MySubscriptions_Click(object sender, RoutedEventArgs e)
         {
             new Subscriptions().Show();
@@ -221,9 +251,13 @@ namespace RssReader.Design
         {
             new MainWindow().Show();
             this.Close();
-
         }
 
+        //Blir knas när man försöker tabort denna? 
+        private void tbNewCategory_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
 
 
 

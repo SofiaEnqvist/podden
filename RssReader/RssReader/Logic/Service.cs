@@ -147,11 +147,10 @@ namespace RssReader.Logic.Service
         /// <summary>
         /// Change a feed.
         /// </summary>
-        //TODO: Validering, Kolla så namnet inte finns, att URL:n inte finns!
         public static void ChangeFeed(string URL, string FeedName, string Category)
         {
             SyndicationFeed feed = getRssByUri(URL);
-            Ser_Add(feed, FeedName, Category);
+            Ser_Add(feed, FeedName, Category);          
         }
 
         public static void DeleteFeed(string FeedName)
@@ -165,6 +164,24 @@ namespace RssReader.Logic.Service
             var ser = new XmlCategory();
             var des = ser.DezerializeCategory();
             return des;
+        }
+
+        internal static List<string> GetAllCategorysFeed(List<string> FeedTitels, string CategoryName)
+        {
+            List<string> feedName = new List<string>();
+
+            for (int i = 0; i < FeedTitels.Count; i++)
+            {
+                var ser = new XmlData(FeedTitels[i]);
+                var des = ser.DezerializeFeed();
+
+                if (des.Category.Equals(CategoryName))
+                {
+                    feedName.Add(des.Title);
+                }
+            }
+
+            return feedName;
         }
 
         internal static Feed Ser_getSelectedSub(string selectedItem)

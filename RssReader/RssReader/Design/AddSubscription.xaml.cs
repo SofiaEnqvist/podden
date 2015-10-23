@@ -55,6 +55,8 @@ namespace RssReader.Design
 
         //TODO: en jäkla massa if-satser, testa testa så alla går rätt. Om det finns tid så kanske försök hitta nått sätt
         //där en miljon if-satser inte behövs.
+        // Eftersom feeden sparas i egna dokument, bör man leta i alla om det inte får ha samma egna feednamn
+    
         private void btnOkej_Click(object sender, RoutedEventArgs e)
         {
             var feedName = tbFeedName.Text;

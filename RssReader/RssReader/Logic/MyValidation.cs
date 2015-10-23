@@ -1,5 +1,6 @@
 ﻿using RssReader.Data;
 using RssReader.Entity;
+using RssReader.Logic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,29 @@ namespace RssReader.Logic
         public static void doesURLExists(string URL)
         {
             
+        }
 
+        //Validera om podcasten redan prenumerereras på
+        // Letar igenom alla xml dokument och kollar efter URL. 
+        // Kunde inte använda den andra då jag inte hade en titel.
+        public static bool isSubscribedAlredy(List<string> TitelAllSub,string URL)
+        {
+            
+                bool result = false;
+
+                for (int i = 0; i < TitelAllSub.Count; i++)
+                {
+                    var ser = new XmlData(TitelAllSub[i]);
+                    var des = ser.DezerializeFeed();
+                    
+                    if (des.URL.Equals(URL))
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+
+                return result;
         }
 
         //Validera om podcasten redan prenumerereras på
@@ -59,27 +82,27 @@ namespace RssReader.Logic
                 return result;            
         }
 
-        //Validerar om kategorin används och listar dem feed som använder det.
-        public static List<string> CategoryUse(string CategoryName)
-        {            
-            List<string> FileName = MethodTest.getAllSubs();
-            List<string> feedName = new List<string>();
+        //Validerar om kategorin används.
+        public static bool CategoryUse(string CategoryName, List<string> filename)
+        {
+            bool result = false;
+            
 
-            for (int i = 0; i < FileName.Count; i++)
-            {
-                var ser = new XmlData(FileName[i]);
-                var des = ser.DezerializeFeed();
+           for (int i = 0; i < filename.Count; i++)
+           {
+               var ser = new XmlData(filename[i]);
+               var des = ser.DezerializeFeed();
+               if(des.Category.Equals(CategoryName))
+               {
+                   result = true;
+                   break;
+               }
+           }
 
-                if (des.Category.Equals(CategoryName))
-                {
-                    feedName.Add(des.Title);
-                }
-            }
+           return result;
 
-            return feedName;
         }
 
-        // Validerar om kategorin finns 
         public static bool CategoryAlredyExist(string CategoryName)
         {
             var ser = new XmlCategory();
@@ -99,6 +122,7 @@ namespace RssReader.Logic
                     if (list.CategoryName[i].Equals(CategoryName))
                     {
                         result = true;
+                        break;
                     }
 
                 }
@@ -108,6 +132,28 @@ namespace RssReader.Logic
         }
 
 
+        // Denna tittar igenom alla xml och letar om man döpt den till det Feednamnet man försöker döpa till. 
+        internal static bool FeedNameExists(string feedName, List<string> AllSub)
+        {
+            bool result = false;
+
+            for (int i = 0; i < AllSub.Count; i++)
+            {
+                var seria = new XmlData(AllSub[i]);
+                var list = seria.DezerializeFeed();
+
+                if(list.Name.Equals(feedName))
+                {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        // Denna kanske inte är nödvändig då vi spara i separata XML. 
+        // Gjorde en likadan men som letar igenom alla xml ! 
         internal static bool feedNameExists(string podcastTitle, string feedName)
         {
             var seria = new XmlData(podcastTitle);
