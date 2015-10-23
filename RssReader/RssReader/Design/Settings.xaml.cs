@@ -180,36 +180,66 @@ namespace RssReader.Design
 
         }
 
+        // Finns säkert bättre sätt att kolla vad som är ändrat. 
         private void btnSaveFeed_Click(object sender, RoutedEventArgs e)
         {
-            //MyValidation.doesURLExists(URL);
-            List<string> AllSub = MethodTest.getAllSubs();
-            bool SubscribeAlredy = MyValidation.isSubscribedAlredy(AllSub, tbURL.Text);
-
-            if (SubscribeAlredy == false)
+            Feed Feed = Service.Ser_getSelectedSub(cbAllFeed.Text);
+       
+            if (Feed.URL != tbURL.Text)
             {
-                bool FeedNameExists = MyValidation.FeedNameExists(tbFeedName.Text, AllSub);
-                if (FeedNameExists == true)
+                //MyValidation.doesURLExists(URL);
+                List<string> AllSub = MethodTest.getAllSubs();
+                bool SubscribeAlredy = MyValidation.isSubscribedAlredy(AllSub, tbURL.Text);
+            
+                if (SubscribeAlredy == false)
                 {
-                    MessageBox.Show("Du har redan en feed med detta namn");
-                    tbFeedName.Clear();
-                    
+                    if (Feed.Name != tbFeedName.Text)
+                    {
+                        bool FeedNameExists = MyValidation.FeedNameExists(tbFeedName.Text, AllSub);
+
+                        if (FeedNameExists == true)
+                        {
+                            MessageBox.Show("Du har redan en feed med detta namn");
+                            tbFeedName.Clear();
+                        }
+
+                    }
+                        Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
+                        MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
+                        updateCb();
                 }
 
                 else
                 {
-                    Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
-                    MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
+                    MessageBox.Show("Du prenummerar redan på" + " " + tbURL.Text);
                     updateCb();
                 }
+
+
             }
 
             else
             {
-                MessageBox.Show("Du prenummerar redan på" + " " + tbURL.Text);
-                updateCb();
+                if (Feed.Name != tbFeedName.Text)
+                {
+                    List<string> AllSub = MethodTest.getAllSubs();
+                    bool FeedNameExists = MyValidation.FeedNameExists(tbFeedName.Text, AllSub);
+
+                    if (FeedNameExists == true)
+                    {
+                        MessageBox.Show("Du har redan en feed med detta namn");
+                        tbFeedName.Clear();
+                    }
+
+                }
+               
+                    Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
+                    MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
+                    updateCb();
             }
             
+
+       
         }
 
         private void btnDeleteFeed_Click(object sender, RoutedEventArgs e)
@@ -238,7 +268,9 @@ namespace RssReader.Design
                 tbFeedName.Text = des.Name;
                 tbURL.Text = des.URL;
                 CbCategory.Text = des.Category;
+
             }
+           
         }
 
         private void MySubscriptions_Click(object sender, RoutedEventArgs e)
@@ -253,12 +285,8 @@ namespace RssReader.Design
             this.Close();
         }
 
-        //Blir knas när man försöker tabort denna? 
-        private void tbNewCategory_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+   
+     
 
 
     }

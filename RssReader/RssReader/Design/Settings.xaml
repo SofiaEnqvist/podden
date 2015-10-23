@@ -6,7 +6,7 @@
         <TextBox Name="tbCategory" HorizontalAlignment="Left" Height="23" Margin="10,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Name="btnAddCategory"  Content="Add" HorizontalAlignment="Left" Margin="157,69,0,0" VerticalAlignment="Top" Width="75" Click="btnAddCategory_Click"/>
         <ComboBox Name="CbAllCategory" HorizontalAlignment="Left" Margin="17,176,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="CbAllCategory_SelectionChanged"/>
-        <TextBox Name="tbNewCategory" HorizontalAlignment="Left" Height="23" Margin="17,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="tbNewCategory_TextChanged"/>
+        <TextBox Name="tbNewCategory" HorizontalAlignment="Left" Height="23" Margin="17,229,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Name="btnDeleteCategory" Content="Delete" HorizontalAlignment="Left" Margin="142,360,0,0" VerticalAlignment="Top" Width="75" Click="btnDeleteCategory_Click"/>
         <Button Name="btnSaveCategory" Content="Save" HorizontalAlignment="Left" Margin="62,360,0,0" VerticalAlignment="Top" Width="75" Click="btnSaveCategory_Click"/>
         <Label Content="Choose category:" HorizontalAlignment="Left" Margin="17,149,0,0" VerticalAlignment="Top" Width="120" Height="27"/>
@@ -14,7 +14,7 @@
         <Button Content="Subscribe" HorizontalAlignment="Left" Margin="55,428,0,0" VerticalAlignment="Top" Width="75" Click="Subscribe_Click"/>
         <GridSplitter HorizontalAlignment="Left" Height="411" Margin="281,0,0,0" VerticalAlignment="Top" Width="5"/>
         <ComboBox Name="cbAllFeed" HorizontalAlignment="Left" Margin="313,67,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbAllFeed_SelectionChanged"/>
-        <TextBox Name="tbFeedName" HorizontalAlignment="Left" Height="23" Margin="313,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="tbFeedName" HorizontalAlignment="Left" Height="23" Margin="313,175,0,0" TextWrapping="Wrap" Text="&#xD;&#xA;" VerticalAlignment="Top" Width="120"/>
         <ComboBox Name="cbIntervall" HorizontalAlignment="Left" Margin="313,288,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Choose feed" HorizontalAlignment="Left" Margin="313,36,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.859,-0.013" Width="120"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="313,149,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.27,-0.259" Width="120"/>
@@ -31,7 +31,7 @@
         <Label Content="Name:" HorizontalAlignment="Left" Margin="17,204,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="CREATE CATEGORY" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Width="134"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="423,360,0,0" VerticalAlignment="Top" Width="75" Click="btnDeleteFeed_Click"/>
-        <Button Name="MySubscriptions" Content="My Subscriptions" HorizontalAlignment="Left" Margin="170,428,0,0" VerticalAlignment="Top" Width="100" Click="MySubscriptions_Click"/>
+        <Button Name="MySubscriptions" Content="My Subscriptions" HorizontalAlignment="Left" Margin="170,428,0,0" VerticalAlignment="Top" Width="100" Click="MySubscriptions_Click" />
 
     </Grid>
 </Window>
