@@ -7,7 +7,8 @@ Iaf så är det bara fylla på listan:
 - abstract
 - virtual
 - enhetstester, kunde vi göra om vi hinner ( kan väl vara bra att försöka förstå hur man gör dem ^^)
-- override-metoder (Ser_AddSubscription och AddCategory blev Sub_ Add, med olika parameterlistor) 
+- override-metoder (Ser_AddSubscription och AddCategory blev Sub_ Add, med olika parameterlistor
+ 
 - uppdateringsintervall på feeden
 - Man ska kunna se om anändaren har lyssnat på podcasten (har en ide om hur man skulle kunna fixa det)
 - Upptäckte lite fel när man sorterar feed efter kategori. det visar feed som inte hör till kategorin.

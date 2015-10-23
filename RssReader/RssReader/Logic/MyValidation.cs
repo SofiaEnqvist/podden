@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace RssReader.Logic
 {
-    public static class MyValidation
+    public class MyValidation
     {
         
 
@@ -80,7 +80,7 @@ namespace RssReader.Logic
         }
 
         // Validerar om kategorin finns 
-        internal static bool CategoryAlredyExist(string CategoryName)
+        public static bool CategoryAlredyExist(string CategoryName)
         {
             var ser = new XmlCategory();
             var list = ser.DezerializeCategory();

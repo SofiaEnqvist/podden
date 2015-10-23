@@ -30,7 +30,6 @@ namespace RssReader.Design
         public Settings()
         {
             InitializeComponent();
-
             //ska inte ligga här egentligen, en onload metod. 
             updateCb();
         }
@@ -101,7 +100,7 @@ namespace RssReader.Design
 
         //TODO: + Visa listan feedName, som har kategorin, alt ta bort även feeds.
         // Listar namnet på dem feed(feedname) som använder kategorin som försöker tas bort. 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private void btnDeleteCategory_Click(object sender, RoutedEventArgs e)
         {
 
             if (!String.IsNullOrEmpty(CbAllCategory.Text))
@@ -174,12 +173,6 @@ namespace RssReader.Design
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new MainWindow().Show();
-            this.Close();
-        }
-
         // TODO: testa mer. 
         private void CbAllCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -202,6 +195,7 @@ namespace RssReader.Design
             }
         }
 
+
         private void btnSaveFeed_Click(object sender, RoutedEventArgs e)
         {
             Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
@@ -214,6 +208,20 @@ namespace RssReader.Design
             Service.DeleteFeed(cbAllFeed.Text);
             MessageBox.Show(cbAllFeed.Text + " " + "är nu borttagen");
             updateCb();
+        }
+
+
+        private void MySubscriptions_Click(object sender, RoutedEventArgs e)
+        {
+            new Subscriptions().Show();
+            this.Close();
+        }
+
+        private void Subscribe_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            this.Close();
+
         }
 
 
