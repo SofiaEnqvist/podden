@@ -19,10 +19,10 @@ namespace RssReader.Logic
         public static void Timer()
         {
             searchNewEpisodes("Värvet");
-            aTimer = new System.Timers.Timer(2000);
-            aTimer.Elapsed += OnTimedEvent;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            //aTimer = new System.Timers.Timer(2000);
+            //aTimer.Elapsed += OnTimedEvent;
+            //aTimer.AutoReset = true;
+            //aTimer.Enabled = true;
         }
 
         //Syndicationfeed.load på varje subscription. Om det finns ett nytt avsnitt, jämfört med senaste publicationdate, så sk det läggas till
