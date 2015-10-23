@@ -39,30 +39,34 @@ namespace RssReader.Design
         public void updateCb()
         {
             CbAllCategory.Items.Clear();
-            cbChangeCategory.Items.Clear();
+            CbCategory.Items.Clear();
+            cbAllFeed.Items.Clear();
+            
 
             var cbItems = Service.GetAllCategory();
+            var cbFeed = Service.Ser_getTitleAllSubs();
+
             if (cbItems.CategoryName != null)
             {
                 foreach (var name in cbItems.CategoryName)
                 {
                     CbAllCategory.Items.Add(name);
-                    cbChangeCategory.Items.Add(name);
+                    CbCategory.Items.Add(name);
                     
                 }
             }
 
-            //var list = Service.GetAllCategory();
-            //if (list != null)
-            //{
-            //    foreach (var name in list)
-            //    {
-            //        CbAllCategory.Items.Add(name);
-            //        cbChangeCategory.Items.Add(name);
-            //    }
-            //}
+            if (cbFeed != null)
+            {
+                foreach (var name in cbFeed)
+                {
+                    cbAllFeed.Items.Add(name);
+                }
+            }
+          
         }
 
+        //lägger till kategori
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         { 
             if (!String.IsNullOrEmpty(tbCategory.Text))
@@ -71,7 +75,7 @@ namespace RssReader.Design
 
                 if (check == false)
                 {
-                    Service.Ser_Add(tbCategory.Text.ToUpper());
+                    Service.AddCategory(tbCategory.Text.ToUpper());
                     MessageBox.Show("Kategorin" + " " + tbCategory.Text + " " + "är nu tillagd");
                 }
 
@@ -93,13 +97,14 @@ namespace RssReader.Design
         }
             
        
-        //TODO: + Visa listan feedName, som har kategorin. 
+        //TODO: + Visa listan feedName, som har kategorin, alt ta bort även feeds.
+        // Listar namnet på dem feed(feedname) som använder kategorin som försöker tas bort. 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
            
             if (!String.IsNullOrEmpty(CbAllCategory.Text))
             {
-                // Listar namnet på dem feeds som använder kategorin som försöker tas bort. 
+                
                 List<string> FeedName = MyValidation.CategoryUse(CbAllCategory.Text);
                 
                 if (FeedName.Count() == 0)
@@ -166,7 +171,7 @@ namespace RssReader.Design
 
         //Blir knas när man försöker tabort denna? 
         private void tbNewCategory_TextChanged(object sender, TextChangedEventArgs e)
-       {
+        {
 
         }
 
@@ -176,9 +181,32 @@ namespace RssReader.Design
             this.Close();
         }
 
+        // TODO: testa mer. 
         private void CbAllCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (CbAllCategory.SelectedItem != null)
+            {
+                tbNewCategory.Text = CbAllCategory.SelectedItem.ToString();   
+            }
+                
+        }
 
+        // TODO: testa mer. 
+        private void cbAllFeed_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbAllFeed.SelectedItem != null)
+            {
+                var des = Service.Ser_getSelectedSub(cbAllFeed.SelectedItem.ToString());
+                tbFeedName.Text = des.Name;
+                tbURL.Text = des.URL;
+                CbCategory.Text = des.Category;
+            }
+        }
+
+        // TODO validering innan, samma som när man la till en feed från början. 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Service.ChangeFeed(tbURL.Text,tbFeedName.Text, CbCategory.Text);
         }
 
 
