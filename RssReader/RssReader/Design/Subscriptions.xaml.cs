@@ -53,12 +53,14 @@ namespace RssReader.Design
         {
             
             lViewSub.Items.Clear();
-            var selectedItem = listBoxSubscription.SelectedItem.ToString();
-            Feed feed = Manage.Man_getSelectedSub(selectedItem);
-            foreach (var item in feed.PodEp)
             {
-                lViewSub.Items.Add("------------------------\r\n" + item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
-                lViewSub.Items.Add(item.Mp3Link);
+                var selectedItem = listBoxSubscription.SelectedItem.ToString();
+                Feed feed = Manage.Man_getSelectedSub(selectedItem);
+                foreach (var item in feed.PodEp)
+                {
+                    lViewSub.Items.Add("------------------------\r\n" + item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
+                    lViewSub.Items.Add(item.Mp3Link);
+                }
             }
         }
 
@@ -92,6 +94,7 @@ namespace RssReader.Design
             this.Close();
         }
 
+        // TODO: Knas när det blir null värde. Funkar inte riktigt som den ska.  
         private void cbFilterCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbFilterCategory.SelectedIndex != 0)

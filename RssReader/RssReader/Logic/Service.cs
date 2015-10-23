@@ -59,11 +59,7 @@ namespace RssReader.Logic.Service
             
         }
 
-
-        /// <summary>
-        /// Add a new category
-        /// </summary>
-        public static void Ser_Add(string CategoryName)
+        public static void Ser_AddCategory(string CategoryName)
         {
             try {
                 var ser = new XmlCategory();
@@ -93,10 +89,6 @@ namespace RssReader.Logic.Service
             
         }
 
-
-        /// <summary>
-        /// Delete a category
-        /// </summary>
         public static void DeleteCategory(string CategoryName)
         {
             try
@@ -124,9 +116,6 @@ namespace RssReader.Logic.Service
            
         }
 
-        /// <summary>
-        /// Change a category 
-        /// </summary>
         public static void ChangeCategory(string name, string newName)
         {
             var ser = new XmlCategory();
@@ -143,9 +132,6 @@ namespace RssReader.Logic.Service
             ser.SerializeCategory(c);
         }
 
-        /// <summary>
-        /// Change a feeds category 
-        /// </summary>
         public static void ChangeFeed(List<string> FeedName, string NewCategory)
         {
             for (int i = 0; i < FeedName.Count; i++)
@@ -159,15 +145,21 @@ namespace RssReader.Logic.Service
         }
 
         /// <summary>
-        /// Delete a feed
+        /// Change a feed.
         /// </summary>
+        //TODO: Validering, Kolla så namnet inte finns, att URL:n inte finns!
+        public static void ChangeFeed(string URL, string FeedName, string Category)
+        {
+            SyndicationFeed feed = getRssByUri(URL);
+            Ser_Add(feed, FeedName, Category);
+        }
+
         public static void DeleteFeed(string FeedName)
         {
             string file = "c:\\temp\\" + FeedName + ".xml";
             File.Delete(file);
         }
        
-
         internal static Category GetAllCategory()
         {
             var ser = new XmlCategory();

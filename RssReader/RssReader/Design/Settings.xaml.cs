@@ -41,7 +41,10 @@ namespace RssReader.Design
             CbAllCategory.Items.Clear();
             CbCategory.Items.Clear();
             cbAllFeed.Items.Clear();
-
+            tbCategory.Clear();
+            tbFeedName.Clear();
+            tbNewCategory.Clear();
+            tbURL.Clear();
 
             var cbItems = Service.GetAllCategory();
             var cbFeed = Service.Ser_getTitleAllSubs();
@@ -66,8 +69,7 @@ namespace RssReader.Design
 
         }
 
-        //lägger till kategori
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void btnAddCategory_Click(object sender, RoutedEventArgs e)
         {
             if (!String.IsNullOrEmpty(tbCategory.Text))
             {
@@ -75,7 +77,7 @@ namespace RssReader.Design
 
                 if (check == false)
                 {
-                    Service.Ser_Add(tbCategory.Text.ToUpper());
+                    Service.Ser_AddCategory(tbCategory.Text.ToUpper());
                     MessageBox.Show("Kategorin" + " " + tbCategory.Text + " " + "är nu tillagd");
                 }
 
@@ -91,7 +93,7 @@ namespace RssReader.Design
                 MessageBox.Show("Fyll i en Kategori");
             }
 
-            tbCategory.Clear();
+            
             updateCb();
 
         }
@@ -134,10 +136,7 @@ namespace RssReader.Design
             updateCb();
         }
 
-
-
-        // Change category name. 
-        private void btnChange_Click(object sender, RoutedEventArgs e)
+        private void btnSaveCategory_Click(object sender, RoutedEventArgs e)
         {
 
             if (!String.IsNullOrEmpty(CbAllCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
@@ -203,10 +202,18 @@ namespace RssReader.Design
             }
         }
 
-        // TODO validering innan, samma som när man la till en feed från början. 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void btnSaveFeed_Click(object sender, RoutedEventArgs e)
         {
-            //Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
+            Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
+            MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
+            updateCb();
+        }
+
+        private void btnDeleteFeed_Click(object sender, RoutedEventArgs e)
+        {
+            Service.DeleteFeed(cbAllFeed.Text);
+            MessageBox.Show(cbAllFeed.Text + " " + "är nu borttagen");
+            updateCb();
         }
 
 
