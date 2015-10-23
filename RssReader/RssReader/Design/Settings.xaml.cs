@@ -39,7 +39,7 @@ namespace RssReader.Design
         public void updateCb()
         {
             CbAllCategory.Items.Clear();
-            CbCategory.Items.Clear();
+            cbChangeCategory.Items.Clear();
 
             var cbItems = Service.GetAllCategory();
             if (cbItems.CategoryName != null)
@@ -47,7 +47,7 @@ namespace RssReader.Design
                 foreach (var name in cbItems.CategoryName)
                 {
                     CbAllCategory.Items.Add(name);
-                    CbCategory.Items.Add(name);
+                    cbChangeCategory.Items.Add(name);
                     
                 }
             }
@@ -71,7 +71,7 @@ namespace RssReader.Design
 
                 if (check == false)
                 {
-                    Service.AddCategory(tbCategory.Text.ToUpper());
+                    Service.Ser_Add(tbCategory.Text.ToUpper());
                     MessageBox.Show("Kategorin" + " " + tbCategory.Text + " " + "är nu tillagd");
                 }
 
