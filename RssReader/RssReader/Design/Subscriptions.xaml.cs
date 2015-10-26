@@ -32,8 +32,7 @@ namespace RssReader.Design
 
         private void Subscriptions_OnLoad(object sender, RoutedEventArgs e)
         {
-            
-            UpdateInterval.Timer();
+            UpdateInterval.getIntervalInt();
             var cbItems = Logic.Manage.fillCb();
             var defaultCat = "Alla kategorier";
             cbFilterCategory.Items.Add(defaultCat);

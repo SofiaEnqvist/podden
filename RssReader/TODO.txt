@@ -21,5 +21,10 @@ Detta är gjort:
 - Ta bort en feed, tar bort hela xml(service.deletefeed) Görs från settnings. 
 
 
+Detta har jag gjort:
+hr börjat försöka mig på UpdateInterval, det måste finnnas enklare sätt att göra det på. Jag har fått det att funkar att den
+letar i feedens xml efter den interval man valt till just den feeden. Den letar efter nya avsnitt, om den hittar nya avsnitt så läggs det till i feeden.
+Problemet blir när den ska sköta flera feeds intervaller på samma gång, då blandas det ihop.. typ.. hehe
+
 
 

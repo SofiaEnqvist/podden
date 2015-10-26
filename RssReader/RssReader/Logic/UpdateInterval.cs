@@ -1,57 +1,77 @@
 ﻿using RssReader.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Xml;
 
 namespace RssReader.Logic
 {
     public static class UpdateInterval
     {
         private static Timer aTimer;
+        private static string feedTitle;
 
 
-        //1. hur ska vi få fram hur alla xmldokument ska ha en update interval, ett eget xml?
-        // 
+        //TODO: metoderna här vet jag inte hur man ska kunna köra samtidigt som allt annaat händer, det ska hända i bakgrunden alltså. helst Hehe
 
-        public static void Timer()
+        public static void Timer(int interval, string feed)
         {
-            searchNewEpisodes("Värvet");
-            //aTimer = new System.Timers.Timer(2000);
-            //aTimer.Elapsed += OnTimedEvent;
-            //aTimer.AutoReset = true;
-            //aTimer.Enabled = true;
+            feedTitle = feed;
+            aTimer = new System.Timers.Timer(interval);
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
         }
 
-        //Syndicationfeed.load på varje subscription. Om det finns ett nytt avsnitt, jämfört med senaste publicationdate, så sk det läggas till
         private static void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
-            
+            searchNewEpisodes(feedTitle);
+            Console.WriteLine("vi har sökt efter nya poddar i " + feedTitle + " {0}", e.SignalTime);
+            //Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
         }
-
-        private static void loadFeed(string searchString)
+        //Hämta ut alla xmldocuments intervall, skicka tillbaka en lista på titel och interval
+        internal static void getIntervalInt()
         {
-
+            int interval = 0;
+            var list = Manage.Man_getTitleListSubscription();
+            foreach (var item in list)
+            {
+                XmlData xml = new XmlData(item);
+                var dez = xml.DezerializeFeed();
+                interval = dez.Interval;
+                UpdateInterval.Timer(interval, dez.Title);
+            }
         }
-        // TODO: Avsnittet som sparas i subscription behöver sparas med en mer precis datetime,
-        //Som det är nu så sparas den i hela timmar, den avrundar uppåt, gör nått åt det.
+
         private static void searchNewEpisodes(string searchString)
         {
-            searchString = "Värvet";
             var xml = new XmlData(searchString);
             var dez = xml.DezerializeFeed();
             var rssPath = dez.URL;
-            
             var lastSubDate = dez.PodEp.OrderByDescending(x => x.PubDate).FirstOrDefault();
-            Console.WriteLine(lastSubDate.PubDate + lastSubDate.Title);
             //--------------------------
-           var feed = Service.Service.getRssByUri(rssPath);
-           var pod = feed.Items.ToList();
-           var lastPubDate = pod.OrderByDescending(x => x.PublishDate).FirstOrDefault();
-           Console.WriteLine(lastPubDate.PublishDate + "Nytt avsnitt ? " + lastPubDate.Title.Text );
+            var feed = Service.Service.getRssByUri(rssPath);
+            var pod = feed.Items.ToList();
+            var lastPubDate = pod.OrderByDescending(x => x.PublishDate).FirstOrDefault();
+
+            //Kolla om seanste avsnittet som är sparat har samma pubDate som senaste avsnittet i rssfeeden
+            if (lastSubDate.PubDate.ToString("u") != lastPubDate.PublishDate.ToString("u"))
+            {
+                Console.WriteLine("det finn ett nytt avsnitt");
+                //Ta det senaste avsnittet och uppdatera feeden.
+                Service.Service.DeleteFeed(feed.Title.Text);
+                Manage.AddSubManage(rssPath, feed.Title.Text, dez.Category);
+            }
+            else
+            {
+                //gör inget
+                Console.WriteLine("inget nytt avsnitt");
+            }
         }
+
     }
 }

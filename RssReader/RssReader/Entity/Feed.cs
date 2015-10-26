@@ -24,6 +24,8 @@ namespace RssReader.Entity
         [XmlElement()]
         public string Category { get; set; }
         [XmlElement()]
+        public int Interval { get; set; }
+        [XmlElement()]
         public List<PodcastEp> PodEp { get; set; }
 
         internal static Feed mapFeed(SyndicationFeed feed, string feedName, string category, List<PodcastEp> podcast)
@@ -35,6 +37,7 @@ namespace RssReader.Entity
                 Description = feed.Description.Text,
                 URL = feed.Links.First().Uri.ToString(),
                 Category = category,
+                Interval = 10000,
                 PodEp = podcast
             };
             return feede;
