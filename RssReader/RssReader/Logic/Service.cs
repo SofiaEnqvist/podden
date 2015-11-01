@@ -39,9 +39,29 @@ namespace RssReader.Logic.Service
         }
 
 
-        public static void Ser_Add(SyndicationFeed feed, string feedName, string category)
+        //public static void Ser_Add(SyndicationFeed feed, string feedName, string category)
+        //{
+        //    try {
+        //        var seria = new XmlData(feed.Title.Text);
+        //        List<PodcastEp> list = new List<PodcastEp>();
+        //        foreach (var item in feed.Items)
+        //        {
+        //            PodcastEp mappedPodcasts = PodcastEp.mapPodcastEp(item);
+        //            list.Add(mappedPodcasts);
+        //        }
+        //        Feed mappedFeed = Feed.mapFeed(feed, feedName, category, list);
+        //        seria.SerializeFeed(mappedFeed);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //    }
+            
+        //}
+        internal static void Ser_Add(SyndicationFeed feed, string feedName, string category, int interval)
         {
-            try {
+            try
+            {
                 var seria = new XmlData(feed.Title.Text);
                 List<PodcastEp> list = new List<PodcastEp>();
                 foreach (var item in feed.Items)
@@ -49,14 +69,13 @@ namespace RssReader.Logic.Service
                     PodcastEp mappedPodcasts = PodcastEp.mapPodcastEp(item);
                     list.Add(mappedPodcasts);
                 }
-                Feed mappedFeed = Feed.mapFeed(feed, feedName, category, list);
+                Feed mappedFeed = Feed.mapFeed(feed, feedName, category, interval, list);
                 seria.SerializeFeed(mappedFeed);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-            
         }
 
         public static void Ser_AddCategory(string CategoryName)
@@ -147,10 +166,10 @@ namespace RssReader.Logic.Service
         /// <summary>
         /// Change a feed.
         /// </summary>
-        public static void ChangeFeed(string URL, string FeedName, string Category)
+        public static void ChangeFeed(string URL, string FeedName, string Category, int inter)
         {
             SyndicationFeed feed = getRssByUri(URL);
-            Ser_Add(feed, FeedName, Category);          
+            Ser_Add(feed, FeedName, Category, inter);          
         }
 
         public static void DeleteFeed(string FeedName)
@@ -230,5 +249,7 @@ namespace RssReader.Logic.Service
             
         }
 
+
+        
     }
 }

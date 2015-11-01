@@ -1,23 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using RssReader.Logic;
 using RssReader.Entity;
 using RssReader.Logic.Service;
-using RssReader.Data;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
-
 
 
 namespace RssReader.Design
@@ -40,6 +28,7 @@ namespace RssReader.Design
             CbAllCategory.Items.Clear();
             CbCategory.Items.Clear();
             cbAllFeed.Items.Clear();
+            cbIntervall.Items.Clear();
             tbCategory.Clear();
             tbFeedName.Clear();
             tbNewCategory.Clear();
@@ -47,6 +36,7 @@ namespace RssReader.Design
 
             var cbItems = Service.GetAllCategory();
             var cbFeed = Service.Ser_getTitleAllSubs();
+            var cbInter = Manage.fillCbInterval();
 
             if (cbItems.CategoryName != null)
             {
@@ -54,7 +44,6 @@ namespace RssReader.Design
                 {
                     CbAllCategory.Items.Add(name);
                     CbCategory.Items.Add(name);
-
                 }
             }
 
@@ -63,6 +52,14 @@ namespace RssReader.Design
                 foreach (var name in cbFeed)
                 {
                     cbAllFeed.Items.Add(name);
+                }
+            }
+
+            if (cbInter != null)
+            {
+                foreach (var interval in cbInter)
+                {
+                    cbIntervall.Items.Add(interval);
                 }
             }
 
@@ -79,29 +76,23 @@ namespace RssReader.Design
                     Service.Ser_AddCategory(tbCategory.Text.ToUpper());
                     MessageBox.Show("Kategorin" + " " + tbCategory.Text + " " + "är nu tillagd");
                 }
-
                 else
                 {
                     MessageBox.Show("Kategorin finns redan");
                 }
-
             }
 
             else
             {
                 MessageBox.Show("Fyll i en Kategori");
             }
-
-            
             updateCb();
-
         }
 
 
         //TODO: + Visa listan feedName, som har kategorin, alt ta bort även feeds. 
         private void btnDeleteCategory_Click(object sender, RoutedEventArgs e)
         {
-
             if (!String.IsNullOrEmpty(CbAllCategory.Text))
             {
                 List<string> FileName = MethodTest.getAllSubs();
@@ -132,7 +123,6 @@ namespace RssReader.Design
             {
                 MessageBox.Show("Välj vilken kategori du vill tabort");
             }
-
             updateCb();
         }
 
@@ -177,14 +167,16 @@ namespace RssReader.Design
 
             tbNewCategory.Clear();
             updateCb();
-
         }
+
 
         // Finns säkert bättre sätt att kolla vad som är ändrat. 
         private void btnSaveFeed_Click(object sender, RoutedEventArgs e)
         {
             Feed Feed = Service.Ser_getSelectedSub(cbAllFeed.Text);
-       
+            var interval = cbIntervall.SelectedItem.ToString();
+            int x = MyValidation.ConvertStringToInt(interval);
+
             if (Feed.URL != tbURL.Text)
             {
                 //MyValidation.doesURLExists(URL);
@@ -202,9 +194,8 @@ namespace RssReader.Design
                             MessageBox.Show("Du har redan en feed med detta namn");
                             tbFeedName.Clear();
                         }
-
                     }
-                        Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
+                        Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text, x);
                         MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
                         updateCb();
                 }
@@ -230,16 +221,11 @@ namespace RssReader.Design
                         MessageBox.Show("Du har redan en feed med detta namn");
                         tbFeedName.Clear();
                     }
-
                 }
-               
-                    Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text);
+                    Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text, x);
                     MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
                     updateCb();
-            }
-            
-
-       
+            }          
         }
 
         private void btnDeleteFeed_Click(object sender, RoutedEventArgs e)
@@ -249,6 +235,7 @@ namespace RssReader.Design
             updateCb();
         }
 
+
         // TODO: testa mer. 
         private void CbAllCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -256,7 +243,6 @@ namespace RssReader.Design
             {
                 tbNewCategory.Text = CbAllCategory.SelectedItem.ToString();
             }
-
         }
 
         // TODO: testa mer. 
@@ -268,9 +254,8 @@ namespace RssReader.Design
                 tbFeedName.Text = des.Name;
                 tbURL.Text = des.URL;
                 CbCategory.Text = des.Category;
-
+                cbIntervall.Text = des.Interval.ToString() + " min";
             }
-           
         }
 
         private void MySubscriptions_Click(object sender, RoutedEventArgs e)
@@ -279,16 +264,11 @@ namespace RssReader.Design
             this.Close();
         }
 
+
         private void Subscribe_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();
             this.Close();
         }
-
-   
-     
-
-
     }
-
 }

@@ -21,10 +21,10 @@ namespace RssReader.Logic
         /// Method that manage the subscription action
         /// </summary>
         /// <param name="searchString"></param>
-        internal static void AddSubManage(string searchString, string feedName, string category)
+        internal static void AddSubManage(string searchString, string feedName, string category, int interval)
         {
             var list = Service.Service.getRssByUri(searchString);
-            Service.Service.Ser_Add(list, feedName, category);
+            Service.Service.Ser_Add(list, feedName, category, interval);
         }
 
 
@@ -81,6 +81,14 @@ namespace RssReader.Logic
             string donePath = path.Substring(0, path.IndexOf(".xml"));
             var feed = Service.Service.Ser_getSelectedSub(donePath);
             return feed;
+        }
+
+        internal static List<string> fillCbInterval()
+        {
+            List<string> list = new List<string>();
+            list.Add("5 min");
+            list.Add("10 min");
+            return list;
         }
     }
 }

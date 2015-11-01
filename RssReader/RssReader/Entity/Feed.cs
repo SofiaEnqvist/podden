@@ -28,7 +28,7 @@ namespace RssReader.Entity
         [XmlElement()]
         public List<PodcastEp> PodEp { get; set; }
 
-        internal static Feed mapFeed(SyndicationFeed feed, string feedName, string category, List<PodcastEp> podcast)
+        internal static Feed mapFeed(SyndicationFeed feed, string feedName, string category, int interval, List<PodcastEp> podcast)
         {
             var feede = new Feed()
             {
@@ -37,10 +37,15 @@ namespace RssReader.Entity
                 Description = feed.Description.Text,
                 URL = feed.Links.First().Uri.ToString(),
                 Category = category,
-                Interval = 10000,
+                Interval = interval,
                 PodEp = podcast
             };
             return feede;
+        }
+
+        internal static Feed mapFeed(SyndicationFeed feed, string feedName, string category, List<PodcastEp> list)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,17 +1,16 @@
-Hej anna
-Tänkte vi kunde lägga en lista av vad som är kvar att göra.
-Försöker skriva lite kommentarer i metoderna om det är saker kvar att göra men dem missar man kanske.
-Iaf så är det bara fylla på listan:
-- Async (kunde vi hoppa över)
-- internal metoder ( har vi på några ställen)
+
+
+1/11
+----
+TODO:
 - abstract
 - virtual
-- enhetstester, kunde vi göra om vi hinner ( kan väl vara bra att försöka förstå hur man gör dem ^^)
-- override-metoder (Ser_AddSubscription och AddCategory blev Sub_ Add, med olika parameterlistor
- 
-- uppdateringsintervall på feeden
-- Man ska kunna se om anändaren har lyssnat på podcasten (har en ide om hur man skulle kunna fixa det)
-- Upptäckte lite fel när man sorterar feed efter kategori. det visar feed som inte hör till kategorin.
+- ett enhetstest
+- Man ska kunna se om man lyssnat på en pod
+-----
+//Sofia
+
+
 
 Hej Sofia!
 Smart :D lättare att läsa här. 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -171,6 +172,23 @@ namespace RssReader.Logic
 
             return result;
 
+        }
+
+        internal static int ConvertStringToInt(string valInterval)
+        {
+            string resultString = null;
+            int x = 0;
+            try
+            {
+                Regex regexObj = new Regex(@"[^\d]");
+                resultString = regexObj.Replace(valInterval, "");
+                x = Int32.Parse(resultString);
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return x;
         }
     }
    

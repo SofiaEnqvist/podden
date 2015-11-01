@@ -1,19 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using RssReader.Logic;
-
 using RssReader.Logic.Service;
 using RssReader.Design;
 
@@ -28,17 +15,14 @@ namespace RssReader
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
             if(!String.IsNullOrEmpty(tbSearch.Text))
             {
-
                 BtnSubscribe.IsEnabled = true;
                 var loadedRss = Service.getRssByUri(tbSearch.Text);
-                //kanske kan göra en snygg validering på den här? i service istället för i designlagret
                 if (loadedRss.Title != null)
                 {
                     tbTitle.Text = loadedRss.Title.Text;
@@ -55,7 +39,6 @@ namespace RssReader
             {
                 MessageBox.Show("Fyll i sökfältet.");
             }
-           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

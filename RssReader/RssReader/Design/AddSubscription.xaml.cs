@@ -1,18 +1,5 @@
-﻿using RssReader.Entity;
-using RssReader.Logic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RssReader.Logic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RssReader.Design
 {
@@ -40,16 +27,16 @@ namespace RssReader.Design
         private void AddSubscription_OnLoad(object sender, RoutedEventArgs e)
         {
             var cbItems = Logic.Manage.fillCb();
-            //if (cbItems.CategoryName == null)
-            //{ 
-            //    var def = "default";
-            //    Category cat = new Category();
-            //    cat.CategoryName.Add(def);
+            var cbIntervalItem = Logic.Manage.fillCbInterval();
 
-            //}
             foreach (var item in cbItems.CategoryName)
             {
                 cbCategory.Items.Add(item);
+            }
+
+            foreach (var item in cbIntervalItem)
+            {
+                cbInterval.Items.Add(item);
             }
         }
 
@@ -61,8 +48,8 @@ namespace RssReader.Design
         {
             var feedName = tbFeedName.Text;
             var valCat = cbCategory.SelectedItem;
-            var valInterval = cbInterval.SelectedItem;
-
+            var valInterval = cbInterval.SelectedItem.ToString();
+            int interval = MyValidation.ConvertStringToInt(valInterval);
 
             if (!string.IsNullOrEmpty(feedName))
             {
@@ -77,7 +64,7 @@ namespace RssReader.Design
                         {
                             if (res == false)
                             {
-                                Manage.AddSubManage(searchString, feedName, valCat.ToString());
+                                Manage.AddSubManage(searchString, feedName, valCat.ToString(), interval);
                                 MessageBox.Show("Podcasten är tillagd!");
                             }
 
