@@ -20,7 +20,6 @@ namespace RssReader.Logic
         
         public static void Timer(int interval, string feed)
         {
-            interval = 20000;
             feedTitle = feed;
             aTimer = new System.Timers.Timer(interval);
             aTimer.Elapsed += OnTimedEvent;
@@ -32,11 +31,11 @@ namespace RssReader.Logic
         {
             searchNewEpisodes(feedTitle);
             Console.WriteLine("vi har sökt efter nya poddar i " + feedTitle + " {0}", e.SignalTime);
-            aTimer.Enabled = false;
-            //Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);
-            
+            aTimer.Enabled = false;            
         }
-        //Hämta ut alla xmldocuments intervall, skicka tillbaka en lista på titel och interval
+
+
+        //Hämta ut alla xmldocuments interval, skicka tillbaka en lista på titel och interval
         internal static void getIntervalInt()
         {
             int interval = 0;
@@ -50,31 +49,29 @@ namespace RssReader.Logic
             }
         }
 
+
+        //Compare the latest episode of the subscribed feed with the latest episode of the RSS
         private static void searchNewEpisodes(string searchString)
         {
             var xml = new XmlData(searchString);
             var dez = xml.DezerializeFeed();
             var rssPath = dez.URL;
             var lastSubDate = dez.PodEp.OrderByDescending(x => x.PubDate).FirstOrDefault();
-            //--------------------------
+
             var feed = Service.Service.getRssByUri(rssPath);
             var pod = feed.Items.ToList();
             var lastPubDate = pod.OrderByDescending(x => x.PublishDate).FirstOrDefault();
 
-            //Kolla om senaste avsnittet som är sparat har samma pubDate som senaste avsnittet i rssfeeden
             if (lastSubDate.PubDate.ToString("u") != lastPubDate.PublishDate.DateTime.ToString("u"))
             {
-                Console.WriteLine("det finn ett nytt avsnitt");
-                //Ta det senaste avsnittet och uppdatera feeden.
+                Console.WriteLine("det finns ett nytt avsnitt");
                 Service.Service.DeleteFeed(feed.Title.Text);
                 Manage.AddSubManage(rssPath, feed.Title.Text, dez.Category, dez.Interval);
             }
             else
             {
-                //gör inget
                 Console.WriteLine("inget nytt avsnitt");
             }
         }
-
     }
 }

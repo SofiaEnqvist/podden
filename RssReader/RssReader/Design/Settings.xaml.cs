@@ -18,7 +18,6 @@ namespace RssReader.Design
         public Settings()
         {
             InitializeComponent();
-            //ska inte ligga här egentligen, en onload metod. 
             updateCb();
         }
 
@@ -62,8 +61,8 @@ namespace RssReader.Design
                     cbIntervall.Items.Add(interval);
                 }
             }
-
         }
+
 
         private void btnAddCategory_Click(object sender, RoutedEventArgs e)
         {
@@ -118,7 +117,6 @@ namespace RssReader.Design
                     MessageBox.Show("Kategorin" + " " + CbAllCategory.Text + " " + "är nu borttagen");
                 }
             }
-
             else
             {
                 MessageBox.Show("Välj vilken kategori du vill tabort");
@@ -129,7 +127,6 @@ namespace RssReader.Design
 
         private void btnSaveCategory_Click(object sender, RoutedEventArgs e)
         {
-
             if (!String.IsNullOrEmpty(CbAllCategory.Text) && !String.IsNullOrEmpty(tbNewCategory.Text))
             {
                 bool check = MyValidation.CategoryAlredyExist(tbNewCategory.Text.ToUpper());
@@ -199,14 +196,11 @@ namespace RssReader.Design
                         MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
                         updateCb();
                 }
-
                 else
                 {
                     MessageBox.Show("Du prenummerar redan på" + " " + tbURL.Text);
                     updateCb();
                 }
-
-
             }
 
             else
@@ -228,6 +222,7 @@ namespace RssReader.Design
             }          
         }
 
+
         private void btnDeleteFeed_Click(object sender, RoutedEventArgs e)
         {
             Service.DeleteFeed(cbAllFeed.Text);
@@ -245,6 +240,7 @@ namespace RssReader.Design
             }
         }
 
+
         // TODO: testa mer. 
         private void cbAllFeed_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -257,6 +253,7 @@ namespace RssReader.Design
                 cbIntervall.Text = des.Interval.ToString() + " min";
             }
         }
+
 
         private void MySubscriptions_Click(object sender, RoutedEventArgs e)
         {

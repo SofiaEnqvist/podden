@@ -1,4 +1,5 @@
 ﻿using RssReader.Logic;
+using System;
 using System.Windows;
 
 namespace RssReader.Design
@@ -26,39 +27,51 @@ namespace RssReader.Design
         //För väljs icke en kategori kraschar det
         private void AddSubscription_OnLoad(object sender, RoutedEventArgs e)
         {
-            var cbItems = Logic.Manage.fillCb();
-            var cbIntervalItem = Logic.Manage.fillCbInterval();
-
-            foreach (var item in cbItems.CategoryName)
+            try
             {
-                cbCategory.Items.Add(item);
-            }
+                var cbItems = Logic.Manage.fillCb();
+                var cbIntervalItem = Logic.Manage.fillCbInterval();
 
-            foreach (var item in cbIntervalItem)
-            {
-                cbInterval.Items.Add(item);
+                if (cbItems.CategoryName == null)
+                {
+                    cbCategory.IsEnabled = false;
+                    lbCatInfo.Content = "Du har inga kategorier, lägg till nya i Settings";
+
+                }
+                foreach (var item in cbItems.CategoryName)
+                {
+                    cbCategory.Items.Add(item);
+                }
+
+                foreach (var item in cbIntervalItem)
+                {
+                    cbInterval.Items.Add(item);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
-        //TODO: en jäkla massa if-satser, testa testa så alla går rätt. Om det finns tid så kanske försök hitta nått sätt
-        //där en miljon if-satser inte behövs.
-        // Eftersom feeden sparas i egna dokument, bör man leta i alla om det inte får ha samma egna feednamn
-    
+        //TODO: en jäkla massa if-satser, om tid gör om så
+        // en miljon if-satser inte behövs.
         private void btnOkej_Click(object sender, RoutedEventArgs e)
         {
             var feedName = tbFeedName.Text;
             var valCat = cbCategory.SelectedItem;
-            var valInterval = cbInterval.SelectedItem.ToString();
-            int interval = MyValidation.ConvertStringToInt(valInterval);
+            var valInterval = cbInterval.SelectedItem;
 
             if (!string.IsNullOrEmpty(feedName))
             {
                 var res1 = MyValidation.feedNameExists(titleString, feedName);
                 if (res1 == false)
                 {
-                    if (valCat != null)
+                    if (valCat != null && valInterval != null)
                     {
                         bool res = MyValidation.isSubscribedAlredy(searchString, titleString);
+                        int interval = MyValidation.ConvertStringToInt(valInterval.ToString());
 
                         if (!string.IsNullOrEmpty(searchString))
                         {
@@ -67,18 +80,17 @@ namespace RssReader.Design
                                 Manage.AddSubManage(searchString, feedName, valCat.ToString(), interval);
                                 MessageBox.Show("Podcasten är tillagd!");
                             }
-
                             else
                             {
                                 MessageBox.Show("Du prenumererar redan på denna podcast!");
                             }
                         }
                         this.Close();
+                        new MainWindow().Show();
                     }
-
                     else
                     {
-                        MessageBox.Show("Välj en kategori!");
+                        MessageBox.Show("Välj en kategori eller ett uppdateringsintervall");
                     }
                 }
                 else
@@ -100,6 +112,5 @@ namespace RssReader.Design
 
         public string searchString { get; set; }
         public string titleString { get; set; }
-
     }
 }

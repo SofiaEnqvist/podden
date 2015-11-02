@@ -67,6 +67,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\Class1.cs" />
     <Compile Include="Data\XmlCategory.cs" />
     <Compile Include="Data\XmlData.cs" />
     <Compile Include="Design\AddSubscription.xaml.cs">
@@ -102,7 +103,6 @@
     <Compile Include="Entity\Feed.cs" />
     <Compile Include="Entity\PodcastEp.cs" />
     <Compile Include="Entity\Category.cs" />
-    <Compile Include="Entity\Subscription.cs" />
     <Compile Include="Logic\Manage.cs" />
     <Compile Include="Logic\MethodTest.cs" />
     <Compile Include="Logic\Service.cs" />

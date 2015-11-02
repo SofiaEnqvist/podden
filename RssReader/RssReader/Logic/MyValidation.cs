@@ -1,14 +1,7 @@
 ﻿using RssReader.Data;
-using RssReader.Entity;
-using RssReader.Logic;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace RssReader.Logic
 {
@@ -27,7 +20,6 @@ namespace RssReader.Logic
         // Kunde inte använda den andra då jag inte hade en titel.
         public static bool isSubscribedAlredy(List<string> TitelAllSub,string URL)
         {
-            
                 bool result = false;
 
                 for (int i = 0; i < TitelAllSub.Count; i++)
@@ -41,9 +33,9 @@ namespace RssReader.Logic
                         break;
                     }
                 }
-
                 return result;
         }
+
 
         //Validera om podcasten redan prenumerereras på
         public static bool isSubscribedAlredy(string podcast, string podcastTitle)
@@ -62,32 +54,14 @@ namespace RssReader.Logic
                 {
                     result = false;
                 }
-
-
-                //if (list.Count == 0)
-                //{
-                //    result = false;
-                //}
-                //foreach (Feed item in list)
-                //{
-                  
-                //    if (podcast == item.URL)
-                //    {
-                //        result = true;
-                //    }
-                //    else
-                //    {
-                //        result = false;
-                //    }
-                //}
                 return result;            
         }
+
 
         //Validerar om kategorin används.
         public static bool CategoryUse(string CategoryName, List<string> filename)
         {
             bool result = false;
-            
 
            for (int i = 0; i < filename.Count; i++)
            {
@@ -99,16 +73,14 @@ namespace RssReader.Logic
                    break;
                }
            }
-
            return result;
-
         }
+
 
         public static bool CategoryAlredyExist(string CategoryName)
         {
             var ser = new XmlCategory();
             var list = ser.DezerializeCategory();
-           
             bool result = false;
 
             if (list.CategoryName == null)
@@ -125,15 +97,12 @@ namespace RssReader.Logic
                         result = true;
                         break;
                     }
-
                 }
             }
-
             return result;
         }
 
 
-        // Denna tittar igenom alla xml och letar om man döpt den till det Feednamnet man försöker döpa till. 
         internal static bool FeedNameExists(string feedName, List<string> AllSub)
         {
             bool result = false;
@@ -149,12 +118,10 @@ namespace RssReader.Logic
                     break;
                 }
             }
-
             return result;
         }
 
-        // Denna kanske inte är nödvändig då vi spara i separata XML. 
-        // Gjorde en likadan men som letar igenom alla xml ! 
+
         internal static bool feedNameExists(string podcastTitle, string feedName)
         {
             var seria = new XmlData(podcastTitle);
@@ -169,15 +136,15 @@ namespace RssReader.Logic
             {
                 result = false;
             }
-
             return result;
-
         }
+
 
         internal static int ConvertStringToInt(string valInterval)
         {
             string resultString = null;
             int x = 0;
+
             try
             {
                 Regex regexObj = new Regex(@"[^\d]");
@@ -191,6 +158,5 @@ namespace RssReader.Logic
             return x;
         }
     }
-   
 }
     

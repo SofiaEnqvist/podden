@@ -5,12 +5,12 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssReader", "RssReader\RssReader.csproj", "{1251EC12-2B44-4E9A-B3A5-AB79798CD3E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{3E1B3363-33B7-49F1-801C-D6DA5B95B430}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78351425-9441-446E-95E6-690C2A50BB1F}"
 	ProjectSection(SolutionItems) = preProject
 		TODO.txt = TODO.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7DB1A51B-59D1-4842-9212-56104D70699B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,10 @@ Global
 		{1251EC12-2B44-4E9A-B3A5-AB79798CD3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1251EC12-2B44-4E9A-B3A5-AB79798CD3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1251EC12-2B44-4E9A-B3A5-AB79798CD3E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E1B3363-33B7-49F1-801C-D6DA5B95B430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E1B3363-33B7-49F1-801C-D6DA5B95B430}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E1B3363-33B7-49F1-801C-D6DA5B95B430}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E1B3363-33B7-49F1-801C-D6DA5B95B430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DB1A51B-59D1-4842-9212-56104D70699B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DB1A51B-59D1-4842-9212-56104D70699B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DB1A51B-59D1-4842-9212-56104D70699B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DB1A51B-59D1-4842-9212-56104D70699B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

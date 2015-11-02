@@ -15,7 +15,10 @@ namespace RssReader
         public MainWindow()
         {
             InitializeComponent();
+            //Data.Class2 cl = new Data.Class2();
+            //cl.doSomething();
         }
+
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -41,22 +44,20 @@ namespace RssReader
             }
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             new AddSubscription(tbSearch.Text, tbTitle.Text).Show();
-
-            tbSearch.Clear();
-            tbTitle.Text = "";
-            tbCountAps.Text = "";
-            tblAbout.Text = "";
-
+            this.Close();
         }
+
 
         private void btGoToSub_Click(object sender, RoutedEventArgs e)
         {
             new Subscriptions().Show();
             this.Close();
         }
+
 
         private void btGoToSett_Click(object sender, RoutedEventArgs e)
         {

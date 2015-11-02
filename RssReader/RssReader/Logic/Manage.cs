@@ -12,12 +12,9 @@ using System.Xml;
 
 namespace RssReader.Logic
 {
-    //Typ en mellanklass mellan design och logiken som dirigerar vad som ska hända vid olika events. Eg kanske lite överflödig i detta projekt men 
-    //tanken är god... 
     public static class Manage
     {
         /// <summary>
-        /// TODO: Put into Repository map
         /// Method that manage the subscription action
         /// </summary>
         /// <param name="searchString"></param>
@@ -27,16 +24,24 @@ namespace RssReader.Logic
             Service.Service.Ser_Add(list, feedName, category, interval);
         }
 
-
         internal static Feed Man_getSelectedSub(string selectedItem)
         {
             return Service.Service.Ser_getSelectedSub(selectedItem);
         }
 
-
+        
         internal static Category fillCb()
         {
             return Service.Service.GetAllCategory();
+        }
+
+
+        internal static List<string> fillCbInterval()
+        {
+            List<string> list = new List<string>();
+            list.Add("5 min");
+            list.Add("10 min");
+            return list;
         }
 
 
@@ -83,12 +88,5 @@ namespace RssReader.Logic
             return feed;
         }
 
-        internal static List<string> fillCbInterval()
-        {
-            List<string> list = new List<string>();
-            list.Add("5 min");
-            list.Add("10 min");
-            return list;
-        }
     }
 }

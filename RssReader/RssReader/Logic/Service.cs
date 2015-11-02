@@ -38,26 +38,6 @@ namespace RssReader.Logic.Service
 
         }
 
-
-        //public static void Ser_Add(SyndicationFeed feed, string feedName, string category)
-        //{
-        //    try {
-        //        var seria = new XmlData(feed.Title.Text);
-        //        List<PodcastEp> list = new List<PodcastEp>();
-        //        foreach (var item in feed.Items)
-        //        {
-        //            PodcastEp mappedPodcasts = PodcastEp.mapPodcastEp(item);
-        //            list.Add(mappedPodcasts);
-        //        }
-        //        Feed mappedFeed = Feed.mapFeed(feed, feedName, category, list);
-        //        seria.SerializeFeed(mappedFeed);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //    }
-            
-        //}
         internal static void Ser_Add(SyndicationFeed feed, string feedName, string category, int interval)
         {
             try
@@ -151,6 +131,7 @@ namespace RssReader.Logic.Service
             ser.SerializeCategory(c);
         }
 
+
         public static void ChangeFeed(List<string> FeedName, string NewCategory)
         {
             for (int i = 0; i < FeedName.Count; i++)
@@ -178,12 +159,14 @@ namespace RssReader.Logic.Service
             File.Delete(file);
         }
        
+
         internal static Category GetAllCategory()
         {
             var ser = new XmlCategory();
             var des = ser.DezerializeCategory();
             return des;
         }
+
 
         internal static List<string> GetAllCategorysFeed(List<string> FeedTitels, string CategoryName)
         {
@@ -199,9 +182,9 @@ namespace RssReader.Logic.Service
                     feedName.Add(des.Title);
                 }
             }
-
             return feedName;
         }
+
 
         internal static Feed Ser_getSelectedSub(string selectedItem)
         {
@@ -216,7 +199,6 @@ namespace RssReader.Logic.Service
                 Console.WriteLine(e.Message);
                 return new Feed();
             }
-           
         }
 
 
@@ -246,10 +228,6 @@ namespace RssReader.Logic.Service
                 Console.WriteLine(e.Message);
                 return new List<string>();
             }
-            
         }
-
-
-        
     }
 }
