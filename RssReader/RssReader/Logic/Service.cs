@@ -1,5 +1,6 @@
 ﻿using RssReader.Entity;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using RssReader.Data;
 using System.ServiceModel.Syndication;
@@ -61,13 +62,17 @@ namespace RssReader.Logic.Service
 
         internal static void Ser_Play(SyndicationFeed feed, string feedName, string category, int interval, string EpName)
         {
+            
+
             try
             {
                 var seria = new XmlData(feed.Title.Text);
                 List<PodcastEp> list = new List<PodcastEp>();
-                foreach (var item in feed.Items)
+                
+              
+                foreach (SyndicationItem item in feed.Items)
                 {
-                    if (EpName == item.Title.ToString())
+                    if (EpName == item.Links.First().Uri.ToString())
                     {
                         PodcastEp mappedPodcasts = PodcastEp.mapPodcastEp(item, 1);
                         list.Add(mappedPodcasts);
