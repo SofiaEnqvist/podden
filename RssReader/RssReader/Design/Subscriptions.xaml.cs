@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using RssReader.Logic;
 using RssReader.Entity;
 using System.Diagnostics;
+using System.ServiceModel.Syndication;
 
 
 namespace RssReader.Design
@@ -117,14 +118,16 @@ namespace RssReader.Design
         //ändra i xml till Status == 1
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
+            
             var val = lViewSub.SelectedItem.ToString();
-
             char[] MyChar = { '"' };
             string NewString = val.TrimStart(MyChar);
             Console.WriteLine(NewString);
             try
             {
                 Process.Start(NewString);
+                Logic.Service.Service.Ser_Play(listBoxSubscription.SelectedItem.ToString(), val);
+  
             }
             catch (Exception ex)
             {

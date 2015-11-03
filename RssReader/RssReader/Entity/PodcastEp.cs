@@ -32,5 +32,23 @@ namespace RssReader.Entity
             };
             return podEp;
         }
+
+        internal static PodcastEp mapPodcastEp(SyndicationItem item, int status)
+        {
+            PodcastEp podEp = new PodcastEp()
+            {
+                Title = item.Title.Text,
+                Content = item.Summary.Text,
+                PubDate = item.PublishDate.DateTime,
+                Mp3Link = item.Links.First().Uri.ToString(), 
+                Status = status
+                
+            };
+
+            return podEp;
+        }
+
+        
+
     }
 }

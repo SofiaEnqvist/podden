@@ -58,6 +58,47 @@ namespace RssReader.Logic.Service
             }
         }
 
+
+        internal static void Ser_Play(SyndicationFeed feed, string feedName, string category, int interval, string EpName)
+        {
+            try
+            {
+                var seria = new XmlData(feed.Title.Text);
+                List<PodcastEp> list = new List<PodcastEp>();
+                foreach (var item in feed.Items)
+                {
+                    if (EpName == item.Title.ToString())
+                    {
+                        PodcastEp mappedPodcasts = PodcastEp.mapPodcastEp(item, 1);
+                        list.Add(mappedPodcasts);
+                    }
+                    else
+                    {
+                        PodcastEp mappedPodcasts = PodcastEp.mapPodcastEp(item);
+                        list.Add(mappedPodcasts);
+                    }
+                    
+                    
+                }
+
+                Feed mappedFeed = Feed.mapFeed(feed, feedName, category, interval, list);
+                seria.SerializeFeed(mappedFeed);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public static void Ser_Play(string FeedName, string EpName)
+        {
+            var seria = new XmlData(FeedName);
+            Feed Feed = seria.DezerializeFeed();
+            SyndicationFeed list = getRssByUri(Feed.URL);
+            Ser_Play(list, Feed.Name, Feed.Category, Feed.Interval, EpName);
+        }
+
+
         public static void Ser_AddCategory(string CategoryName)
         {
             try {
