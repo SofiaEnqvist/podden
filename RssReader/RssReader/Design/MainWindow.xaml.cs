@@ -11,18 +11,20 @@ namespace RssReader
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
         public MainWindow()
         {
             InitializeComponent();
-            //Data.Class2 cl = new Data.Class2();
-            //cl.doSomething();
+            Data.Class2 cl = new Data.Class2();
+            cl.doSomething();
+            var hej = new RssReader.Logic.MyValidation();
+            hej.isInt("uhde8");
+     
         }
-
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            if(!String.IsNullOrEmpty(tbSearch.Text))
+            if (!String.IsNullOrEmpty(tbSearch.Text))
             {
                 BtnSubscribe.IsEnabled = true;
                 var loadedRss = Service.getRssByUri(tbSearch.Text);

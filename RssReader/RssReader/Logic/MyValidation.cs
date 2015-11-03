@@ -5,35 +5,44 @@ using System.Text.RegularExpressions;
 
 namespace RssReader.Logic
 {
-    public class MyValidation
+    public abstract class Vali
     {
-        
+        public abstract void isInt(string URL);
 
+    }
+
+    public class MyValidation : Vali
+    {
         //Validera om URL verkligen exiserar och om det är en rss..
-        public static void doesURLExists(string URL)
+        public override void isInt(string URL)
         {
-            
+            char[] str = URL.ToCharArray();
+            for (int i = 0; i < str.Length; i++)
+            {
+                Char.IsDigit(str[0]);
+                Console.WriteLine(str[i]);
+            }
         }
 
         //Validera om podcasten redan prenumerereras på
         // Letar igenom alla xml dokument och kollar efter URL. 
         // Kunde inte använda den andra då jag inte hade en titel.
-        public static bool isSubscribedAlredy(List<string> TitelAllSub,string URL)
+        public static bool isSubscribedAlredy(List<string> TitelAllSub, string URL)
         {
-                bool result = false;
+            bool result = false;
 
-                for (int i = 0; i < TitelAllSub.Count; i++)
+            for (int i = 0; i < TitelAllSub.Count; i++)
+            {
+                var ser = new XmlData(TitelAllSub[i]);
+                var des = ser.DezerializeFeed();
+
+                if (des.URL.Equals(URL))
                 {
-                    var ser = new XmlData(TitelAllSub[i]);
-                    var des = ser.DezerializeFeed();
-                    
-                    if (des.URL.Equals(URL))
-                    {
-                        result = true;
-                        break;
-                    }
+                    result = true;
+                    break;
                 }
-                return result;
+            }
+            return result;
         }
 
 
@@ -42,19 +51,19 @@ namespace RssReader.Logic
         {
             //TODO: Lägg till så den loopar och kollar alla feedName, inte bara den första
             //get title of podcast hämta med streamreader och rulla igenom för att kolla Kanske en if (exists)
-                var seria = new XmlData(podcastTitle);
-                var list = seria.DezerializeFeed();
-                bool result = true;
+            var seria = new XmlData(podcastTitle);
+            var list = seria.DezerializeFeed();
+            bool result = true;
 
-                if (podcast == list.URL)
-                {
-                    result = true;
-                }
-                else
-                {
-                    result = false;
-                }
-                return result;            
+            if (podcast == list.URL)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+            return result;
         }
 
 
@@ -63,17 +72,17 @@ namespace RssReader.Logic
         {
             bool result = false;
 
-           for (int i = 0; i < filename.Count; i++)
-           {
-               var ser = new XmlData(filename[i]);
-               var des = ser.DezerializeFeed();
-               if(des.Category.Equals(CategoryName))
-               {
-                   result = true;
-                   break;
-               }
-           }
-           return result;
+            for (int i = 0; i < filename.Count; i++)
+            {
+                var ser = new XmlData(filename[i]);
+                var des = ser.DezerializeFeed();
+                if (des.Category.Equals(CategoryName))
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
         }
 
 
@@ -112,7 +121,7 @@ namespace RssReader.Logic
                 var seria = new XmlData(AllSub[i]);
                 var list = seria.DezerializeFeed();
 
-                if(list.Name.Equals(feedName))
+                if (list.Name.Equals(feedName))
                 {
                     result = true;
                     break;
@@ -159,4 +168,4 @@ namespace RssReader.Logic
         }
     }
 }
-    
+
