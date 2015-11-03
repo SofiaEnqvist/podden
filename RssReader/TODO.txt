@@ -6,9 +6,16 @@ TODO:
 - abstract
 - virtual
 - ett enhetstest
-- Man ska kunna se om man lyssnat på en pod
+- Man ska kunna se om man lyssnat på en pod - Grejar med den
 -----
-//Sofia
+
+3/11 . 
+Funderingar till när man lägger till en feed, när man kör feednameexist 
+letar den endast i exempelvis värvets xml, inte i alla.
+Vilket gör att feednamnet inte kommer vara upptaget, Eller tänker jag fel? 
+Jag gjorde iallafall tidigare en till metod: feednameexist, som används när man ändrar en feed,  den kollar i alla xml, 
+kanske ska använda den även när vi lägger till?
+
 
 
 
