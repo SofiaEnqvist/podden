@@ -85,8 +85,9 @@ namespace RssReader.Design
                                 MessageBox.Show("Du prenumererar redan på denna podcast!");
                             }
                         }
-                        this.Close();
+                     
                         new MainWindow().Show();
+                        this.Close();
                     }
                     else
                     {

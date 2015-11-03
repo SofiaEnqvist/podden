@@ -4,7 +4,7 @@
         Title="MainWindow" Height="600" Width="670">
     <Grid>
         <Button Content="Search" Name="BtnSearch" HorizontalAlignment="Left" Margin="364,23,0,0" VerticalAlignment="Top" Width="75" Click="BtnSearch_Click"/>
-        <TextBox Text="http://rss.acast.com/varvet" HorizontalAlignment="Left" Height="23" Margin="37,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" Name="tbSearch"/>
+        <TextBox Text="" HorizontalAlignment="Left" Height="23" Margin="37,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" Name="tbSearch"/>
         <TextBlock HorizontalAlignment="Left" Margin="37,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="164" Width="303" x:Name="tblAbout"/>
         <TextBlock HorizontalAlignment="Left" Height="24" Margin="120,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Name="tbCountAps"/>
         <Label Content="Antal avsnitt:" HorizontalAlignment="Left" Margin="37,82,0,0" VerticalAlignment="Top"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Xml.Serialization;
@@ -6,7 +7,7 @@ using System.Xml.Serialization;
 namespace RssReader.Entity
 {
     [Serializable()]
-       public class PodcastEp
+    public class PodcastEp
     {
         [XmlElement()]
         public string Title { get; set; }
@@ -16,6 +17,8 @@ namespace RssReader.Entity
         public DateTime PubDate { get; set; }
         [XmlElement()]
         public string Mp3Link { get; set; }
+        [XmlElement()]
+        public int Status { get; set; }
 
         internal static PodcastEp mapPodcastEp(SyndicationItem item)
         {
@@ -24,7 +27,8 @@ namespace RssReader.Entity
                 Title = item.Title.Text,
                 Content = item.Summary.Text,
                 PubDate = item.PublishDate.DateTime,
-               Mp3Link = item.Links.First().Uri.ToString()
+                Mp3Link = item.Links.First().Uri.ToString(),
+                Status = 0
             };
             return podEp;
         }

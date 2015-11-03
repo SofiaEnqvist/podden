@@ -20,7 +20,6 @@ namespace RssReader.Design
 
         private void Subscriptions_OnLoad(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 UpdateInterval.getIntervalInt();
@@ -56,7 +55,22 @@ namespace RssReader.Design
                     Feed feed = Manage.Man_getSelectedSub(selectedItem);
                     foreach (var item in feed.PodEp)
                     {
-                        lViewSub.Items.Add("------------------------\r\n" + item.Title + "\r\n" + item.Content + "\r\n" + item.PubDate.ToString());
+                        if (item.Status == 1)
+                        {
+                            lViewSub.Items.Add("------------------------\r\n"
+                                + item.Title + "\r\n"
+                                + item.Content + "\r\n"
+                                + item.PubDate.ToString()
+                                + " \r\n Lyssnad på \r\n");
+                        }
+                        else if (item.Status == 0)
+                        {
+                            lViewSub.Items.Add("------------------------\r\n"
+                                + item.Title + "\r\n"
+                                + item.Content + "\r\n"
+                                + item.PubDate.ToString()
+                                + " \r\n Olyssnad på \r\n");
+                        }
                         lViewSub.Items.Add(item.Mp3Link);
                     }
                 }
@@ -66,6 +80,7 @@ namespace RssReader.Design
                 }
             }
         }
+
 
         private void cbFilterCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -99,6 +114,7 @@ namespace RssReader.Design
         }
 
         //TODO: Validering eller att det ej går tt klicka på annat än länken när man vill spela upp. 
+        //ändra i xml till Status == 1
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
             var val = lViewSub.SelectedItem.ToString();

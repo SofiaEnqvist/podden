@@ -15,8 +15,6 @@ namespace RssReader.Logic
         private static Timer aTimer;
         private static string feedTitle;
 
-        //TODO: Kolla efter backgroundworker på msdn
-        //TODO: metoderna här vet jag inte hur man ska kunna köra samtidigt som allt annat händer, det ska hända i bakgrunden alltså. helst Hehe
         
         public static void Timer(int interval, string feed)
         {
@@ -27,6 +25,7 @@ namespace RssReader.Logic
             aTimer.Enabled = true;
         }
 
+
         private static void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
             searchNewEpisodes(feedTitle);
@@ -35,18 +34,25 @@ namespace RssReader.Logic
         }
 
 
-        //Hämta ut alla xmldocuments interval, skicka tillbaka en lista på titel och interval
         internal static void getIntervalInt()
         {
-            int interval = 0;
-            var list = Manage.Man_getTitleListSubscription();
-            foreach (var item in list)
-            {
-                XmlData xml = new XmlData(item);
-                var dez = xml.DezerializeFeed();
-                interval = dez.Interval * 60000;
-                UpdateInterval.Timer(interval, dez.Title);
+           try
+           {
+                int interval = 0;
+                var list = Manage.Man_getTitleListSubscription();
+                foreach (var item in list)
+                {
+                    XmlData xml = new XmlData(item);
+                    var dez = xml.DezerializeFeed();
+                    interval = dez.Interval * 60000;
+                    UpdateInterval.Timer(interval, dez.Title);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
 
