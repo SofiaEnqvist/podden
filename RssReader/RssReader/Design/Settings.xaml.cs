@@ -170,20 +170,46 @@ namespace RssReader.Design
         // Finns säkert bättre sätt att kolla vad som är ändrat. 
         private void btnSaveFeed_Click(object sender, RoutedEventArgs e)
         {
-            Feed Feed = Service.Ser_getSelectedSub(cbAllFeed.Text);
-            var interval = cbIntervall.SelectedItem.ToString();
-            int x = MyValidation.ConvertStringToInt(interval);
-
-            if (Feed.URL != tbURL.Text)
+            try
             {
-                //MyValidation.doesURLExists(URL);
-                List<string> AllSub = MethodTest.getAllSubs();
-                bool SubscribeAlredy = MyValidation.isSubscribedAlredy(AllSub, tbURL.Text);
-            
-                if (SubscribeAlredy == false)
+                Feed Feed = Service.Ser_getSelectedSub(cbAllFeed.Text);
+                var interval = cbIntervall.SelectedItem.ToString();
+                int x = MyValidation.ConvertStringToInt(interval);
+
+                if (Feed.URL != tbURL.Text)
+                {
+                    //MyValidation.doesURLExists(URL);
+                    List<string> AllSub = MethodTest.getAllSubs();
+                    bool SubscribeAlredy = MyValidation.isSubscribedAlredy(AllSub, tbURL.Text);
+
+                    if (SubscribeAlredy == false)
+                    {
+                        if (Feed.Name != tbFeedName.Text)
+                        {
+                            bool FeedNameExists = MyValidation.FeedNameExists(tbFeedName.Text, AllSub);
+
+                            if (FeedNameExists == true)
+                            {
+                                MessageBox.Show("Du har redan en feed med detta namn");
+                                tbFeedName.Clear();
+                            }
+                        }
+                        Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text, x);
+                        MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
+                        updateCb();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Du prenummerar redan på" + " " + tbURL.Text);
+                        updateCb();
+                    }
+                }
+
+                else
                 {
                     if (Feed.Name != tbFeedName.Text)
                     {
+                        List<string> AllSub = MethodTest.getAllSubs();
                         bool FeedNameExists = MyValidation.FeedNameExists(tbFeedName.Text, AllSub);
 
                         if (FeedNameExists == true)
@@ -192,42 +218,32 @@ namespace RssReader.Design
                             tbFeedName.Clear();
                         }
                     }
-                        Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text, x);
-                        MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
-                        updateCb();
-                }
-                else
-                {
-                    MessageBox.Show("Du prenummerar redan på" + " " + tbURL.Text);
-                    updateCb();
-                }
-            }
-
-            else
-            {
-                if (Feed.Name != tbFeedName.Text)
-                {
-                    List<string> AllSub = MethodTest.getAllSubs();
-                    bool FeedNameExists = MyValidation.FeedNameExists(tbFeedName.Text, AllSub);
-
-                    if (FeedNameExists == true)
-                    {
-                        MessageBox.Show("Du har redan en feed med detta namn");
-                        tbFeedName.Clear();
-                    }
-                }
                     Service.ChangeFeed(tbURL.Text, tbFeedName.Text, CbCategory.Text, x);
                     MessageBox.Show(cbAllFeed.Text + " " + "är nu ändrad");
                     updateCb();
-            }          
+                }   
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+                   
         }
 
 
         private void btnDeleteFeed_Click(object sender, RoutedEventArgs e)
         {
-            Service.DeleteFeed(cbAllFeed.Text);
-            MessageBox.Show(cbAllFeed.Text + " " + "är nu borttagen");
-            updateCb();
+            try
+            {
+                Service.DeleteFeed(cbAllFeed.Text);
+                MessageBox.Show(cbAllFeed.Text + " " + "är nu borttagen");
+                updateCb();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
 
